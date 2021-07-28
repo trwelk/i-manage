@@ -1,7 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const globalState = useSelector((state) => state);
+  console.log(globalState)
+
   return (
     <div className="App">
       <header className="App-header">
