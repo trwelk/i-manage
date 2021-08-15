@@ -166,7 +166,7 @@ function InventoryPartTable(props) {
 
     return (
         <div>
-        <div style={{ padding: "20px",marginTop:"100px" }}>
+        <div style={{ padding: "20px",marginTop:"10px" }}>
             {table}
             {feedBackToast}
         </div>
