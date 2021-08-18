@@ -54,7 +54,6 @@ function InvLocationHeaderWithSelector() {
 
     const handleChange = (event) => {
         let location = event.target.value
-        console.log(location)
         setLocation(location);
         dispatch(setSelectedInventoryLocation(event.target.value));
     };
@@ -69,7 +68,7 @@ function InvLocationHeaderWithSelector() {
 
     const selectorMenuItems = inventoryLocations.map( location => {
         return(
-            <MenuItem value={location.locationName}>{location.locationName}</MenuItem>
+            <MenuItem value={location.id}>{location.locationName}</MenuItem>
         )
     })
     return (

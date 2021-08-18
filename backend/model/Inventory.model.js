@@ -5,7 +5,7 @@ var inventorySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    locationId: {
+    location: {
         type: String,
         required: true
     },
@@ -16,16 +16,7 @@ var inventorySchema = mongoose.Schema({
     quantity: {
         type: Number,
         required: true
-    },
-    stockBuyingPrice:{
-        type: Number,
-        required:true
-    },
-    stockSellingPrice:{
-        type:Number,
-        required: true
-    },
-    
+    }
 });
 
 module.exports = mongoose.model('inventory', inventorySchema);
