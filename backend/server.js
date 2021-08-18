@@ -13,6 +13,9 @@ const corsOptions ={
 }
 const inventoryRoutes = require('./routes/Inventory.routes')
 const inventoryLocationRoutes = require('./routes/InventoryLocation.routes')
+const productRoutes = require('./routes/Product.routes')
+const supplierRoutes = require('./routes/Supplier.routes')
+const purchaseRequisition = require('./routes/PurchaseRequisition.routes')
 
 
 const app = new Koa();
@@ -23,6 +26,12 @@ app.use(cors(corsOptions));
  .use(inventoryRoutes.allowedMethods());
  app.use(inventoryLocationRoutes.routes())
  .use(inventoryLocationRoutes.allowedMethods());
+ app.use(productRoutes.routes())
+ .use(productRoutes.allowedMethods());
+ app.use(supplierRoutes.routes())
+ .use(supplierRoutes.allowedMethods());
+ app.use(purchaseRequisition.routes())
+ .use(purchaseRequisition.allowedMethods());
 
 
 app.listen(9090);
