@@ -8,7 +8,7 @@ const inventoryLocationSchema = require('../model/InventoryLocation.model')
   const addInventoryLocation = async obj => {
     return new Promise((resolve, reject) => {
         var newInventoryLocation = new inventoryLocationSchema({
-            id: uuid.v4(),
+            id: obj.id,
             locationName: obj.locationName,
             locationDescription: obj.locationDescription,
             address: obj.address,
@@ -74,11 +74,11 @@ async function deleteInventoryLocation( inventoryLocationId ) {
 }
 
 
-async function updateInventoryLocationId( inventory ) {
+async function updateInventoryLocation( inventory ) {
     var filter = {id: inventory.id};
     let updatedInventory = await inventoryLocationSchema.findOneAndReplace(filter,inventory, {
         new: true
     });
     return updatedInventory;
 }
-module.exports = {updateInventoryLocationId, addInventoryLocation, getInventoryLocationByCategory, getInventoryLocation ,deleteInventoryLocation };
+module.exports = {updateInventoryLocation, addInventoryLocation, getInventoryLocationByCategory, getInventoryLocation ,deleteInventoryLocation };

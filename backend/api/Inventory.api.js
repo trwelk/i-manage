@@ -8,10 +8,10 @@ const inventorySchema = require('../model/inventory.model')
   const addInventory = async obj => {
     return new Promise((resolve, reject) => {
         var newInventory = new inventorySchema({
-            id: uuid.v4(),
-            paperUploader: obj.paperUploader,
-            paperTopic: obj.paperTopic,
-            paperLink: obj.paperLink,
+            id: obj.id,
+            quantity: obj.quantity,
+            location: obj.location,
+            product: obj.product,
             state: "requested",
             email: obj.email,
         });
