@@ -4,6 +4,9 @@ export const AppConstants = {
     STATE_REQUESTED: "requested",
     STATE_DECLINED: "declined",
     DUMMY: "dummy",
-    INVENTORY_LOCATION_URL: "/inventoryLocations"
+    INVENTORY_LOCATION_URL: "/inventoryLocations",
+    INVENTORY_URL: "/inventory",
+    PRODUCT_URL: "/products"
+
 
 };
