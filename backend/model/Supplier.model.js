@@ -9,7 +9,7 @@ var supplierSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Note: {
+    note: {
         type: String,
         required: false
     },

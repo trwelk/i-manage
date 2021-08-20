@@ -9,13 +9,14 @@ const supplierSchema = require('../model/Supplier.model')
     return new Promise((resolve, reject) => {
         var newSupplierSchema = new supplierSchema({
             id: obj.id,
-            supplierName: obj.SupplierName,
-            Note: obj.Note,
+            supplierName: obj.supplierName,
+            note: obj.note,
             contractDate: obj.contractDate,
             contractExpDate: obj.contractExpDate,
             contactNumber: obj.contactNumber,
             contactEmail: obj.contactEmail,
             currencyCode: obj.currencyCode,
+            methodOfContact: obj.methodOfContact,
             state: obj.state,
             rating: obj.rating,
 
