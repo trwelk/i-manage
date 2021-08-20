@@ -6,7 +6,8 @@ export const AppConstants = {
     DUMMY: "dummy",
     INVENTORY_LOCATION_URL: "/inventoryLocations",
     INVENTORY_URL: "/inventory",
-    PRODUCT_URL: "/products"
+    PRODUCT_URL: "/products",
+    SUPPLIER_URL: "/suppliers"
 
 
 };
