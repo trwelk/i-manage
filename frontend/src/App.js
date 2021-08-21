@@ -8,19 +8,25 @@ import ProductManagement from './pages/ProductManagement';
 import LocationManagement from './pages/LocationManagement';
 import SupplierInsights from './pages/SupplierInsights';
 import SupplierManagement from './pages/SupplierManagement';
+import CashFlowInsights from './pages/CashFlowInsights';
+import SideNav from './components/layout/common/SideNav';
 
 function App() {
   return (
-    <div className="App">
-       <Router>
-        <Switch>
-          <Route exact path="/inventory" component={InventoryItemsInLocationPage} />
-          <Route exact path="/products" component={ProductManagement} />
-          <Route exact path="/locations" component={LocationManagement} />
-          <Route exact path="/suppliers/insights" component={SupplierInsights} />
-        </Switch>
-        <Route exact path="/suppliers" component={SupplierManagement} />
-      </Router>
+    <div className="App" style={{ display: "flex" }}>
+      <SideNav />
+      <div style={{marginTop:"80px",width:"100%"}}>
+        <Router>
+          <Switch>
+            <Route exact path="/inventory" component={InventoryItemsInLocationPage} />
+            <Route exact path="/products" component={ProductManagement} />
+            <Route exact path="/locations" component={LocationManagement} />
+            <Route exact path="/suppliers/insights" component={SupplierInsights} />
+            <Route exact path="/suppliers" component={SupplierManagement} />
+            <Route exact path="/cashflow" component={CashFlowInsights} />
+          </Switch>
+        </Router></div>
+
     </div>
   );
 }
