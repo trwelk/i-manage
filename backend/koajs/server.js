@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const AppConstants  = require('./constants/AppConstants');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://ryan-testdb:XBKNOg0BMVPuEKudh8HowRUfnzrxtEGNmWbNIwJP281GxmcvOGcB6O62IkqAiniqhtbgjxxqKRQT19N9TgnNpg==@ryan-testdb.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@ryan-testdb@');
 const corsOptions ={
     origin:'http://localhost:3000', 
     credentials:true,            //access-control-allow-credentials:true
@@ -36,4 +36,4 @@ app.use(cors(corsOptions));
 
 app.listen(9090);
 
-console.log('Application is running on port 80');
+console.log('Application is running on port 9090');
