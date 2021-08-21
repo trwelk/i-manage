@@ -106,7 +106,7 @@ function InventoryPartTable(props) {
 
     const table = inventoryItems ? (
         <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black" }}
-            title={"Research Papers"}
+            title={"Inventory Items"}
             columns={columns}
             data={displayData}
             editable={{
