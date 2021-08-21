@@ -31,19 +31,20 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <div className="App" style={{ display: "flex" }}>
-      <SideNav />
-      <div style={{marginTop:"80px",width:"100%"}}>      
+  
        <Router>
+       <SideNav />
+      <div style={{marginTop:"80px",width:"100%"}}>    
         <Switch>
         <Route exact path="/" component={LandingPage} />
           <Route exact path="/inventory" component={InventoryItemsInLocationPage} />
           <Route exact path="/products" component={ProductManagement} />
           <Route exact path="/locations" component={LocationManagement} />
           <Route exact path="/suppliers/insights" component={SupplierInsights} />
+          <Route exact path="/suppliers/manage" component={SupplierManagement} />
         </Switch>
-        <Route exact path="/suppliers" component={SupplierManagement} />
+        </div>
       </Router>
-      </div>
     </div>
     </ThemeProvider>
   );
