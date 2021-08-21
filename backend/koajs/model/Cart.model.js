@@ -6,8 +6,20 @@ var cartSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    items: {
-        type: [CartItemModel],
+    products: {
+        type: [String],
+        required: true
+    },
+    qty: {
+        type: [String],
+        required: true
+    },
+    total: {
+        type: Number,
+        required: false
+    },
+    itemCount: {
+        type: Number,
         required: false
     }
 });
