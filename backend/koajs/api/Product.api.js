@@ -62,6 +62,23 @@ async function getProductsByCategory(category) {
 
 }
 
+/*Fetches all the productLocations for a given category and returns a json array of productLocations.model type objects  : else returns the error 
+  Catch this error from where it's called and  throw an error*/
+  async function getProductByKey( id ) {
+    const query = { id: id }
+    return new Promise((resolve, reject) => {
+        productSchema.find(query,function(err, response){
+            if(err)
+                reject(err)
+            else{
+                console.log(response)
+                resolve(response)
+            }
+         });
+    })
+
+}
+
 async function deleteProduct( productId ) {
     return new Promise((resolve, reject) => {
         var query = { id: productId };
@@ -83,4 +100,4 @@ async function updateProduct( product ) {
     });
     return updatedProduct;
 }
-module.exports = {updateProduct, addProduct, getProductsByCategory, getProducts ,deleteProduct };
+module.exports = {updateProduct, addProduct, getProductByKey, getProductsByCategory, getProducts ,deleteProduct };

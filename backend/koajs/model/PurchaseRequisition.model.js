@@ -27,19 +27,23 @@ var purchaseRequisitionSchema = mongoose.Schema({
     },
     wantedDeliveryDate: {
         type: Date,
-        required: true
+        required: false
+    },
+    dateResolved: {
+        type: Date,
+        required: false
     },
     state: {
         type: String,
         required: true
     },
-    currencyCode: {
-        type: String,
-        required: false
+    quantityOfItems: {
+        type: Number,
+        required: true
     },
-    purchaseRequisition: {
-        type: String,
-        required: false
+    totalAmount: {
+        type: Number,
+        required: true
     }
 });
 
