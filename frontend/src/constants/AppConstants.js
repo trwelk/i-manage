@@ -5,5 +5,6 @@ export const AppConstants = {
     STATE_REQUESTED: "REQUESTED",
     STATE_DECLINED: "DECLINED",
     STATE_REMOVED: "REMOVED",
+    STATE_CLEARED: "CLEARED",
     DUMMY: "dummy"
 };

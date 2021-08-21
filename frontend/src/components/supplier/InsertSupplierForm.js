@@ -9,14 +9,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Chip from '@material-ui/core/Chip';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-// import { fetchWorkshopTags } from '../../redux/actions/WorkshopTag.action';
-// import { createWorkshop , validateWorkshopObj} from '../../redux/actions/Wokshop.action';
+import { createSupplier } from '../../redux/actions/Supplier.actions';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -45,8 +39,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InsertSupplierForm() {
     const [open, setOpen] = React.useState(false);
-    const [state, setState] = React.useState({ id:"",supplierName: "", note: "", contractDate: null, contractExpDate: null,
-        contactNumber: "", contactEmail: "" , currencyCode: "" , rating: "" });
+    const [state, setState] = React.useState({
+        id: "", supplierName: "", note: "", contractDate: null, contractExpDate: null,
+        contactNumber: "", contactEmail: "", currencyCode: "", rating: "", methodOfContact: ""
+    });
     const [openFeedback, setOpenFeedback] = React.useState({
         openf: false,
         vertical: 'bottom',
@@ -57,20 +53,9 @@ export default function InsertSupplierForm() {
     const [selectedTags, setSelectedTags] = React.useState([]);
     const dispatch = useDispatch();
     const classes = useStyles();
-    const globalState = useSelector((state) => state);
-    // const tags = globalState.workshopTag.workshopTags
-    const MenuProps = {
-        PaperProps: {
-            style: {
-                maxHeight: 48 * 4.5 + 5,
-                width: 250,
-            },
-        },
-    };
 
-    useEffect(() => {
-        // fetchWorkshopTags(dispatch)
-    }, [])
+
+
     // Event handlers
     const handleClickOpen = () => {
         setOpen(true);
@@ -81,23 +66,14 @@ export default function InsertSupplierForm() {
     };
 
     const handleSubmit = () => {
-        // let err = validateWorkshopObj(state)
-        // setError(err)
-        // if(error == null){
-        //     createWorkshop({ ...state, tags: selectedTags }, dispatch,);
-        //     setOpen(false)
-        // }
-
+        createSupplier(state, dispatch);
+        setOpen(false);
     };
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
         console.log(state)
     }
-    const handleTagChange = (event) => {
-        setSelectedTags(event.target.value);
-    };
-
 
     return (
         <div>
@@ -110,7 +86,7 @@ export default function InsertSupplierForm() {
                 onClick={handleClickOpen}
             >
                 Add workshop
-        </Button>
+            </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
                 <DialogTitle id="form-dialog-title">Workshops</DialogTitle>
                 <div style={{ marginLeft: "20px", color: "red" }}>{error ? error : ""}</div>
@@ -122,13 +98,13 @@ export default function InsertSupplierForm() {
                                 name="supplierName" label="Supplier Name" variant="outlined" />
                         </div>
                         <div className={classes.textFieldCover}>
-                            <TextField className={classes.textField} onChange={handleChange} required label="Currency Code" 
+                            <TextField className={classes.textField} onChange={handleChange} required label="Currency Code"
                                 name="currencyCode" variant="outlined" />
                             <TextField className={classes.textField} onChange={handleChange} style={{ width: "300px" }}
                                 name="rating" label="Rating" type="number" variant="outlined" />
                         </div>
                         <div className={classes.textFieldCover}>
-                            <TextField className={classes.textField} variant="outlined" fullWidth multiline rows={4} required label="Note" 
+                            <TextField className={classes.textField} variant="outlined" fullWidth multiline rows={4} required label="Note"
                                 name="note" />
                         </div>
                         <div className={classes.textFieldCover}>
@@ -146,12 +122,12 @@ export default function InsertSupplierForm() {
                             />
                         </div>
                         <div className={classes.textFieldCover}>
-                            <TextField onChange={handleChange} className={classes.textField} required type="number" 
+                            <TextField onChange={handleChange} className={classes.textField} required type="number"
                                 name="contactNumber" label="contact Number" variant="outlined" />
                             <TextField onChange={handleChange} className={classes.textField} required type="email"
                                 name="contactEmail" style={{ width: "300px" }} label="Email" variant="outlined" />
                         </div>
-                        <div className={classes.textFieldCover}  style={{margin:"5px 0px 18px 0px"}}>
+                        <div className={classes.textFieldCover} style={{ margin: "5px 0px 18px 0px" }}>
                             <TextField
                                 id="standard-select-currency"
                                 select
@@ -169,10 +145,10 @@ export default function InsertSupplierForm() {
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
-          </Button>
+                    </Button>
                     <Button onClick={handleSubmit} color="primary">
                         Add
-          </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>
