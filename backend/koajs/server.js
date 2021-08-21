@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const AppConstants  = require('./constants/AppConstants');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(AppConstants.DB_URL);
 const corsOptions ={
     origin:'http://localhost:3000', 
     credentials:true,            //access-control-allow-credentials:true
@@ -16,6 +16,7 @@ const inventoryLocationRoutes = require('./routes/InventoryLocation.routes')
 const productRoutes = require('./routes/Product.routes')
 const supplierRoutes = require('./routes/Supplier.routes')
 const purchaseRequisition = require('./routes/PurchaseRequisition.routes')
+const cartRoutes = require('./routes/Cart.routes')
 
 
 const app = new Koa();
@@ -32,8 +33,10 @@ app.use(cors(corsOptions));
  .use(supplierRoutes.allowedMethods());
  app.use(purchaseRequisition.routes())
  .use(purchaseRequisition.allowedMethods());
+ app.use(cartRoutes.routes())
+ .use(cartRoutes.allowedMethods()); 
 
 
 app.listen(9090);
 
-console.log('Application is running on port 80');
+console.log('Application is running on port 9090');
