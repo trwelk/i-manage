@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import SuppliersAddedPerMonth from '../components/supplier/SuppliersAddedPerMonth';
-import SuppliersCutoffPerMonth from '../components/supplier/SuppliersCutoffPerMonth';
-import SuppliersState from '../components/supplier/SuppliersState';
+import CashOutflowChart from '../components/purchaseReq/CashOutflowChart';
+import PurchaseReqByStateChart from '../components/purchaseReq/PurchaseReqByStateChart';
+import PurchaseReqsClearedPerMonthChart from '../components/purchaseReq/PurchaseReqsClearedPerMonthChart';
+import WeeklyCashOutflowChart from '../components/purchaseReq/WeeklyCashOutflowChart';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSuppliers } from '../redux/actions/Supplier.actions'
+import { fetchPurchaseReqs } from '../redux/actions/PurchaseReq.actions'
 import { AppConstants } from '../constants/AppConstants';
 import InsightsImage from '../assets/images/icon_insights.png'
-import App from '../App';
-
 const useStyles = makeStyles((theme) => ({
     rowDiv: {
         width: "100%",
@@ -42,60 +41,68 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function SupplierInsights() {
+function CashFlowInsights() {
+
     useEffect(() => {
-        fetchSuppliers(dispatch);
+        fetchPurchaseReqs(dispatch);
     }, [])
     const dispatch = useDispatch();
     const classes = useStyles();
     const globalState = useSelector((state) => state);
-    const suppliers = globalState.supplierReducer.suppliers
-    let supplierCount = 0;
-    let bestSupplier = {rating:0};
+    const purchaseReqs = globalState.purchaseReq.purchaseReqs
+    let totalThisYear = 0;
+    let totalThisMonth = 0
 
-    suppliers?.forEach(supplier => {
-        if(supplier.state === AppConstants.STATE_APPROVED)
-        supplierCount++;
-        if(supplier.rating > bestSupplier.rating)
-            bestSupplier = supplier
+    purchaseReqs?.forEach(purchaseReq => {
+        if (new Date().getUTCFullYear() === new Date(purchaseReq.dateResolved).getUTCFullYear()
+            && purchaseReq.state == AppConstants.STATE_CLEARED) {
+            var month = new Date(purchaseReq.dateResolved).getMonth();
+            totalThisYear += purchaseReq.totalAmount;
+            if(new Date().getMonth() === month){
+                totalThisMonth += purchaseReq.totalAmount;
+            }
+        }
     });
     return (
         <div>
             <div className={classes.rowDiv}>
                 <Paper className={classes.statCardCover} variant="outlined">
                     <div className={classes.imgCover}>
-                        <img src={InsightsImage} />
+                        <img src={InsightsImage}/>
                     </div>
                     <div className={classes.statText}>
                         <div>
-                            <h3 style={{ margin: "0px" }}>Total Number of suppliers</h3>
+                            <h3 style={{margin:"0px"}}>Total Cash Outflow this year</h3>
                         </div>
-                        {supplierCount}
+                        {totalThisYear}
                     </div>
                 </Paper>
                 <Paper className={classes.statCardCover} variant="outlined">
                     <div className={classes.imgCover}>
-                        <img src={InsightsImage} />
+                        <img src={InsightsImage}/>
                     </div>
                     <div className={classes.statText}>
                         <div>
-                            <h3 style={{ margin: "0px" }}>Best Supplier</h3>
+                            <h3 style={{margin:"0px"}}>Total Cash Outflow this month</h3>
                         </div>
-                        {bestSupplier.supplierName}
+                        {totalThisMonth}
                     </div>
                 </Paper>
             </div>
             <div className={classes.rowDiv}>
                 <Paper className={classes.chartCover} variant="outlined">
-                    <SuppliersCutoffPerMonth />
+                    <PurchaseReqByStateChart />
                 </Paper>
                 <Paper className={classes.chartCover} variant="outlined">
-                    <SuppliersState />
+                    <PurchaseReqsClearedPerMonthChart />
                 </Paper>
             </div>
             <div className={classes.rowDiv}>
                 <Paper className={classes.chartCover} variant="outlined">
-                    <SuppliersAddedPerMonth />
+                    <CashOutflowChart />
+                </Paper>
+                <Paper className={classes.chartCover} variant="outlined">
+                    <WeeklyCashOutflowChart />
                 </Paper>
             </div>
         </div>
@@ -103,4 +110,4 @@ function SupplierInsights() {
     );
 }
 
-export default SupplierInsights;
+export default CashFlowInsights;

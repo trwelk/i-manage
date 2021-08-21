@@ -8,6 +8,7 @@ import SupplierManagement from './pages/SupplierManagement';
 import LandingPage from './pages/LandingPage';
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import SideNav from './components/layout/common/SideNav';
 
 const theme = createTheme({
   palette: {
@@ -29,7 +30,9 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <div className="App">
+    <div className="App" style={{ display: "flex" }}>
+      <SideNav />
+      <div style={{marginTop:"80px",width:"100%"}}>      
        <Router>
         <Switch>
         <Route exact path="/" component={LandingPage} />
@@ -40,6 +43,7 @@ function App() {
         </Switch>
         <Route exact path="/suppliers" component={SupplierManagement} />
       </Router>
+      </div>
     </div>
     </ThemeProvider>
   );

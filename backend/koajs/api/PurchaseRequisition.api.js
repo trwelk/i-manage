@@ -1,24 +1,27 @@
 const uuid = require('uuid');
 const purchaseRequisitionSchema = require('../model/PurchaseRequisition.model')
+const productApi = require('../api/Product.api')
 // const mailApi = require('../api/mail.api');
+
 
 
 /*Inserts a new purchaseRequisitionLocation entity into the database and returns the object if successfull : else returns the error 
   Catch this error from where it's called and throw an error*/
   const addPurchaseRequisition = async obj => {
-    return new Promise((resolve, reject) => {
+    return new Promise( async (resolve, reject) => {
+        var product = await productApi.getProductByKey(obj.product);
         var newPurchaseRequisitionSchema = new purchaseRequisitionSchema({
             id: obj.id,
-            purchaseRequisitionName: obj.PurchaseRequisitionName,
-            Note: obj.Note,
-            contractDate: obj.contractDate,
-            contractExpDate: obj.contractExpDate,
-            contactNumber: obj.contactNumber,
-            contactEmail: obj.contactEmail,
-            currencyCode: obj.currencyCode,
+            description: obj.description,
+            product: obj.product,
+            requester: obj.requester,
+            location: obj.location,
+            requestedDate:obj.requestedDate,
+            wantedDeliveryDate: obj.wantedDeliveryDate,
             state: obj.state,
-            rating: obj.rating,
-
+            quantityOfItems:obj.quantityOfItems,
+            dateResolved:obj.dateResolved,
+            totalAmount: product[0].buyingPrice * obj.quantityOfItems
         });
 
         newPurchaseRequisitionSchema.save()
