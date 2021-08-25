@@ -42,6 +42,7 @@ function App() {
           <Route exact path="/locations" component={LocationManagement} />
           <Route exact path="/suppliers/insights" component={SupplierInsights} />
           <Route exact path="/suppliers/manage" component={SupplierManagement} />
+          <Route exact path="/customer/landingpage" component={LandingPage}/>
         </Switch>
         </div>
       </Router>
