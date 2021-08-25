@@ -5,7 +5,7 @@ import InvLocationHeaderWithSelector from '../components/inventoryLocation/InvLo
 function InventoryItemsInLocationPage() {
     
     return (
-        <div>
+        <div className="fullwidth">
             <InvLocationHeaderWithSelector/>
             <InventoryPartTable/>
         </div>

@@ -3,7 +3,7 @@ import InventoryLocationTable from '../components/inventoryLocation/InventoryLoc
 function LocationManagement() {
         console.log(new Date().toISOString())
     return (
-        <div>
+        <div  className="fullwidth">
             <InventoryLocationTable/>
         </div>
 

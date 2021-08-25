@@ -13,13 +13,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import logo from '../../assets/Logo.png';
 import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom: 20
   },
   sectionDesktop: {
     display: 'none',
+    marginLeft: 'auto',
+    marginRight: 0,
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     }
@@ -33,59 +37,58 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 700,
-    [theme.breakpoints.up('sm')]: {
-      marginRight: theme.spacing(0),
-      width: 'auto',
-      display: 'flex'
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(2, 2, 2, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '40ch',
-      '&:focus': {
-        width: '40ch',
-      },
-    },
-  },
+  // search: {
+  //   position: 'relative',
+  //   borderRadius: theme.shape.borderRadius,
+  //   backgroundColor: alpha(theme.palette.common.white, 0.15),
+  //   '&:hover': {
+  //     backgroundColor: alpha(theme.palette.common.white, 0.25),
+  //   },
+  //   marginLeft: 'auto',
+  //   marginRight: 0,
+  //   [theme.breakpoints.up('md')]: {
+  //     marginRight: theme.spacing(0),
+  //     width: 'auto',
+  //     display: 'flex'
+  //   },
+  // },
+  // searchIcon: {
+  //   padding: theme.spacing(0, 2),
+  //   height: '100%',
+  //   position: 'absolute',
+  //   pointerEvents: 'none',
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  // inputRoot: {
+  //   color: 'inherit',
+  // },
+  // inputInput: {
+  //   padding: theme.spacing(2, 2, 2, 0),
+  //   // vertical padding + font size from searchIcon
+  //   paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+  //   transition: theme.transitions.create('width'),
+  //   width: '100%',
+  //   [theme.breakpoints.up('sm')]: {
+  //     width: '40ch',
+  //     '&:focus': {
+  //       width: '40ch',
+  //     },
+  //   },
+  // },
   logo: {
     maxWidth:70,
     padding: 10
   },
   navbutton: {
       fontSize: 20
-  },
-  searchdiv: {
-      widht: 50
   }
 }));
 
 export default function Navbar() {
   const classes = useStyles();
+  let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -96,6 +99,26 @@ export default function Navbar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleCartRedirect = () => {
+    history.push('/shop/cart');
+  };
+
+  const handleHomeRedirect = () => {
+    history.push('/shop');
+  };
+
+  const handleProductsRedirect = () => {
+    history.push('/shop');
+  };
+
+  const handleNewsRedirect = () => {
+    history.push('/shop');
+  };
+
+  const handleShopRedirect = () => {
+    history.push('/shop');
   };
 
   const menuId = 'primary-search-account-menu';
@@ -119,13 +142,21 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <img src={logo} alt="Logo" className={classes.logo}/>
-            <Button color="secondary" className={classes.navbutton}>Home</Button>
-            <Button color="secondary" className={classes.navbutton}>Products</Button>
-            <Button color="secondary" className={classes.navbutton}>News</Button>
-            <Button color="secondary" className={classes.navbutton}>Shop</Button>
+            <Button color="secondary" className={classes.navbutton} onClick={handleHomeRedirect}>
+              Home
+            </Button>
+            <Button color="secondary" className={classes.navbutton} onClick={handleProductsRedirect}>
+              Products
+            </Button>
+            <Button color="secondary" className={classes.navbutton} onClick={handleNewsRedirect}>
+              News
+            </Button>
+            <Button color="secondary" className={classes.navbutton} onClick={handleShopRedirect}>
+              Shop
+            </Button>
             <Button color="secondary" className={classes.navbutton}>Contact Us</Button>
-          <div className={classes.searchdiv}>
-          <div className={classes.search}>
+          {/* Uncomment if search is required in navbar */}
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -137,17 +168,16 @@ export default function Navbar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
-          </div>
+          </div> */}
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="4 items in cart" color="inherit">
+            <IconButton aria-label="4 items in cart" color="inherit" onClick={handleCartRedirect}>
               <Badge badgeContent={4} color="secondary">
-                <ShoppingCartIcon />
+                <ShoppingCartIcon className={classes.navbutton}/>
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+                <NotificationsIcon className={classes.navbutton}/>
               </Badge>
             </IconButton>
             <IconButton
@@ -158,7 +188,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle className={classes.navbutton}/>
             </IconButton>
           </div>
         </Toolbar>

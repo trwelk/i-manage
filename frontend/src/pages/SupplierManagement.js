@@ -3,7 +3,7 @@ import InsertSupplierForm from '../components/supplier/InsertSupplierForm';
 function SupplierManagement() {
     
     return (
-        <div>
+        <div  className="fullwidth">
             <InsertSupplierForm/>
         </div>
 

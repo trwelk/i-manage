@@ -23,12 +23,14 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import StoreIcon from '@material-ui/icons/Store';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        marginBottom: '100px'
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -69,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: "53px",
+        width: "50px",
     },
     toolbar: {
         display: 'flex',
@@ -107,7 +109,7 @@ export default function SideNav() {
 
     const supplierMenu = (
         <div>
-            <Link className={classes.link} to="/suppliers/insights">
+            <Link className={classes.link} to="/admin/suppliers/insights">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon} >
                         <CasinoIcon />
@@ -115,7 +117,7 @@ export default function SideNav() {
                     <ListItemText primary="Supplier Insights" />
                 </ListItem>
             </Link>
-            <Link className={classes.link} to="/suppliers/manage">
+            <Link className={classes.link} to="/admin/suppliers/manage">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <EmojiPeopleIcon />
@@ -128,7 +130,7 @@ export default function SideNav() {
 
     const locationMenu = (
         <div>
-            <Link className={classes.link} to="/locations">
+            <Link className={classes.link} to="/admin/locations">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <LocationCityIcon />
@@ -141,7 +143,7 @@ export default function SideNav() {
 
     const inventoryMenu = (
         <div>
-            <Link className={classes.link} to="/inventory">
+            <Link className={classes.link} to="/admin/inventory">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <StoreIcon />
@@ -155,12 +157,25 @@ export default function SideNav() {
     
     const productMenu = (
         <div>
-            <Link className={classes.link} to="/products">
+            <Link className={classes.link} to="/admin/products">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <AddShoppingCartIcon />
                     </ListItemIcon>
                     <ListItemText primary="Product Management" />
+                </ListItem>
+            </Link>
+        </div>
+    )
+
+    const orderMenu = (
+        <div>
+            <Link className={classes.link} to="/admin/orders">
+                <ListItem button>
+                    <ListItemIcon className={classes.itemIcon}>
+                        <AssignmentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Order Management" />
                 </ListItem>
             </Link>
         </div>
@@ -215,6 +230,7 @@ export default function SideNav() {
                 {productMenu}
                 {inventoryMenu}
                 {locationMenu}
+                {orderMenu}
                 <Divider />
                 <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (

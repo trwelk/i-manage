@@ -4,7 +4,8 @@ import LandingCarousel from '../components/customer/landingpage/LandingCarousel'
 function LandingPage() {
     
     return (
-        <div>
+        <div style={{    flexGrow: 1
+        }}>
             <Navbar/>
             <LandingCarousel/>
         </div>

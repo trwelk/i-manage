@@ -76,3 +76,33 @@ export const deleteProductSuccess = (data) =>  {
         payload: data
     }
 }
+
+
+export const validateProductObj = (data) => {
+    if (data.id == null || data.id == "") {
+        return "Field id Cannot be empty"
+    }
+    else if (data.productName == null || data.productName == "") {
+        return "Field Name Cannot be empty"
+    }
+    else if (data.brand == null || data.brand == "") {
+        return "Field brand Date Cannot be empty"
+    }
+    else if (data.model == null || data.model == "") {
+        return "Field model Exp Date Cannot be empty"
+    }
+    else if (data.type == null || data.type == "") {
+        return "Field type Number Cannot be empty"
+    }
+    else if (data.supplier == null || data.supplier == "") {
+        return "Field supplier Cannot be empty"
+    }
+    else if (data.sellingPrice == null || data.sellingPrice == "") {
+        return "Field  selling Price Code Cannot be empty"
+    }
+    else if (data.buyingPrice == null || data.buyingPrice == "") {
+        return "Field buyingPrice Of Contact Cannot be empty"
+    }
+    else
+        return null;
+}
