@@ -123,6 +123,7 @@ export default function Navbar() {
             <Button color="secondary" className={classes.navbutton}>Products</Button>
             <Button color="secondary" className={classes.navbutton}>News</Button>
             <Button color="secondary" className={classes.navbutton}>Shop</Button>
+            <Button color="secondary" className={classes.navbutton}>Contact Us</Button>
           <div className={classes.searchdiv}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
