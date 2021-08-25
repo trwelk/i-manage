@@ -64,7 +64,7 @@ function CashFlowInsights() {
         }
     });
     return (
-        <div>
+        <div  className="fullwidth">
             <div className={classes.rowDiv}>
                 <Paper className={classes.statCardCover} variant="outlined">
                     <div className={classes.imgCover}>
