@@ -3,7 +3,7 @@ import ProductTable from '../components/product/ProductTable';
 function ProductManagement() {
     
     return (
-        <div>
+        <div  className="fullwidth">
             <ProductTable/>
         </div>
 

@@ -102,7 +102,8 @@ export const validateSupplierObj = (data) => {
     else if (data.methodOfContact == null || data.methodOfContact == "") {
         return "Field method Of Contact Cannot be empty"
     }
-    else if (data.email == null || data.email == "") {
+    else if (data.contactEmail == null || data.contactEmail == "") {
+        console.log(data)
         return "Field email Cannot be empty"
     } else if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(data.contactEmail))) {
         return "Field Email is invalid"
