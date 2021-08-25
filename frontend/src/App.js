@@ -6,6 +6,7 @@ import LocationManagement from './pages/LocationManagement';
 import SupplierInsights from './pages/SupplierInsights';
 import SupplierManagement from './pages/SupplierManagement';
 import LandingPage from './pages/LandingPage';
+import Cart from './pages/Cart';
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -24,6 +25,9 @@ const theme = createTheme({
       contrastText: '#000',
     },
   },
+  typography: {
+    fontSize: 10
+  }
 });
 
 function App() {
@@ -32,7 +36,8 @@ function App() {
     <div className="App">
        <Router>
         <Switch>
-        <Route exact path="/" component={LandingPage} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/cart" component={Cart} />
           <Route exact path="/inventory" component={InventoryItemsInLocationPage} />
           <Route exact path="/products" component={ProductManagement} />
           <Route exact path="/locations" component={LocationManagement} />
