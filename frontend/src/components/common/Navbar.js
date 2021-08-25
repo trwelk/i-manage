@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import logo from '../../assets/Logo.png';
 import Button from '@material-ui/core/Button';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,6 +83,18 @@ const useStyles = makeStyles((theme) => ({
   },
   navbutton: {
       fontSize: 20
+  },
+  link: {
+    textDecoration: 'none',
+    '&:visited': {
+      color: '#fff'
+    }
+  },
+  userMenu: {
+    backgroundColor: theme.palette.secondary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.dark
+    }
   }
 }));
 
@@ -101,26 +113,6 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
-  const handleCartRedirect = () => {
-    history.push('/shop/cart');
-  };
-
-  const handleHomeRedirect = () => {
-    history.push('/shop');
-  };
-
-  const handleProductsRedirect = () => {
-    history.push('/shop');
-  };
-
-  const handleNewsRedirect = () => {
-    history.push('/shop');
-  };
-
-  const handleShopRedirect = () => {
-    history.push('/shop');
-  };
-
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -132,8 +124,21 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+        <Link to="/shop/signUp" className={classes.link}>
+          Sign Up
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+        <Link to="/shop" className={classes.link}>
+          Login
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+        <Link to="/shop" className={classes.link}>
+          Profile
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -142,19 +147,21 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <img src={logo} alt="Logo" className={classes.logo}/>
-            <Button color="secondary" className={classes.navbutton} onClick={handleHomeRedirect}>
+            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Home
-            </Button>
-            <Button color="secondary" className={classes.navbutton} onClick={handleProductsRedirect}>
+            </Button></Link>
+            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Products
-            </Button>
-            <Button color="secondary" className={classes.navbutton} onClick={handleNewsRedirect}>
+            </Button></Link>
+            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               News
-            </Button>
-            <Button color="secondary" className={classes.navbutton} onClick={handleShopRedirect}>
+            </Button></Link>
+            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Shop
-            </Button>
-            <Button color="secondary" className={classes.navbutton}>Contact Us</Button>
+            </Button></Link>
+            <Link to="/shop/contactUs" className={classes.link}><Button color="secondary" className={classes.navbutton}>
+              Contact Us
+            </Button></Link>
           {/* Uncomment if search is required in navbar */}
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -170,9 +177,11 @@ export default function Navbar() {
             />
           </div> */}
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="4 items in cart" color="inherit" onClick={handleCartRedirect}>
+            <IconButton aria-label="4 items in cart" color="inherit">
               <Badge badgeContent={4} color="secondary">
+              <Link to="/shop/cart" className={classes.link}>
                 <ShoppingCartIcon className={classes.navbutton}/>
+              </Link>
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
