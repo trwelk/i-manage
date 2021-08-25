@@ -48,9 +48,8 @@ function App() {
               <Route exact path="/admin/suppliers/manage" component={SupplierManagement} />
               <Route exact path="/shop" component={LandingPage} />
               <Route exact path="/shop/cart" component={Cart} />
-              <Route exact path="/customer/landingpage" component={LandingPage}/>
-              <Route exact path="/customer/contactUs" component = {ContactUs}/>
-              <Route exact path="/customer/signUp" component = {CustomerSignUp}/>
+              <Route exact path="/shop/contactUs" component = {ContactUs}/>
+              <Route exact path="/shop/signUp" component = {CustomerSignUp}/>
             </Switch>
         </Router>
       </div>

@@ -68,7 +68,7 @@ export default function CustomerSignUp() {
   };
 
   return (
-    <div>
+    <div style={{ flexGrow: 1 }}>
       <Navbar />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
