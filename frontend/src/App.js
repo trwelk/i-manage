@@ -9,6 +9,8 @@ import LandingPage from './pages/LandingPage';
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import SideNav from './components/layout/common/SideNav';
+import ContactUs from './pages/ContactUs';
+import CustomerSignUp from './pages/CustomerSignUp';
 
 const theme = createTheme({
   palette: {
@@ -43,6 +45,8 @@ function App() {
           <Route exact path="/suppliers/insights" component={SupplierInsights} />
           <Route exact path="/suppliers/manage" component={SupplierManagement} />
           <Route exact path="/customer/landingpage" component={LandingPage}/>
+          <Route exact path="/customer/contactUs" component = {ContactUs}/>
+          <Route exact path="/customer/signUp" component = {CustomerSignUp}/>
         </Switch>
         </div>
       </Router>
