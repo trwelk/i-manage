@@ -102,23 +102,23 @@ export default function Navbar() {
   };
 
   const handleCartRedirect = () => {
-    history.push('/cart');
+    history.push('/shop/cart');
   };
 
   const handleHomeRedirect = () => {
-    history.push('/');
+    history.push('/shop');
   };
 
   const handleProductsRedirect = () => {
-    history.push('/');
+    history.push('/shop');
   };
 
   const handleNewsRedirect = () => {
-    history.push('/');
+    history.push('/shop');
   };
 
   const handleShopRedirect = () => {
-    history.push('/');
+    history.push('/shop');
   };
 
   const menuId = 'primary-search-account-menu';

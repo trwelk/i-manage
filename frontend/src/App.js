@@ -35,27 +35,26 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <Router>
-            <Switch>
-              <Route path="/admin" component={SideNav} />
-              <Route path="/shop" component={Navbar} />
-            </Switch>
-            <div style={{ width: "100%" }}>
-            <Switch>
-              <Route exact path="/admin/inventory" component={InventoryItemsInLocationPage} />
-              <Route exact path="/admin/products" component={ProductManagement} />
-              <Route exact path="/admin/locations" component={LocationManagement} />
-              <Route exact path="/admin/suppliers/insights" component={SupplierInsights} />
-              <Route exact path="/admin/suppliers/manage" component={SupplierManagement} />
-              <Route exact path="/shop" component={LandingPage} />
-              <Route exact path="/shop/cart" component={Cart} />
-            </Switch>
-
-          </div>
-
-        </Router>
-      </div>
+    <div className="App">
+  
+       <Router>  
+        <Switch>
+          <Route path="/admin" component={SideNav} />
+          <Route path="/shop" component={Navbar} />
+        </Switch>
+        <div style={{width:"100%"}}> 
+        <Switch> 
+          <Route exact path="/admin/inventory" component={InventoryItemsInLocationPage} />
+          <Route exact path="/admin/products" component={ProductManagement} />
+          <Route exact path="/admin/locations" component={LocationManagement} />
+          <Route exact path="/admin/suppliers/insights" component={SupplierInsights} />
+          <Route exact path="/admin/suppliers/manage" component={SupplierManagement} />
+          <Route exact path="/shop" component={LandingPage} />
+          <Route exact path="/shop/cart" component={Cart} />
+        </Switch>
+        </div>
+      </Router>
+    </div>
     </ThemeProvider>
   );
 }
