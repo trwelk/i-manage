@@ -10,7 +10,10 @@ import LandingPage from './pages/LandingPage';
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import SideNav from './components/layout/common/SideNav';
+import ContactUs from './pages/ContactUs';
+import CustomerSignUp from './pages/CustomerSignUp';
 import Navbar from './components/common/Navbar';
+
 
 const theme = createTheme({
   palette: {
@@ -33,12 +36,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App" style={{ display: "flex" }}>
-
         <Router>
             <Switch>
               <Route path="/admin" component={SideNav} />
             </Switch>
-
             <Switch>
               <Route exact path="/admin/inventory" component={InventoryItemsInLocationPage} />
               <Route exact path="/admin/products" component={ProductManagement} />
@@ -47,6 +48,9 @@ function App() {
               <Route exact path="/admin/suppliers/manage" component={SupplierManagement} />
               <Route exact path="/shop" component={LandingPage} />
               <Route exact path="/shop/cart" component={Cart} />
+              <Route exact path="/customer/landingpage" component={LandingPage}/>
+              <Route exact path="/customer/contactUs" component = {ContactUs}/>
+              <Route exact path="/customer/signUp" component = {CustomerSignUp}/>
             </Switch>
         </Router>
       </div>

@@ -154,6 +154,7 @@ export default function Navbar() {
             <Button color="secondary" className={classes.navbutton} onClick={handleShopRedirect}>
               Shop
             </Button>
+            <Button color="secondary" className={classes.navbutton}>Contact Us</Button>
           {/* Uncomment if search is required in navbar */}
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
