@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MaterialTable, { MTableToolbar } from 'material-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchInventories, updateInventory, deleteInventory, createInventory } from '../../redux/actions/Inventory.actions';
+import { fetchInventories, validateInvItemObj,  updateInventory, deleteInventory, createInventory } from '../../redux/actions/Inventory.actions';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -114,8 +114,7 @@ function InventoryPartTable(props) {
                     new Promise((resolve, reject) => {
 
                         setTimeout(() => {
-                            // let err = validateResearchObj(newData)
-                            let err = null;
+                            let err = validateInvItemObj(newData)
                             if (err == null) {
                                 createInventory(newData, dispatch)
                                 resolve();

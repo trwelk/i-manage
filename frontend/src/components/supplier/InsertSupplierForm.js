@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MenuItem from '@material-ui/core/MenuItem';
-import { createSupplier } from '../../redux/actions/Supplier.actions';
+import { createSupplier , validateSupplierObj} from '../../redux/actions/Supplier.actions';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -66,8 +66,16 @@ export default function InsertSupplierForm() {
     };
 
     const handleSubmit = () => {
-        createSupplier(state, dispatch);
-        setOpen(false);
+        let err = validateSupplierObj(state);
+        console.log(state)
+        console.log(err)
+        if(err != null){
+            setError(err)
+        }else{
+            createSupplier(state, dispatch);
+            setOpen(false);
+        }
+
     };
 
     const handleChange = (e) => {
@@ -91,7 +99,7 @@ export default function InsertSupplierForm() {
                 <DialogTitle id="form-dialog-title">Workshops</DialogTitle>
                 <div style={{ marginLeft: "20px", color: "red" }}>{error ? error : ""}</div>
                 <DialogContent className={classes.dialog}>
-                    <form className={classes.root} noValidate autoComplete="off">
+                    <form className={classes.root}  autoComplete="off">
                         <div className={classes.textFieldCover}>
                             <TextField className={classes.textField} onChange={handleChange} required label="Id" name="id" variant="outlined" />
                             <TextField className={classes.textField} onChange={handleChange} required style={{ width: "300px" }}

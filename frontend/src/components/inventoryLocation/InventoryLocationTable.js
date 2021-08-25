@@ -6,7 +6,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { AppConstants } from '../../constants/AppConstants';
-import { deleteLocation ,createLocation,updateLocation ,fetchInventoryLocations} from '../../redux/actions/InventoryLocations.actions'
+import { deleteLocation ,createLocation,updateLocation ,fetchInventoryLocations , validateInvLocation} from '../../redux/actions/InventoryLocations.actions'
 import { IconButton } from '@material-ui/core';
 // import AdminNavbar from '../views/AdminNavBar';
 
@@ -42,7 +42,7 @@ function InventoryLocationTable(props) {
 //*********************************************Setting columns************************************************************* */
 
     const [columns, setColumns] = useState([
-        { title: 'ID', field: 'id' },
+        { title: 'ID', field: 'id' ,required:true},
         { title: 'Name', field: 'locationName', },
         { title: 'Description', field: 'locationDescription' },
         { title: 'Address', field: 'address' },
@@ -82,33 +82,11 @@ function InventoryLocationTable(props) {
             title={"locations"}
             columns={columns}
             data={locations}
-            detailPanel={[
-            {
-              icon:'download',
-              tooltip: 'Download',
-              render: rowData => {
-                return (
-                  <div> 
-
-                    <a 
-                    href={rowData.paperLink} 
-                    target="_blank"download>
-                                              <IconButton>
-                          <CloudDownloadIcon/>
-                      </IconButton>download</a>
-                  </div>
-
-                    
-                )
-              },
-            },
-          ]}
             editable={{
                 onRowAdd: newData =>
                     new Promise((resolve, reject) => {
                             setTimeout(() => {
-                                // let err = validateResearchObj(newData)
-                                let err = null;
+                                let err = validateInvLocation(newData)
                                 if(err == null){
                                     createLocation(newData,dispatch)
                                     resolve();

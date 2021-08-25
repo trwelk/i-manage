@@ -107,7 +107,7 @@ export default function SideNav() {
 
     const supplierMenu = (
         <div>
-            <Link className={classes.link} to="/suppliers/insights">
+            <Link className={classes.link} to="/admin/suppliers/insights">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon} >
                         <CasinoIcon />
@@ -115,7 +115,7 @@ export default function SideNav() {
                     <ListItemText primary="Supplier Insights" />
                 </ListItem>
             </Link>
-            <Link className={classes.link} to="/suppliers/manage">
+            <Link className={classes.link} to="/admin/suppliers/manage">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <EmojiPeopleIcon />
@@ -128,7 +128,7 @@ export default function SideNav() {
 
     const locationMenu = (
         <div>
-            <Link className={classes.link} to="/locations">
+            <Link className={classes.link} to="/admin/locations">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <LocationCityIcon />
@@ -141,7 +141,7 @@ export default function SideNav() {
 
     const inventoryMenu = (
         <div>
-            <Link className={classes.link} to="/inventory">
+            <Link className={classes.link} to="/admin/inventory">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <StoreIcon />
@@ -155,7 +155,7 @@ export default function SideNav() {
     
     const productMenu = (
         <div>
-            <Link className={classes.link} to="/products">
+            <Link className={classes.link} to="/admin/products">
                 <ListItem button>
                     <ListItemIcon className={classes.itemIcon}>
                         <AddShoppingCartIcon />
