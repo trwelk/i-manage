@@ -3,7 +3,9 @@ import Navbar from '../components/common/Navbar';
 function LandingPage() {
     
     return (
-        <div>
+        <div style={{    flexGrow: 1
+        }}>
+            <Navbar/>
         </div>
 
     );
