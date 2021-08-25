@@ -37,7 +37,6 @@ function App() {
         <Router>
             <Switch>
               <Route path="/admin" component={SideNav} />
-              <Route path="/shop" component={Navbar} />
             </Switch>
 
             <Switch>
@@ -47,7 +46,7 @@ function App() {
               <Route exact path="/admin/suppliers/insights" component={SupplierInsights} />
               <Route exact path="/admin/suppliers/manage" component={SupplierManagement} />
               <Route exact path="/shop" component={LandingPage} />
-              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/shop/cart" component={Cart} />
             </Switch>
         </Router>
       </div>
