@@ -23,12 +23,14 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import StoreIcon from '@material-ui/icons/Store';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        marginBottom: '100px'
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -69,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: "53px",
+        width: "50px",
     },
     toolbar: {
         display: 'flex',
@@ -166,6 +168,19 @@ export default function SideNav() {
         </div>
     )
 
+    const orderMenu = (
+        <div>
+            <Link className={classes.link} to="/admin/orders">
+                <ListItem button>
+                    <ListItemIcon className={classes.itemIcon}>
+                        <AssignmentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Order Management" />
+                </ListItem>
+            </Link>
+        </div>
+    )
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -215,6 +230,7 @@ export default function SideNav() {
                 {productMenu}
                 {inventoryMenu}
                 {locationMenu}
+                {orderMenu}
                 <Divider />
                 <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
