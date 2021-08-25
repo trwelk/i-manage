@@ -81,3 +81,21 @@ export const deleteInventorySuccess = (data) =>  {
         payload: data
     }
 }
+
+
+export const validateInvItemObj = (data) => {
+    if (data.id == null || data.id == "") {
+        return "Field id Cannot be empty"
+    }
+    else if (data.location == null || data.location == "") {
+        return "Field location Cannot be empty"
+    }
+    else if (data.product == null || data.product == "") {
+        return "Field product Date Cannot be empty"
+    }
+    else if (data.quantity == null || data.quantity == "") {
+        return "Field quantity Exp Date Cannot be empty"
+    }
+    else
+        return null;
+}

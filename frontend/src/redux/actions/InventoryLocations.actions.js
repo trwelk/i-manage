@@ -82,3 +82,25 @@ export const deleteLocationSuccess = (data) =>  {
         payload: data
     }
 }
+
+
+export const validateInvLocation = (data) =>  {
+    if(data.id == null || data.id == ""){
+     return "Field id Cannot be empty"
+   }
+   else if(data.locationName == null || data.locationName == ""){
+     return "Field locationName Cannot be empty"
+   }
+   else if(data.address == null || data.address == ""){
+     return "Field address Cannot be empty"
+    }
+    else if(data.city == null || data.city == ""){
+      return "Field city Cannot be empty"
+    }
+    else if(data.country == null || data.country == ""){
+        return "Field country Cannot be empty"
+  }  else if(data.manager == null || data.manager == ""){
+    return "Field manager Cannot be empty"
+}  else
+   return null;
+ }
