@@ -13,11 +13,14 @@ import Container from "@material-ui/core/Container";
 import Navbar from "../components/common/Navbar";
 import DateFnsUtils from "@date-io/date-fns";
 import MuiPhoneNumber from "material-ui-phone-number";
+import { validateCustomerObj, createCustomer } from "../redux/actions/Customer.actions";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -51,22 +54,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function handleOnChange(value) {
-  this.setState({
-    phone: value,
-  });
-}
+
 
 export default function CustomerSignUp() {
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
 
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [error,setError] = React.useState("");
+  const history = useHistory();
+  const dispatch = useDispatch();
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    setState(prevState => ({ ...prevState,dateOfBirth: selectedDate}));
+    console.log(state)
   };
+  function handleSubmit() {
+    let err = validateCustomerObj(state);
+    if(err!=null){
+      setError(err);
+    }else{
+      createCustomer(state,dispatch);
+      history.push('/shop');
+    }
+    console.log(state);
+ }
 
+  function handlePhoneChange(value) {
+    setState(prevState => ({ ...prevState,contactNumber: value}));
+    console.log(state)
+ }
+
+  const [state,setState] =  React.useState({
+    firstName: "", lastName: "", dateOfBirth: new Date(), contactNumber: "", address: "", emailAddress: "", password: ""
+  });
+
+  const handleOnChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value })
+    console.log(state)
+}
   return (
     <div style={{ flexGrow: 1 }}>
       <Navbar />
@@ -79,6 +104,7 @@ export default function CustomerSignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          <div style={{ marginLeft: "20px", color: "red" }}>{error ? error : ""}</div>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -86,6 +112,7 @@ export default function CustomerSignUp() {
                   autoComplete="fname"
                   name="firstName"
                   variant="outlined"
+                  onChange={handleOnChange}
                   required
                   fullWidth
                   id="firstName"
@@ -97,6 +124,7 @@ export default function CustomerSignUp() {
                 <TextField
                   variant="outlined"
                   required
+                  onChange={handleOnChange}
                   fullWidth
                   id="lastName"
                   label="Last Name"
@@ -116,6 +144,7 @@ export default function CustomerSignUp() {
                     margin="normal"
                     id="date-picker-inline"
                     label="Date of Birth"
+                    name = "dateOfBirth"
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
@@ -128,7 +157,8 @@ export default function CustomerSignUp() {
                 <MuiPhoneNumber
                   variant="outlined"
                   defaultCountry={"lk"}
-                  onChange={handleOnChange}
+                  onChange={handlePhoneChange}
+                  name = "contactNumber"
                   fullWidth
                 />
               </Grid>
@@ -136,6 +166,7 @@ export default function CustomerSignUp() {
                 <TextField
                   variant="outlined"
                   fullWidth
+                  onChange={handleOnChange}
                   id="address"
                   label="Home Address"
                   name="address"
@@ -147,9 +178,10 @@ export default function CustomerSignUp() {
                   variant="outlined"
                   required
                   fullWidth
+                  onChange={handleOnChange}
                   id="email"
                   label="Email Address"
-                  name="email"
+                  name="emailAddress"
                   autoComplete="email"
                 />
               </Grid>
@@ -158,6 +190,7 @@ export default function CustomerSignUp() {
                   variant="outlined"
                   required
                   fullWidth
+                  onChange={handleOnChange}
                   name="password"
                   label="Password"
                   type="password"
@@ -167,10 +200,10 @@ export default function CustomerSignUp() {
               </Grid>
             </Grid>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
+              onClick = {handleSubmit}
               className={classes.submit}
             >
               Sign Up
