@@ -1,8 +1,20 @@
 const mongoose = require('mongoose');
 
-var cartSchema = mongoose.Schema({
+var orderSchema = mongoose.Schema({
+    id: {
+        type: String,
+        required: true
+    },
     userId: {
         type: String,
+        required: true
+    },
+    source: {
+        type: String,
+        required: false
+    },
+    date: {
+        type: Date,
         required: true
     },
     items: {
@@ -18,12 +30,12 @@ var cartSchema = mongoose.Schema({
     },
     total: {
         type: Number,
-        required: false
+        required: true
     },
-    itemCount: {
-        type: Number,
-        required: false
+    status: {
+        type: String,
+        required: true
     }
 });
 
-module.exports = mongoose.model('cart', cartSchema);
+module.exports = mongoose.model('order', orderSchema);

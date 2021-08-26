@@ -6,10 +6,9 @@ const cartSchema = require('../model/Cart.model')
     return new Promise((resolve, reject) => {
         var newCartSchema = new cartSchema({
             userId: obj.userId,
-            products: obj.items,
-            qty: obj.qty,
+            items: obj.items,
             total: obj.total,
-            itemCount: obj.itemCount
+            itemCount: obj.items.length()
         });
 
         newCartSchema.save()

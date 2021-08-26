@@ -154,6 +154,19 @@ export default function SideNav() {
         </div>
     )
 
+    const cashflowMenu = (
+        <div>
+            <Link className={classes.link} to="/admin/cashflow/insights">
+                <ListItem button>
+                    <ListItemIcon className={classes.itemIcon}>
+                        <StoreIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Financial Insights" />
+                </ListItem>
+            </Link>
+        </div>
+    )
+
     
     const productMenu = (
         <div>
@@ -203,7 +216,7 @@ export default function SideNav() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        I-Manage
+                        Shan.eryn Management
           </Typography>
                 </Toolbar>
             </AppBar>
@@ -226,6 +239,7 @@ export default function SideNav() {
                     </IconButton>
                 </div>
                 <Divider />
+                {cashflowMenu}
                 {supplierMenu}
                 {productMenu}
                 {inventoryMenu}
