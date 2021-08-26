@@ -16,6 +16,7 @@ const inventoryLocationRoutes = require('./routes/InventoryLocation.routes')
 const productRoutes = require('./routes/Product.routes')
 const supplierRoutes = require('./routes/Supplier.routes')
 const purchaseRequisition = require('./routes/PurchaseRequisition.routes')
+const customerRoutes = require('./routes/Customer.routes')
 // const cartRoutes = require('./routes/Cart.routes')
 
 
@@ -33,6 +34,8 @@ app.use(cors(corsOptions));
  .use(supplierRoutes.allowedMethods());
  app.use(purchaseRequisition.routes())
  .use(purchaseRequisition.allowedMethods());
+ app.use(customerRoutes.routes())
+ .use(customerRoutes.allowedMethods());
 //  app.use(cartRoutes.routes())
 //  .use(cartRoutes.allowedMethods()); 
 
