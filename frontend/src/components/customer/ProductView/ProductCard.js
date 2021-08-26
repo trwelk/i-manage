@@ -14,11 +14,12 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 345
   },
   media: {
     height: 0,
@@ -55,17 +56,20 @@ export default function ProductCard(props) {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
+        image={values.image}
+        title={values.title}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {values.description}
         </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Price : {values.price}
+        </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <AddShoppingCartIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
