@@ -37,7 +37,11 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center"
-    }
+    },   
+     chartFullCover: {
+        width: "90%",
+        marginBottom: "30px"
+    },
 
 }));
 
@@ -98,11 +102,8 @@ function CashFlowInsights() {
                 </Paper>
             </div>
             <div className={classes.rowDiv}>
-                <Paper className={classes.chartCover} variant="outlined">
+                <Paper className={classes.chartFullCover} variant="outlined">
                     <CashOutflowChart />
-                </Paper>
-                <Paper className={classes.chartCover} variant="outlined">
-                    <WeeklyCashOutflowChart />
                 </Paper>
             </div>
         </div>
