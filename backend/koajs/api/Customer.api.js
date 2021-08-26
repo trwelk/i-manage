@@ -7,7 +7,7 @@ const customerSchema = require('../model/Customer.model')
 const addCustomer = async obj => {
   return new Promise((resolve, reject) => {
       var newCustomerSchema = new customerSchema({
-          id: obj.id,
+          id: uuid.v4(),
           firstName: obj.firstName,
           lastName: obj.lastName,
           dateOfBirth: obj.dateOfBirth,
