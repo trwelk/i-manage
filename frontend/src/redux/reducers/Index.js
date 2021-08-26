@@ -4,6 +4,7 @@ import { InventoryLocationReducer } from './InventoryLocationReducer'
 import { ProductReducer } from './ProductReducer'
 import { SupplierReducer } from './SupplierReducer'
 import { PurchaseReqReducer } from './PurchaseReqReducer'
+import { OrderReducer } from './OrderReducer'
 
 
  const reducer = combineReducers({
@@ -11,7 +12,8 @@ import { PurchaseReqReducer } from './PurchaseReqReducer'
     inventoryLocationReducer:InventoryLocationReducer,
     productReducer:ProductReducer,
     supplierReducer:SupplierReducer,
-    purchaseReq:PurchaseReqReducer
+    purchaseReq:PurchaseReqReducer,
+    orderReducer: OrderReducer,
 })
 
 export default reducer
