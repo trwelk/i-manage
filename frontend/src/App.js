@@ -17,7 +17,7 @@ import OrderForm from './components/order/OrderForm';
 import CashFlowInsights from './pages/CashFlowInsights';
 import Checkout from './pages/Checkout';
 import ProductView from './pages/ProductView';
-
+import Login from './pages/Login';
 
 
 const theme = createTheme({
@@ -60,6 +60,7 @@ function App() {
               <Route exact path="/shop/contactUs" component = {ContactUs}/>
               <Route exact path="/shop/signUp" component = {CustomerSignUp}/>
               <Route exact path="/shop/viewProducts" component = {ProductView}/>
+              <Route exact path="/shop/login" component = {Login}/>
             </Switch>
         </Router>
       </div>
