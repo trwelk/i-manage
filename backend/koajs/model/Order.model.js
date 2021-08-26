@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const cartItem = require('./CartItem.model')
 
 var orderSchema = mongoose.Schema({
     id: {
@@ -17,12 +18,15 @@ var orderSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    products: {
-        type: [String],
-        required: true
-    },
-    qty: {
-        type: [String],
+    items: {
+        type: [
+            {
+                productId: String,
+                qty: Number,
+                price: Number,
+                total: Number
+            }
+        ],
         required: true
     },
     total: {

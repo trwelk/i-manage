@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 15
   },
   hr: {
-    width: '100%'
+    width: '100%',
+    border: '1px solid black'
   },
   titles: {
     fontSize: 15,

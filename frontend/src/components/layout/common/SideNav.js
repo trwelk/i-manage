@@ -203,7 +203,7 @@ export default function SideNav() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        I-Manage
+                        Shan.eryn Management
           </Typography>
                 </Toolbar>
             </AppBar>
