@@ -52,11 +52,15 @@ function OrderTable(props) {
 //*********************************************Setting columns************************************************************* */
 
     const [columns, setColumns] = useState([
-        { title: 'User Id', field: 'userId', },
-        { title: 'Source', field: 'source' },
-        { title: 'Date', field: 'date' },
-        { title: 'Total', field: 'total' },
-        { title: 'Status', field: 'status' }
+        { title: 'User Id', field: 'userId', editable: 'never'},
+        { title: 'Source', field: 'source', editable: 'never' },
+        { title: 'Date', field: 'date', editable: 'never' },
+        { title: 'Total', field: 'total', editable: 'never' },
+        { 
+            title: 'Status', 
+            field: 'status',
+            lookup: {'New': 'New', 'Completed': 'Completed', 'Processing': 'Processing', 'Delivered': 'Delivered'}
+        }
     ]);
 
 
@@ -117,15 +121,14 @@ function OrderTable(props) {
                             deleteOrder(dispatch, oldData.id)
                             resolve()
                         }, 1000)
-                })
-
-                // onRowUpdate: (newData, oldData) =>
-                //     new Promise((resolve, reject) => {
-                //             setTimeout(() => {
-                //                 updateOrder(dispatch, newData)
-                //                 resolve();
-                //             }, 1000)
-                //     }),
+                }),
+                onRowUpdate: (newData, oldData) =>
+                    new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                updateOrder(dispatch, newData)
+                                resolve();
+                            }, 1000)
+                    }),
             }}
             options={{
                 pageSize: 10,
