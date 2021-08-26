@@ -14,6 +14,7 @@ import ContactUs from './pages/ContactUs';
 import CustomerSignUp from './pages/CustomerSignUp';
 import OrderManagement from './pages/OrderManagement';
 import OrderForm from './components/order/OrderForm';
+import CashFlowInsights from './pages/CashFlowInsights';
 
 
 const theme = createTheme({
@@ -49,6 +50,7 @@ function App() {
               <Route exact path="/admin/suppliers/manage" component={SupplierManagement} />
               <Route exact path="/admin/orders" component={OrderManagement} />
               <Route exact path="/admin/orders/new" component={OrderForm} />
+              <Route exact path="/admin/cashflow/insights" component={CashFlowInsights} />
               <Route exact path="/shop" component={LandingPage} />
               <Route exact path="/shop/cart" component={Cart} />
               <Route exact path="/shop/contactUs" component = {ContactUs}/>
