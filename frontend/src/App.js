@@ -12,6 +12,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import SideNav from './components/layout/common/SideNav';
 import ContactUs from './pages/ContactUs';
 import CustomerSignUp from './pages/CustomerSignUp';
+import ProductView from './pages/ProductView';
 import Navbar from './components/common/Navbar';
 
 
@@ -50,6 +51,7 @@ function App() {
               <Route exact path="/shop/cart" component={Cart} />
               <Route exact path="/shop/contactUs" component = {ContactUs}/>
               <Route exact path="/shop/signUp" component = {CustomerSignUp}/>
+              <Route exact path="/shop/viewProducts" component = {ProductView}/>
             </Switch>
         </Router>
       </div>
