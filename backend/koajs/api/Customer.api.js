@@ -1,6 +1,9 @@
 const uuid = require('uuid');
 const customerSchema = require('../model/Customer.model')
 
+/*Inserts a new Customer entity into the database and returns the object if successfull : else returns the error 
+  Catch this error from where it's called and throw an error*/
+
 const addCustomer = async obj => {
   return new Promise((resolve, reject) => {
       var newCustomerSchema = new customerSchema({
@@ -23,4 +26,5 @@ const addCustomer = async obj => {
           })
   })
 }
+
 module.exports = {addCustomer};
