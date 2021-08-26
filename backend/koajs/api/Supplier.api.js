@@ -17,7 +17,7 @@ const supplierSchema = require('../model/Supplier.model')
             contactEmail: obj.contactEmail,
             currencyCode: obj.currencyCode,
             methodOfContact: obj.methodOfContact,
-            state: obj.state,
+            state: "REQUESTED",
             rating: obj.rating,
 
         });

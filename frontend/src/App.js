@@ -13,6 +13,7 @@ import SideNav from './components/layout/common/SideNav';
 import ContactUs from './pages/ContactUs';
 import CustomerSignUp from './pages/CustomerSignUp';
 import Navbar from './components/common/Navbar';
+import CashFlowInsights from './pages/CashFlowInsights';
 
 
 const theme = createTheme({
@@ -46,6 +47,7 @@ function App() {
               <Route exact path="/admin/locations" component={LocationManagement} />
               <Route exact path="/admin/suppliers/insights" component={SupplierInsights} />
               <Route exact path="/admin/suppliers/manage" component={SupplierManagement} />
+              <Route exact path="/admin/cashflow/insights" component={CashFlowInsights} />
               <Route exact path="/shop" component={LandingPage} />
               <Route exact path="/shop/cart" component={Cart} />
               <Route exact path="/shop/contactUs" component = {ContactUs}/>

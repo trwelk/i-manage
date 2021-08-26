@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
         width: "35%",
         marginBottom: "30px"
     },
+    chartFullCover: {
+        width: "90%",
+        marginBottom: "30px"
+    },
     statCardCover: {
         width: "35%",
         height: "100px",
@@ -94,7 +98,7 @@ function SupplierInsights() {
                 </Paper>
             </div>
             <div className={classes.rowDiv}>
-                <Paper className={classes.chartCover} variant="outlined">
+                <Paper className={classes.chartFullCover} variant="outlined">
                     <SuppliersAddedPerMonth />
                 </Paper>
             </div>
