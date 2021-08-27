@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 20,
     textAlign: 'left',
-    color: '#fff',
+    color: theme.palette.primary.contrastText,
     marginBottom: 10,
     marginLeft: 40
   }

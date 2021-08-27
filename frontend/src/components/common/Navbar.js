@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
     '&:visited': {
-      color: '#fff'
+      color: theme.palette.primary.contrastText
     }
   },
   userMenu: {

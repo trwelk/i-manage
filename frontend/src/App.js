@@ -26,6 +26,7 @@ const theme = createTheme({
       light: '#5c5c5c',
       main: '#333333',
       dark: '#0c0c0c',
+      medium: '#aaa',
       contrastText: '#fff',
     },
     secondary: {
@@ -34,6 +35,9 @@ const theme = createTheme({
       dark: '#c85b53',
       contrastText: '#000',
     },
+    admin: {
+      main: 'rgba(255,255,255,0.7)'
+    }
   },
 });
 

@@ -13,7 +13,7 @@ import Image4 from "../../../assets/Items/4.PNG";
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
-    background: '#aaa',
+    background: theme.palette.primary.medium,
     marginBottom: 10
   },
   bullet: {
