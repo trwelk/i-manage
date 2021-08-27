@@ -44,7 +44,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App" style={{ display: "flex", backgroundColor: '#555' }}>
+      <div className="App" style={{ display: "flex" }} class="customerFront">
         <Router>
             <Switch>
               <Route path="/admin" component={SideNav} />
