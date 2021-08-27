@@ -18,8 +18,6 @@ import CashFlowInsights from './pages/CashFlowInsights';
 import Checkout from './pages/Checkout';
 import ProductView from './pages/ProductView';
 
-
-
 const theme = createTheme({
   palette: {
     primary: {

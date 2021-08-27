@@ -115,7 +115,6 @@ export default function OrderForm() {
             items: newItems
         });
         setTimeout(() => {
-            console.log(orderItems.items);
             setState(prevState => ({ ...prevState,items: orderItems.items}));
             setState(prevState => ({ ...prevState,total: calcTotal()}));
         }, 1000);
