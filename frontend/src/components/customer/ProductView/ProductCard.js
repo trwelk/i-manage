@@ -19,7 +19,10 @@ import { fetchCart, updateCart, createCart  } from '../../../redux/actions/Cart.
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    backgroundColor: theme.palette.secondary.dark
+    backgroundColor: theme.palette.secondary.main,
+    boxShadow: '3px 3px #ffbdaf',
+    margin: 20,
+    borderRadius: 15
   },
   media: {
     height: 0,
@@ -38,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  cardText: {
+    color: theme.palette.primary.contrastText
+  }
 }));
 
 export default function ProductCard(props) {
@@ -96,6 +102,7 @@ export default function ProductCard(props) {
   return (
     <Card className={classes.root}>
       <CardHeader
+        className={classes.cardText}
         title={values.title}
       />
       <CardMedia
@@ -104,24 +111,31 @@ export default function ProductCard(props) {
         title={values.title}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" component="p" className={classes.cardText}>
           {values.description}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" component="p" className={classes.cardText}>
           Price : {values.price}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to cart" onClick={handleAddToCart}>
+        <IconButton 
+          aria-label="add to cart" 
+          onClick={handleAddToCart}
+          className={classes.cardText}
+        >
           <AddShoppingCartIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton 
+          aria-label="Share" 
+          className={classes.cardText}
+        >
           <ShareIcon />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
-          })}
+          },classes.cardText)}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
@@ -131,7 +145,7 @@ export default function ProductCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
+          <Typography paragraph className={classes.cardText}>
           {values.mainDescription}
           </Typography>
         </CardContent>

@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.customerFront {
+  text-align: center;
+  font-family: 'Roboto';
+  background-image: url('./assets/images/customerBg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
