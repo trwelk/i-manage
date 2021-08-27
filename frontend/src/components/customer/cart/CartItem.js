@@ -34,6 +34,15 @@ const useStyles = makeStyles((theme) => ({
 function CartItem(props) {
   const classes = useStyles();
   const { itemDetails, qty } = props;
+  const [state, setState] = React.useState(qty);
+
+  const handleQuantityAdd = () => {
+    setState(state+1);
+  }
+
+  const handleQuantitySubtract = () => {
+    setState(state-1);
+  }
 
   return (
     <div className={classes.root}>
@@ -55,18 +64,18 @@ function CartItem(props) {
             </Grid>
             <Grid item xs={2}>
               <Typography variant="h5" component="h2" className={classes.text}>
-                    <IconButton color="inherit">
+                    <IconButton color="inherit" onClick={handleQuantitySubtract}>
                       <RemoveIcon className={classes.icon}/> 
                     </IconButton>
-                        {qty} 
-                    <IconButton color="inherit">
+                        {state} 
+                    <IconButton color="inherit" onClick={handleQuantityAdd}>
                       <AddIcon className={classes.icon}/> 
                     </IconButton>
               </Typography>
             </Grid>
             <Grid item xs={2}>
                 <Typography variant="h5" component="h2" className={classes.text}>
-                    {itemDetails.price * qty}
+                    {itemDetails.price * state}
                 </Typography>
             </Grid>
             <Grid item xs={2}>

@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +37,13 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'none'
     }
   },
+  link: {
+    color: theme.palette.primary.contrastText,
+    textDecoration: 'none',
+    '&:visited': {
+      color: theme.palette.primary.contrastText,
+    }
+  }
 }));
 
 function CartTotal() {
@@ -53,7 +61,7 @@ function CartTotal() {
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. xxx
+                    Rs. 3350
             </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -63,7 +71,7 @@ function CartTotal() {
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. xxx
+                    Rs. 150
             </Typography>
             </Grid>
             <hr className={classes.hr} />
@@ -74,13 +82,15 @@ function CartTotal() {
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. xxx
+                    Rs. 3500
             </Typography>
             </Grid>
             <Grid item xs={12}>
+            <Link to="/shop/checkout" className={classes.link}>
             <Button variant="outlined" size="large" className={classes.checkout}>
-              Checkout
+                Checkout
             </Button>
+            </Link>
             </Grid>
           </Grid>
         </CardContent>

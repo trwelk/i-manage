@@ -66,7 +66,7 @@ async function deleteOrder(orderid) {
 
 
 async function updateOrder(order) {
-    var filter = {userid:order.userid};
+    var filter = {userId:order.userId};
     let updatedOrder = await orderSchema.findOneAndReplace(filter,order, {
         new: true
     });
