@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     flexDirection: "column",
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   root: {
     width: "100%"
@@ -31,20 +31,20 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(3),
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   total: {
     width: "100%",
     marginTop: theme.spacing(3),
-    color: '#fff',
+    color: theme.palette.primary.contrastText,
     alignItems:'left'
   },
   text: {
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   icon: {
       marginRight: theme.spacing(1)

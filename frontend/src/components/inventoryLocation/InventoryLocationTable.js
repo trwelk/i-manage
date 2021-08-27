@@ -78,7 +78,7 @@ function InventoryLocationTable(props) {
         </Snackbar>)
 
     const table = locations ? (
-        <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black" }}
+        <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black", backgroundColor: 'rgba(255,255,255,0.7)' }}
             title={"locations"}
             columns={columns}
             data={locations}
