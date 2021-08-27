@@ -31,7 +31,7 @@ function Cart() {
   return (
     <div className={classes.root}>
       <Navbar/>
-      <Typography className={classes.title}>Your cart: x items</Typography>
+      <Typography className={classes.title}>Your cart: 4 items</Typography>
       <Grid container spacing={3}>
         <Grid item xs={8} className={classes.cartItems}>
             <CartList/>

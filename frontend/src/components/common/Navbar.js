@@ -178,11 +178,11 @@ export default function Navbar() {
           </div> */}
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="4 items in cart" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              {/* <Badge badgeContent={4} color="secondary"> */}
               <Link to="/shop/cart" className={classes.link}>
                 <ShoppingCartIcon className={classes.navbutton}/>
               </Link>
-              </Badge>
+              {/* </Badge> */}
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">

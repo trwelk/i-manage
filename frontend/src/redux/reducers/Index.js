@@ -6,6 +6,7 @@ import { SupplierReducer } from './SupplierReducer'
 import { PurchaseReqReducer } from './PurchaseReqReducer'
 import { OrderReducer } from './OrderReducer'
 import { CustomerReducer } from './CustomerReducer'
+import { CartReducer } from './CartReducer'
 
 
  const reducer = combineReducers({
@@ -17,7 +18,7 @@ import { CustomerReducer } from './CustomerReducer'
     purchaseReq:PurchaseReqReducer,
     orderReducer: OrderReducer,
     customerReducer:CustomerReducer,
-
+    cartReducer: CartReducer
 })
 
 export default reducer

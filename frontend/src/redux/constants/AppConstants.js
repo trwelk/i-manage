@@ -10,6 +10,6 @@ export const AppConstants = {
     SUPPLIER_URL: "/suppliers",
     ORDER_URL: "/orders",
     PURCHASE_REQUEST_URL: "/purchaseRequisitions",
-    CUSTOMER_SIGNUP_URL : "/customer"
-
+    CUSTOMER_SIGNUP_URL : "/customer",
+    CART_URL : "/cart"
 };

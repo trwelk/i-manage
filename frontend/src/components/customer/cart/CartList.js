@@ -5,6 +5,10 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Image1 from "../../../assets/Items/1.PNG";
+import Image2 from "../../../assets/Items/2.PNG";
+import Image3 from "../../../assets/Items/3.PNG";
+import Image4 from "../../../assets/Items/4.PNG";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,39 +34,29 @@ function CartList() {
     const cart = {
       'userId': '123',
       'products': [{
-          'img': 'https://www.claires.com/dw/image/v2/BBTK_PRD/on/demandware.static/-/Sites-master-catalog/default/dwac910086/images/hi-res/20559_1.jpg?sw=2000&sh=2000&sm=fit',
-          'desc': 'Item',
-          'price': 1000
+          'img': Image1,
+          'desc': 'Uniqeon',
+          'price': 300
         },
         {
-          'img': '../../../assets/ProductImages/img2.jpg',
-          'desc': 'Item 2',
-          'price': 1000
+          'img': Image2,
+          'desc': 'Hibiscus Pop',
+          'price': 450
         },
         {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
+          'img': Image3,
+          'desc': 'Candy Floss',
+          'price': 350
         },
         {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
-        },
-        {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
-        },
-        {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
+          'img': Image4,
+          'desc': 'Mandarin Sting',
+          'price': 500
         }
       ],
-      'qty': [2,5,4,6,7,2],
-      'total': 11000,
-      'itemCount': 3
+      'qty': [2,2,1,3],
+      'total': 3350,
+      'itemCount': 4
     }
   
     return (

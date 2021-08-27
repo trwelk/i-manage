@@ -109,11 +109,16 @@ export default function OrderForm() {
             price: getProdDetails(orderProduct.product).sellingPrice,
             total: getProdDetails(orderProduct.product).sellingPrice * orderProduct.qty
         }
+        var newItems = orderItems.items;
+        newItems.push(item);
         setOrderItems({
-            items: [ ...orderItems.items, item]
+            items: newItems
         });
-        setState(prevState => ({ ...prevState,items: orderItems.items}));
-        setState(prevState => ({ ...prevState,total: calcTotal()}));
+        setTimeout(() => {
+            console.log(orderItems.items);
+            setState(prevState => ({ ...prevState,items: orderItems.items}));
+            setState(prevState => ({ ...prevState,total: calcTotal()}));
+        }, 1000);
     }
 
     const getProdDetails = (prodId) => {

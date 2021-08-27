@@ -8,7 +8,7 @@ const cartSchema = require('../model/Cart.model')
             userId: obj.userId,
             items: obj.items,
             total: obj.total,
-            itemCount: obj.items.length()
+            itemCount: obj.itemCount
         });
 
         newCartSchema.save()
@@ -22,7 +22,7 @@ const cartSchema = require('../model/Cart.model')
 }
 
 async function getUserCart(userid) {
-    const query = { userid: userid }
+    const query = { userId: userid }
     return new Promise((resolve, reject) => {
        cartSchema.find(query,function(err, response){
             if(err)
