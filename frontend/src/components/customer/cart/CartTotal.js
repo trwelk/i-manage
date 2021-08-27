@@ -46,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function CartTotal() {
+function CartTotal(props) {
   const classes = useStyles();
+  const {total} = props
 
   return (
     <div className={classes.root}>
@@ -56,12 +57,12 @@ function CartTotal() {
           <Grid container spacing={1}  className={classes.grid}>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.titles}>
-                    Subtotal (x items)
+                    Subtotal ({total.count} items)
             </Typography>
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. 3350
+                Rs. {total.total} 
             </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -82,7 +83,7 @@ function CartTotal() {
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. 3500
+                    Rs. {total.total + 150}
             </Typography>
             </Grid>
             <Grid item xs={12}>

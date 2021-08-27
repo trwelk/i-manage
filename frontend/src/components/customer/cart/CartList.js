@@ -5,10 +5,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Image1 from "../../../assets/Items/1.PNG";
-import Image2 from "../../../assets/Items/2.PNG";
-import Image3 from "../../../assets/Items/3.PNG";
-import Image4 from "../../../assets/Items/4.PNG";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,34 +25,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CartList() {
+function CartList(props) {
     const classes = useStyles();
-    const cart = {
-      'userId': '123',
-      'products': [{
-          'img': Image1,
-          'desc': 'Uniqeon',
-          'price': 300
-        },
-        {
-          'img': Image2,
-          'desc': 'Hibiscus Pop',
-          'price': 450
-        },
-        {
-          'img': Image3,
-          'desc': 'Candy Floss',
-          'price': 350
-        },
-        {
-          'img': Image4,
-          'desc': 'Mandarin Sting',
-          'price': 500
+    const {cartUpdate, cart} = props;
+
+    const itemUpdate = (itemInfo) => {
+      for(var i = 0; i < cart.items.length; i++) {
+        if(cart.items[i].desc == itemInfo.id) {
+          cart.items[i].qty = itemInfo.qty;
         }
-      ],
-      'qty': [2,2,1,3],
-      'total': 3350,
-      'itemCount': 4
+      }
+      cartUpdate(cart);
     }
   
     return (
@@ -87,8 +66,13 @@ function CartList() {
           </Grid>
         </CardContent>
       </Card>
-        {cart.products.map((cartItem) => {
-          return <CartItem itemDetails={cartItem} qty={cart.qty[cart.products.indexOf(cartItem)]} className={classes.root}/>;
+        {cart.items.map((cartItem) => {
+          if(cartItem.qty > 0){
+            return <CartItem 
+                    cartItem={cartItem} 
+                    itemUpdate={itemUpdate}
+                    className={classes.root}/>;
+          }
         })}
       </div>
     );
