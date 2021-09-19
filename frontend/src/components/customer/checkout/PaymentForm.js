@@ -7,12 +7,19 @@ import Container from "@material-ui/core/Container";
 import DateFnsUtils from "@date-io/date-fns";
 import PaymentIcon from '@material-ui/icons/Payment';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { useHistory } from "react-router-dom";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     flexDirection: "column",
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   root: {
     width: "100%"
@@ -24,20 +31,20 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(3),
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   total: {
     width: "100%",
     marginTop: theme.spacing(3),
-    color: '#fff',
+    color: theme.palette.primary.contrastText,
     alignItems:'left'
   },
   text: {
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    color: '#fff'
+    color: theme.palette.primary.contrastText
   },
   icon: {
       marginRight: theme.spacing(1)
@@ -47,11 +54,25 @@ const useStyles = makeStyles((theme) => ({
 export default function PaymentForm() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
+    new Date()
   );
+  let history = useHistory();
+  const [open,setOpen] = React.useState(false);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+  };
+
+  const handlePayment = () => {
+    setOpen(true);
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+    history.push('/shop');
   };
 
   return (
@@ -89,7 +110,7 @@ export default function PaymentForm() {
                     inputVariant="outlined"
                     margin="normal"
                     id="date-picker-inline"
-                    label="Date of Birth"
+                    label="Expiry Date"
                     InputProps={{
                         className: classes.text
                     }}
@@ -120,16 +141,21 @@ export default function PaymentForm() {
                   label="Security Code"
                   autoFocus
                 />
-                <Typography className={classes.total}>Total amount: Rs.5000</Typography>
+                <Typography className={classes.total}>Total amount: Rs.3500</Typography>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="secondary"
               className={classes.submit}
+              onClick={handlePayment}
             >
               Confirm Payment
             </Button>
+            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                Order Placed Successfully!
+              </Alert>
+            </Snackbar>
           </form>
         </div>
       </Container>

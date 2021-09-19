@@ -5,10 +5,11 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "#aaa",
+    background: theme.palette.primary.medium,
     marginBottom: 10
   },
   grid: {
@@ -29,17 +30,25 @@ const useStyles = makeStyles((theme) => ({
   checkout: {
     marginTop: 10,
     width: '100%',
-    backgroundColor: '#ff8b80',
-    color: '#fff',
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.primary.contrastText,
     '&:hover': {
-      backgroundColor: '#c85b53',
+      backgroundColor: theme.palette.secondary.dark,
       boxShadow: 'none'
     }
   },
+  link: {
+    color: theme.palette.primary.contrastText,
+    textDecoration: 'none',
+    '&:visited': {
+      color: theme.palette.primary.contrastText,
+    }
+  }
 }));
 
-function CartTotal() {
+function CartTotal(props) {
   const classes = useStyles();
+  const {total} = props
 
   return (
     <div className={classes.root}>
@@ -48,12 +57,12 @@ function CartTotal() {
           <Grid container spacing={1}  className={classes.grid}>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.titles}>
-                    Subtotal (x items)
+                    Subtotal ({total.count} items)
             </Typography>
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. xxx
+                Rs. {total.total} 
             </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -63,7 +72,7 @@ function CartTotal() {
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. xxx
+                    Rs. 150
             </Typography>
             </Grid>
             <hr className={classes.hr} />
@@ -74,13 +83,15 @@ function CartTotal() {
             </Grid>
             <Grid item xs={6}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    Rs. xxx
+                    Rs. {total.total + 150}
             </Typography>
             </Grid>
             <Grid item xs={12}>
+            <Link to="/shop/checkout" className={classes.link}>
             <Button variant="outlined" size="large" className={classes.checkout}>
-              Checkout
+                Checkout
             </Button>
+            </Link>
             </Grid>
           </Grid>
         </CardContent>

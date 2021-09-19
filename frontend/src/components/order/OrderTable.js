@@ -16,14 +16,14 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    table: {
+    detailTable: {
         marginTop: '20',
         minWidth: 450,
     },
     head: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
-      },
+    }
 }));
 
 function Alert(props) {
@@ -162,7 +162,7 @@ function OrderTable(props) {
                   render: rowData => {
                     return (
                     <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="simple table">
+                        <Table className={classes.detailTable} aria-label="simple table">
                             <TableHead>
                             <TableRow>
                                 <TableCell className={classes.head}>Product</TableCell>

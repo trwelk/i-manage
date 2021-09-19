@@ -19,13 +19,13 @@ import Checkout from './pages/Checkout';
 import ProductView from './pages/ProductView';
 import Login from './pages/Login';
 
-
 const theme = createTheme({
   palette: {
     primary: {
       light: '#5c5c5c',
       main: '#333333',
       dark: '#0c0c0c',
+      medium: '#aaa',
       contrastText: '#fff',
     },
     secondary: {
@@ -34,13 +34,16 @@ const theme = createTheme({
       dark: '#c85b53',
       contrastText: '#000',
     },
+    admin: {
+      main: 'rgba(255,255,255,0.7)'
+    }
   },
 });
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App" style={{ display: "flex", backgroundColor: '#555' }}>
+      <div className="App" style={{ display: "flex" }} class="customerFront">
         <Router>
             <Switch>
               <Route path="/admin" component={SideNav} />

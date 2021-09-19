@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
         height: "100px",
         marginBottom: "30px",
         marginTop: "30px",
-        display: "flex"
+        display: "flex",
+        backgroundColor: theme.palette.admin.main
     },
     imgCover: {
         height: "100%",
