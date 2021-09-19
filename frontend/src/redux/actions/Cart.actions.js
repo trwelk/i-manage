@@ -14,6 +14,7 @@ export const fetchCart = (dispatch, userId) => {
         axios.get(AppConstants.REST_URL_HOST + AppConstants.CART_URL  + '/' + userId)
             .then(response => {
                 dispatch(fetchCartSuccess(response.data))
+                console.log(response.data);
             })
             .catch(error => {
                 console.log(error)
@@ -22,15 +23,15 @@ export const fetchCart = (dispatch, userId) => {
 
 //UPDATE
 export const updateCart = (dispatch, cart) => {
-    console.log(cart);
-    axios.put(AppConstants.REST_URL_HOST + AppConstants.CART_URL, cart)
-        .then(response => {
-            console.log(response)
-            dispatch(updateCartSuccess({...response.data}))
-        })
-        .catch(error => {
-            console.log(error)
-        }) 
+    fetchCart(dispatch, cart.userId);
+    // axios.put(AppConstants.REST_URL_HOST + AppConstants.CART_URL, cart)
+    //     .then(response => {
+    //         console.log(response)
+    //         dispatch(updateCartSuccess({...response.data}))
+    //     })
+    //     .catch(error => {
+    //         console.log(error)
+    //     }) 
 }
 
 export const updateCartSuccess = (data) =>  {
