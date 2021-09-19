@@ -63,40 +63,49 @@ export default function ProductCard(props) {
   };
 
   const handleAddToCart = () => {
-    cart = globalState.cartReducer.cart ? globalState.cartReducer.cart : null
-    console.log(cart);
-    setState(cart);
-    if(state == "" || state == null){
-      console.log("Adding new cart");
-      var newCart = {
-        userId: "user123",
-        items: [
-          {
-            productId: values.title,
-            qty: 1,
-            price: values.price,
-            total: values.price
-          }
-        ],
-        total: values.price,
-        itemCount: 1
-      }
-      console.log(newCart);
-      createCart(newCart,dispatch);
-      setState(newCart);
-    } else {
-      var cartItems = state.items;
-      cartItems.push({
-          productId: values.title,
-          qty: 1,
-          price: values.price,
-          total: values.price
-      })
-      var newTotal = state.total + values.price;
-      setState(prevState => ({ ...prevState,items: cartItems}));
-      setState(prevState => ({ ...prevState,total: newTotal}));
-      console.log(state);
-    }
+    var newCart = {
+          userId: "user123",
+          items: [
+            {
+              productId: values.title,
+              qty: 1,
+              price: values.price
+            }
+          ]
+        }
+    updateCart(dispatch,cart);
+    // cart = globalState.cartReducer.cart ? globalState.cartReducer.cart : null
+    // console.log(cart);
+    // setState(cart);
+    // if(state == "" || state == null){
+    //   console.log("Adding new cart");
+    //   var newCart = {
+    //     userId: "user123",
+    //     items: [
+    //       {
+    //         productId: values.title,
+    //         qty: 1,
+    //         price: values.price
+    //       }
+    //     ]
+    //   }
+    //   console.log(newCart);
+    //   createCart(newCart,dispatch);
+    //   setState(newCart);
+    // } else {
+    //   var cartItems = state.items;
+    //   cartItems.push({
+    //       productId: values.title,
+    //       qty: 1,
+    //       price: values.price
+    //   })
+    //   var newTotal = state.total + values.price;
+    //   console.log(cartItems);
+    //   console.log(newTotal);
+    // setState(prevState => ({ ...prevState,items: cartItems}));
+    // setState(prevState => ({ ...prevState,total: newTotal}));
+    // console.log(state);
+    // }
   } 
 
   return (
