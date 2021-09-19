@@ -3,7 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -25,9 +25,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://www.instagram.com/shan.eryn_/">
+      
         shan.eryn_
-      </Link>{" "}
+{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -36,10 +36,11 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    color: '#fff'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -51,7 +52,17 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: '#fff'
   },
+  text: {
+    color: '#fff',
+    textDecoration: 'none',
+    '&:visited': {
+
+      color: '#fff'
+
+    }
+  }
 }));
 
 
@@ -118,6 +129,12 @@ export default function CustomerSignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  InputProps={{
+                    className: classes.text
+                }}
+                InputLabelProps={{
+                    className: classes.text
+                }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -130,6 +147,12 @@ export default function CustomerSignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
+                  InputProps={{
+                    className: classes.text
+                }}
+                InputLabelProps={{
+                    className: classes.text
+                }}
                 />
               </Grid>
               <Grid item xs={12} spacing={2}>
@@ -150,6 +173,12 @@ export default function CustomerSignUp() {
                     KeyboardButtonProps={{
                       "aria-label": "change date",
                     }}
+                    InputProps={{
+                      className: classes.text
+                  }}
+                  InputLabelProps={{
+                      className: classes.text
+                  }}
                   />
                 </MuiPickersUtilsProvider>
               </Grid>
@@ -160,6 +189,12 @@ export default function CustomerSignUp() {
                   onChange={handlePhoneChange}
                   name = "contactNumber"
                   fullWidth
+                  InputProps={{
+                    className: classes.text
+                }}
+                InputLabelProps={{
+                    className: classes.text
+                }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -171,6 +206,12 @@ export default function CustomerSignUp() {
                   label="Home Address"
                   name="address"
                   autoComplete="address"
+                  InputProps={{
+                    className: classes.text
+                }}
+                InputLabelProps={{
+                    className: classes.text
+                }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -183,6 +224,12 @@ export default function CustomerSignUp() {
                   label="Email Address"
                   name="emailAddress"
                   autoComplete="email"
+                  InputProps={{
+                    className: classes.text
+                }}
+                InputLabelProps={{
+                    className: classes.text
+                }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -196,13 +243,19 @@ export default function CustomerSignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  InputProps={{
+                    className: classes.text
+                }}
+                InputLabelProps={{
+                    className: classes.text
+                }}
                 />
               </Grid>
             </Grid>
             <Button
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               onClick = {handleSubmit}
               className={classes.submit}
             >
@@ -210,7 +263,7 @@ export default function CustomerSignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/shop" variant="body2" className= {classes.text}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

@@ -19,7 +19,7 @@ import { fetchCart, updateCart, createCart  } from '../../../redux/actions/Cart.
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor:theme.palette.secondary.dark,
     boxShadow: '3px 3px #ffbdaf',
     margin: 20,
     borderRadius: 15

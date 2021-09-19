@@ -130,15 +130,15 @@ export default function Navbar() {
         </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
-        <Link to="/shop" className={classes.link}>
+        <Link to="/shop/login" className={classes.link}>
           Login
         </Link>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+      {/* MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
         <Link to="/shop" className={classes.link}>
           Profile
         </Link>
-      </MenuItem>
+      </MenuItem>< */}
     </Menu>
   );
 
@@ -150,15 +150,15 @@ export default function Navbar() {
             <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Home
             </Button></Link>
-            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
+            <Link to="/shop/viewProducts" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Products
             </Button></Link>
-            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
+            {/* <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               News
-            </Button></Link>
-            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
+            </Button></Link> */}
+            {/* <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Shop
-            </Button></Link>
+            </Button></Link> */}
             <Link to="/shop/contactUs" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Contact Us
             </Button></Link>
