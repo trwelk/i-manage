@@ -14,7 +14,7 @@ import { red } from '@material-ui/core/colors';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { fetchCart, updateCart, createCart  } from '../../../redux/actions/Cart.actions'
+import { fetchCart, addToCart  } from '../../../redux/actions/Cart.actions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +50,7 @@ export default function ProductCard(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     fetchCart(dispatch, 'user123');
-  }, [])
+  }, []);
   const classes = useStyles();
   var globalState = useSelector((state) => state);
   var cart = globalState.cartReducer.cart ? globalState.cartReducer.cart : null
@@ -73,7 +73,7 @@ export default function ProductCard(props) {
             }
           ]
         }
-    updateCart(dispatch,cart);
+      addToCart(dispatch,newCart);
     // cart = globalState.cartReducer.cart ? globalState.cartReducer.cart : null
     // console.log(cart);
     // setState(cart);
