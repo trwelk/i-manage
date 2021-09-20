@@ -11,10 +11,11 @@ export const fetchCartSuccess = (data) =>  {
 
 
 export const fetchCart = (dispatch, userId) => {
+    console.log("fetching cart");
         axios.get(AppConstants.REST_URL_HOST + AppConstants.CART_URL  + '/' + userId)
             .then(response => {
+                console.log(response);
                 dispatch(fetchCartSuccess(response.data))
-                console.log(response.data);
             })
             .catch(error => {
                 console.log(error)
@@ -23,15 +24,41 @@ export const fetchCart = (dispatch, userId) => {
 
 //UPDATE
 export const updateCart = (dispatch, cart) => {
-    fetchCart(dispatch, cart.userId);
-    // axios.put(AppConstants.REST_URL_HOST + AppConstants.CART_URL, cart)
-    //     .then(response => {
-    //         console.log(response)
-    //         dispatch(updateCartSuccess({...response.data}))
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //     }) 
+    axios.put(AppConstants.REST_URL_HOST + AppConstants.CART_URL, cart)
+        .then(response => {
+            dispatch(updateCartSuccess({...response.data}))
+        })
+        .catch(error => {
+            console.log(error)
+        }) 
+}
+
+export const addToCart = (dispatch, cart) => {
+    axios.get(AppConstants.REST_URL_HOST + AppConstants.CART_URL  + '/' + cart.userId)
+        .then(response => {
+            dispatch(fetchCartSuccess(response.data))
+            if(response.data == ""){
+                console.log("Need to create a cart");
+                createCart(cart,dispatch);
+            }
+            else{
+                var items = response.data[0].items;
+                var updated = false;
+                for(var i = 0; i < items.length; i++){
+                    if(items[i].productId == cart.items[0].productId){
+                        response.data[0].items[i].qty += 1;
+                        updated = true;
+                    }
+                }
+                if(!updated){
+                    response.data[0].items.push(cart.items[0]);
+                }
+                updateCart(dispatch,response.data[0])
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        }) 
 }
 
 export const updateCartSuccess = (data) =>  {
@@ -43,6 +70,7 @@ return {
 
 //CREATE
 export const createCart = (data,dispatch) => {
+    console.log(data);
     const cart = data;
     axios.post(AppConstants.REST_URL_HOST + AppConstants.CART_URL, cart )
         .then(response => {

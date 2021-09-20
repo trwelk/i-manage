@@ -31,7 +31,7 @@ function CartList(props) {
 
     const itemUpdate = (itemInfo) => {
       for(var i = 0; i < cart.items.length; i++) {
-        if(cart.items[i].desc == itemInfo.id) {
+        if(cart.items[i].productId == itemInfo.id) {
           cart.items[i].qty = itemInfo.qty;
         }
       }
