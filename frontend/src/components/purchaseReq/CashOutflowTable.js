@@ -6,9 +6,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { AppConstants } from '../../constants/AppConstants';
-import { validateProductObj ,deleteProduct ,createProduct,updateProduct ,fetchProducts} from '../../redux/actions/Product.action'
-import { fetchSuppliers } from '../../redux/actions/Supplier.actions'
-import { IconButton } from '@material-ui/core';
+import {  deletePurchaseReq ,createPurchaseReq, updatePurchaseReq ,fetchPurchaseReqs } from '../../redux/actions/PurchaseReq.actions'
+import CashRequestForm from './CashRequestForm';
 // import AdminNavbar from '../views/AdminNavBar';
 
 
@@ -17,18 +16,17 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function ProductTable(props) {
+function CashOutflowTable(props) {
     useEffect(() => {
-        fetchProducts(dispatch);
-        fetchSuppliers(dispatch);
+        fetchPurchaseReqs(dispatch);
     }, [])
     //*********************************************CONSTANTS************************************************************* */
-    const location = props.location     
+    const location = props.location  
+    const { useState } = React;   
     const globalState = useSelector((state) => state);
     const dispatch = useDispatch();
-    const products = globalState.productReducer.products ? globalState.productReducer.products : null
+    const purchaseReqs = globalState.purchaseReq.purchaseReqs ? globalState.purchaseReq.purchaseReqs : null
 
-    const suppliers = globalState.productReducer.products ? globalState.supplierReducer.suppliers : null
     const [error, setError] = React.useState("")
     const [state, setState] = React.useState({
         open: false,
@@ -36,31 +34,23 @@ function ProductTable(props) {
         horizontal: 'right',
     });
     const { vertical, horizontal, open } = state;
-    const { useState } = React;
-    const typeLookup = {
-        ELECTRONIC: 'ELECTRONIC',
-        APPARREL:'APPARREL',
-        CONSUMABLE: 'CONSUMABLE',
-        HEADWEAR:'HEADWEAR'
-    }
+    const [formOpen, setFormOpen] = React.useState(false);
 
-    var supplierLookup = {};
-    if (suppliers) {
-        suppliers.forEach(supplier => {
-            supplierLookup[supplier.id] = supplier.supplierName
-        })
-    }
+    const stateLookup = {REQUESTED:"REQUESTED",APPROVED:"APPROVED",DECLINED:"DECLINED"}
+
+
 //*********************************************Setting columns************************************************************* */
 
     const columns =[
         { title: 'ID', field: 'id' },
-        { title: 'Name', field: 'productName', },
-        { title: 'Brand', field: 'brand' },
-        { title: 'Model', field: 'model' },
-        { title: 'Type', field: 'type' , lookup:typeLookup},
-        { title: 'Supplier', field: 'supplier',  lookup: supplierLookup },
-        { title: 'Selling Price', field: 'sellingPrice' },
-        { title: 'Buying Price', field: 'buyingPrice' }
+        { title: 'Description', field: 'description', },
+        { title: 'product', field: 'product' },
+        { title: 'Supplier', field: 'supplier' },
+        { title: 'requester', field: 'requester' },
+        { title: 'location', field: 'location' },
+        { title: 'state', field: 'state' , lookup: stateLookup },
+        { title: 'quantityOfItems', field: 'quantityOfItems' },
+        { title: 'dateResolved', field: 'dateResolved' }
     ]
 
 
@@ -76,7 +66,9 @@ function ProductTable(props) {
         setState({ ...state, open: false });
     };
 
-
+    const handleFormOpen = (val) => {
+        setFormOpen(val)
+    }
 
     //--------------------------------------------------------UI-ELEMENTS-------------------------------------------------------------     
     const feedBackToast =  (<Snackbar 
@@ -89,53 +81,24 @@ function ProductTable(props) {
           <Alert severity="error">{error}</Alert>
         </Snackbar>)
 
-    const table = products ? (
-        <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black", backgroundColor: 'rgba(255,255,255,0.7)' }}
-            title={"Products"}
+    const table = purchaseReqs ? (
+        <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black" }}
+            title={"PR" }
             columns={columns}
-            data={products}
-            detailPanel={[
-            {
-              icon:'download',
-              tooltip: 'Download',
-              render: rowData => {
-                return (
-                  <div> 
-
-                    <a 
-                    href={rowData.paperLink} 
-                    target="_blank"download>
-                                              <IconButton>
-                          <CloudDownloadIcon/>
-                      </IconButton>download</a>
-                  </div>
-
-                    
-                )
-              },
-            },
-          ]}
+            data={purchaseReqs}        
+            actions={[
+                {
+                icon: 'add',
+                tooltip: 'Add Request',
+                isFreeAction: true,
+                onClick: (event) => handleFormOpen(true)
+                }
+            ]}
             editable={{
-                onRowAdd: newData =>
-                    new Promise((resolve, reject) => {
-                            setTimeout(() => {
-                                let err = validateProductObj(newData)
-                                 if(err == null){
-                                    createProduct(newData,dispatch)
-                                    resolve();
-                                }
-                                else{
-                                    setError(err)
-                                    setState({...state,open:true})
-                                    reject();
-                                }
-                            }, 1000)
-
-                    }),
                 onRowDelete: oldData =>
                     new Promise((resolve, reject) => {
                         setTimeout(() => {
-                            deleteProduct(dispatch, oldData.id)
+                            deletePurchaseReq(dispatch, oldData.id)
                             resolve()
                         }, 1000)
                 }),
@@ -143,7 +106,7 @@ function ProductTable(props) {
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve, reject) => {
                             setTimeout(() => {
-                                updateProduct(dispatch, newData)
+                                updatePurchaseReq(dispatch, newData)
                                 resolve();
                             }, 1000)
                     }),
@@ -174,6 +137,7 @@ function ProductTable(props) {
 
     return (
         <div>
+            <CashRequestForm setOpen={handleFormOpen} open={formOpen}/>
         <div style={{ padding: "20px",marginTop:"10px" }}>
             {table}
             {feedBackToast}
@@ -184,4 +148,4 @@ function ProductTable(props) {
 }
 
 
-export default ProductTable
+export default CashOutflowTable

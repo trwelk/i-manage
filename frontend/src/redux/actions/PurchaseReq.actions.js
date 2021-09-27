@@ -41,13 +41,14 @@ return {
 //CREATE
 export const createPurchaseReq = (data,dispatch) => {
     const purchaseReq = data;
+    console.log(data)
     axios.post(AppConstants.REST_URL_HOST + AppConstants.PURCHASE_REQUEST_URL, purchaseReq )
         .then(response => {
             const id = response;
-            console.log(id)
                     dispatch(createPurchaseReqSuccess(response.data))
+        }).catch(err => {
+            console.log(err.response)
         })
-
 }
 
 export const createPurchaseReqSuccess = (data) => {

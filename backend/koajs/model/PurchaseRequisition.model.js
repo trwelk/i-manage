@@ -17,6 +17,10 @@ var purchaseRequisitionSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    supplier: {
+        type: String,
+        required: true
+    },
     requester: {
         type: String,
         required: true
@@ -38,10 +42,6 @@ var purchaseRequisitionSchema = mongoose.Schema({
         required: true
     },
     quantityOfItems: {
-        type: Number,
-        required: true
-    },
-    totalAmount: {
         type: Number,
         required: true
     }

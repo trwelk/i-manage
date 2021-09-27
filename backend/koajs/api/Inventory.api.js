@@ -12,7 +12,7 @@ const inventorySchema = require('../model/inventory.model')
             quantity: obj.quantity,
             location: obj.location,
             product: obj.product,
-            state: "requested",
+            state: "REQUESTED",
             email: obj.email,
         });
 

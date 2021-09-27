@@ -16,7 +16,11 @@ var inventorySchema = mongoose.Schema({
     quantity: {
         type: Number,
         required: true
-    }
+    },
+    state: {
+        type: String,
+        required: true
+    },
 });
 
 module.exports = mongoose.model('inventory', inventorySchema);

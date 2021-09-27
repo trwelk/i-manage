@@ -164,6 +164,14 @@ export default function SideNav() {
                     <ListItemText primary="Financial Insights" />
                 </ListItem>
             </Link>
+            <Link className={classes.link} to="/admin/cashflow">
+                <ListItem button>
+                    <ListItemIcon className={classes.itemIcon}>
+                        <StoreIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Purchase Requisitions" />
+                </ListItem>
+            </Link>
         </div>
     )
 
@@ -246,14 +254,14 @@ export default function SideNav() {
                 {locationMenu}
                 {orderMenu}
                 <Divider />
-                <List>
+                {/* <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemIcon className={classes.itemIcon}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
-                </List>
+                </List> */}
             </Drawer>
         </div>
     );
