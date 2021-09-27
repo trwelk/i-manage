@@ -50,6 +50,8 @@ function InventoryPartTable(props) {
         })
     }
 
+    const stateLookup = {REQUESTED:"REQUESTED",DELIVERED:"DELIVERED"}
+
     const displayData = inventoryItems.map(iItem => {
         return (
             {
@@ -77,6 +79,7 @@ function InventoryPartTable(props) {
         { title: 'Location', field: 'location', lookup: locationLookup },
         { title: 'Product', field: 'product', lookup: productLookup },
         { title: 'price', field: 'price' },
+        { title: 'State', field: 'state' , lookup:stateLookup},
         { title: 'Quantity', field: 'quantity' }
     ];
 

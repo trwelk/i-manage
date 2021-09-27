@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { AppConstants } from '../../constants/AppConstants';
 import { validateProductObj ,deleteProduct ,createProduct,updateProduct ,fetchProducts} from '../../redux/actions/Product.action'
+import { fetchSuppliers } from '../../redux/actions/Supplier.actions'
 import { IconButton } from '@material-ui/core';
 // import AdminNavbar from '../views/AdminNavBar';
 
@@ -19,12 +20,15 @@ function Alert(props) {
 function ProductTable(props) {
     useEffect(() => {
         fetchProducts(dispatch);
+        fetchSuppliers(dispatch);
     }, [])
     //*********************************************CONSTANTS************************************************************* */
     const location = props.location     
     const globalState = useSelector((state) => state);
     const dispatch = useDispatch();
     const products = globalState.productReducer.products ? globalState.productReducer.products : null
+
+    const suppliers = globalState.productReducer.products ? globalState.supplierReducer.suppliers : null
     const [error, setError] = React.useState("")
     const [state, setState] = React.useState({
         open: false,
@@ -33,24 +37,31 @@ function ProductTable(props) {
     });
     const { vertical, horizontal, open } = state;
     const { useState } = React;
-    const stateLookup = {
-        requested: AppConstants.STATE_REQUESTED,
-        approved: AppConstants.STATE_APPROVED,
-        declined: AppConstants.STATE_DECLINED
+    const typeLookup = {
+        ELECTRONIC: 'ELECTRONIC',
+        APPARREL:'APPARREL',
+        CONSUMABLE: 'CONSUMABLE',
+        HEADWEAR:'HEADWEAR'
     }
 
+    var supplierLookup = {};
+    if (suppliers) {
+        suppliers.forEach(supplier => {
+            supplierLookup[supplier.id] = supplier.supplierName
+        })
+    }
 //*********************************************Setting columns************************************************************* */
 
-    const [columns, setColumns] = useState([
+    const columns =[
         { title: 'ID', field: 'id' },
         { title: 'Name', field: 'productName', },
         { title: 'Brand', field: 'brand' },
         { title: 'Model', field: 'model' },
-        { title: 'Type', field: 'type' },
-        { title: 'Supplier', field: 'supplier' },
+        { title: 'Type', field: 'type' , lookup:typeLookup},
+        { title: 'Supplier', field: 'supplier',  lookup: supplierLookup },
         { title: 'Selling Price', field: 'sellingPrice' },
         { title: 'Buying Price', field: 'buyingPrice' }
-    ]);
+    ]
 
 
 
