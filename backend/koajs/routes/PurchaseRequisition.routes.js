@@ -5,7 +5,6 @@ const router = new Router({
     prefix: '/purchaseRequisitions'
 });
 
-
 //call this to get all the purchaseRequisition
 router.get('/', async ctx => {
     let purchaseRequisition = await purchaseRequisitionApi.getPurchaseRequisitions()

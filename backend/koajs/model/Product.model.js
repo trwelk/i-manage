@@ -11,11 +11,15 @@ var productSchema = mongoose.Schema({
     },
     brand: {
         type: String,
-        required: true
+        required: false
     },
-    model: {
+    description: {
         type: String,
-        required: true
+        required: false
+    },
+    image: {
+        type: Array,
+        required: false
     },
     type: {
         type: String,
