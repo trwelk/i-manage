@@ -6,10 +6,7 @@ const cartSchema = require('../model/Cart.model')
     return new Promise((resolve, reject) => {
         var newCartSchema = new cartSchema({
             userId: obj.userId,
-            products: obj.items,
-            qty: obj.qty,
-            total: obj.total,
-            itemCount: obj.itemCount
+            items: obj.items
         });
 
         newCartSchema.save()
@@ -23,7 +20,7 @@ const cartSchema = require('../model/Cart.model')
 }
 
 async function getUserCart(userid) {
-    const query = { userid: userid }
+    const query = { userId: userid }
     return new Promise((resolve, reject) => {
        cartSchema.find(query,function(err, response){
             if(err)
@@ -38,7 +35,7 @@ async function getUserCart(userid) {
 
 async function deleteCart(userid) {
     return new Promise((resolve, reject) => {
-        var query = { userid:userid };
+        var query = { userId:userid };
        cartSchema.deleteOne(query,function(err, response) {
             if (err) {
                 reject(err)
@@ -51,8 +48,8 @@ async function deleteCart(userid) {
 
 
 async function updateCart(cart) {
-    var filter = {userid:cart.userid};
-    let updatedCart = awaitcartSchema.findOneAndReplace(filter,cart, {
+    var filter = {userId:cart.userId};
+    let updatedCart = await cartSchema.findOneAndReplace(filter,cart, {
         new: true
     });
     return updatedCart;

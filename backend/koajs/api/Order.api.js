@@ -5,11 +5,13 @@ const orderSchema = require('../model/Order.model')
   const addOrder = async obj => {
     return new Promise((resolve, reject) => {
         var newOrderSchema = new orderSchema({
+            id: uuid.v4(),
             userId: obj.userId,
-            products: obj.items,
-            qty: obj.qty,
+            source: obj.source,
+            date: obj.date,
+            items: obj.items,
             total: obj.total,
-            itemCount: obj.itemCount
+            status: 'New'
         });
 
         newOrderSchema.save()
@@ -64,8 +66,8 @@ async function deleteOrder(orderid) {
 
 
 async function updateOrder(order) {
-    var filter = {userid:order.userid};
-    let updatedOrder = awaitorderSchema.findOneAndReplace(filter,order, {
+    var filter = {userId:order.userId};
+    let updatedOrder = await orderSchema.findOneAndReplace(filter,order, {
         new: true
     });
     return updatedOrder;
