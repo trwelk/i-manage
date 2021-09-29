@@ -32,7 +32,10 @@ function CartList(props) {
     const itemUpdate = (itemInfo) => {
       for(var i = 0; i < cart.items.length; i++) {
         if(cart.items[i].productId == itemInfo.id) {
-          cart.items[i].qty = itemInfo.qty;
+          if(itemInfo.qty>0)
+            cart.items[i].qty = itemInfo.qty;
+          else
+            cart.items.splice(i, 1)
         }
       }
       cartUpdate(cart);
@@ -69,6 +72,7 @@ function CartList(props) {
         {cart.items.map((cartItem) => {
           if(cartItem.qty > 0){
             return <CartItem 
+                    key = {cartItem.productId}
                     cartItem={cartItem} 
                     itemUpdate={itemUpdate}
                     className={classes.root}/>;

@@ -6,7 +6,7 @@ import CartTotal from "../components/customer/cart/CartTotal";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCart } from '../redux/actions/Cart.actions'
+import { fetchCart, updateCart } from '../redux/actions/Cart.actions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,11 +61,13 @@ function Cart() {
       "count": calcCount(childData.items),
       "total": calcTotal(childData.items)
     })
+    updateCart(dispatch,childData)
   }
 
   const [total,setTotal] = useState();
 
   if(isLoading){
+    fetchCart(dispatch, 'user123');
     return (
       <div className={classes.root}>
         <Navbar/>
@@ -75,9 +77,18 @@ function Cart() {
       </div>
     );
   }
+  else if(cart == null){
+    return (
+      <div className={classes.root}>
+        <Navbar/>
+        <Typography variant="h5" component="h2">
+                    Cart is Empty
+        </Typography>
+      </div>
+    );
+  }
   else{
     if(total == null){
-      console.log("setting total");
       setTotal({
         "count": cart.items.length,
         "total": calcTotal(cart.items)
