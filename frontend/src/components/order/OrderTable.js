@@ -89,22 +89,6 @@ function OrderTable(props) {
             columns={columns}
             data={orders}
             editable={{
-                // onRowAdd: newData =>
-                //     new Promise((resolve, reject) => {
-                //             setTimeout(() => {
-                //                 let err = validateOrderObj(newData)
-                //                  if(err == null){
-                //                     createOrder(newData,dispatch)
-                //                     resolve();
-                //                 }
-                //                 else{
-                //                     setError(err)
-                //                     setState({...state,open:true})
-                //                     reject();
-                //                 }
-                //             }, 1000)
-
-                //     }),
                 onRowDelete: oldData =>
                     new Promise((resolve, reject) => {
                         setTimeout(() => {
@@ -122,6 +106,7 @@ function OrderTable(props) {
             }}
             options={{
                 pageSize: 10,
+                exportButton: true,
                 headerStyle: {
                     backgroundColor: 'rgb(35 47 62) ',
                     color: '#FFF',
@@ -165,11 +150,11 @@ function OrderTable(props) {
                             {rowData.items.map((row) => (
                                 <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
-                                    Product
+                                    {row.productId}
                                 </TableCell>
                                 <TableCell align="right">{row.qty}</TableCell>
                                 <TableCell align="right">{row.price}</TableCell>
-                                <TableCell align="right">{row.total}</TableCell>
+                                <TableCell align="right">{row.price * row.qty}</TableCell>
                                 </TableRow>
                             ))}
                             </TableBody>
