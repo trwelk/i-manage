@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -52,9 +52,6 @@ export default function ProductCard(props) {
     fetchCart(dispatch, 'user123');
   }, []);
   const classes = useStyles();
-  var globalState = useSelector((state) => state);
-  var cart = globalState.cartReducer.cart ? globalState.cartReducer.cart : null
-  const [state, setState] = React.useState(cart);
   const {values} = props;
   const [expanded, setExpanded] = React.useState(false);
 
@@ -74,38 +71,6 @@ export default function ProductCard(props) {
           ]
         }
       addToCart(dispatch,newCart);
-    // cart = globalState.cartReducer.cart ? globalState.cartReducer.cart : null
-    // console.log(cart);
-    // setState(cart);
-    // if(state == "" || state == null){
-    //   console.log("Adding new cart");
-    //   var newCart = {
-    //     userId: "user123",
-    //     items: [
-    //       {
-    //         productId: values.title,
-    //         qty: 1,
-    //         price: values.price
-    //       }
-    //     ]
-    //   }
-    //   console.log(newCart);
-    //   createCart(newCart,dispatch);
-    //   setState(newCart);
-    // } else {
-    //   var cartItems = state.items;
-    //   cartItems.push({
-    //       productId: values.title,
-    //       qty: 1,
-    //       price: values.price
-    //   })
-    //   var newTotal = state.total + values.price;
-    //   console.log(cartItems);
-    //   console.log(newTotal);
-    // setState(prevState => ({ ...prevState,items: cartItems}));
-    // setState(prevState => ({ ...prevState,total: newTotal}));
-    // console.log(state);
-    // }
   } 
 
   return (

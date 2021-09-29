@@ -121,7 +121,7 @@ export default function PaymentForm(props) {
       return;
     }
     setSnackbarMessage({...snackbarMessage, open: false});
-    if(snackbarMessage.severity == "success"){
+    if(snackbarMessage.severity === "success"){
       history.push("/shop");
     }
   };
