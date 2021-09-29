@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MenuItem from '@material-ui/core/MenuItem';
-import {  createPurchaseReq, updatePurchaseReq ,fetchPurchaseReqs } from '../../redux/actions/PurchaseReq.actions'
+import {  createPurchaseReq ,validatePr } from '../../redux/actions/PurchaseReq.actions'
 import { fetchSuppliers } from '../../redux/actions/Supplier.actions'
 import { fetchProducts } from '../../redux/actions/Product.action'
 import { fetchInventoryLocations } from '../../redux/actions/InventoryLocations.actions'
@@ -67,7 +67,7 @@ export default function CashRequestForm(props) {
     })
     const {open , setOpen}= props;
     const [state, setState] = React.useState({
-        id: "", description: "", product: "", supplier: null, requester: null,
+        id: "", description: "", product: "", supplier: null, 
         location: "", requestedDate: "", wantedDeliveryDate: "", quantityOfItems: "", requester:"IFSAPP"
     });
     const [openFeedback, setOpenFeedback] = React.useState({
@@ -81,8 +81,7 @@ export default function CashRequestForm(props) {
 
 
     const handleSubmit = () => {
-        // let err = validateSupplierObj(state);
-        let err = null
+        let err = validatePr(state);
         if(err != null){
             console.log(state)
             setError(err);
