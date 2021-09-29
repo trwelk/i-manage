@@ -86,7 +86,7 @@ function Checkout() {
               <CheckoutList cart={cart}/>
           </Grid>
           <Grid item xs={4} className={classes.paymentForm}>
-              <PaymentForm total={total}/>
+              <PaymentForm total={total} cart = {cart}/>
           </Grid>
         </Grid>
   

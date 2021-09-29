@@ -10,6 +10,8 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/picker
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { createOrder } from '../../../redux/actions/Order.actions';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -52,8 +54,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PaymentForm(props) {
-  const {total} = props;
+  const {total, cart} = props;
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [card, setCard] = React.useState(
     {
       "cardNo": false,
@@ -112,6 +115,15 @@ export default function PaymentForm(props) {
           "message": "Payment Sucessfull",
           "severity": "success"
         });
+        const order = {
+          "userId": cart.userId,
+          "source": "Website",
+          "date": new Date(),
+          "items": cart.items,
+          "total": total,
+          "status": "New"
+        }
+        createOrder(order, dispatch);
       },4000);
     }     
   }

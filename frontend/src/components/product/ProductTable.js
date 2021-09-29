@@ -35,10 +35,10 @@ function ProductTable(props) {
     });
     const { vertical, horizontal, open } = state;
     const typeLookup = {
-        ELECTRONIC: 'ELECTRONIC',
-        APPARREL:'APPARREL',
-        CONSUMABLE: 'CONSUMABLE',
-        HEADWEAR:'HEADWEAR'
+        HEADBAND: 'Headband',
+        TURBAN:'Turban',
+        SCRUNCHIE: 'Scrunchie',
+        BANDANA:'Bandana'
     }
 
     var supplierLookup = {};
@@ -52,8 +52,7 @@ function ProductTable(props) {
     const columns =[
         { title: 'ID', field: 'id' },
         { title: 'Name', field: 'productName', },
-        { title: 'Brand', field: 'brand' },
-        { title: 'Model', field: 'model' },
+        { title: 'Description', field: 'description' },
         { title: 'Type', field: 'type' , lookup:typeLookup},
         { title: 'Supplier', field: 'supplier',  lookup: supplierLookup },
         { title: 'Selling Price', field: 'sellingPrice' },
