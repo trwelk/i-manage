@@ -6,7 +6,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { AppConstants } from '../../constants/AppConstants';
-import {  deletePurchaseReq ,createPurchaseReq, updatePurchaseReq ,fetchPurchaseReqs } from '../../redux/actions/PurchaseReq.actions'
+import {  deletePurchaseReq , updatePurchaseReq ,fetchPurchaseReqs , validatePr } from '../../redux/actions/PurchaseReq.actions'
 import CashRequestForm from './CashRequestForm';
 // import AdminNavbar from '../views/AdminNavBar';
 
@@ -26,7 +26,30 @@ function CashOutflowTable(props) {
     const globalState = useSelector((state) => state);
     const dispatch = useDispatch();
     const purchaseReqs = globalState.purchaseReq.purchaseReqs ? globalState.purchaseReq.purchaseReqs : null
+    const products = globalState.productReducer.products ? globalState.productReducer.products : null
+    const suppliers = globalState.productReducer.products ? globalState.supplierReducer.suppliers : null
+    const invLocations = globalState.inventoryLocationReducer.inventoryLocations ? globalState.inventoryLocationReducer.inventoryLocations : null
+ 
+    var supplierLookup = {};
+    if (suppliers) {
+        suppliers.forEach(supplier => {
+            supplierLookup[supplier.id] = supplier.supplierName
+        })
+    }
 
+    var productLookup = {};
+    if (products) {
+        products.forEach(product => {
+            productLookup[product.id] = product.productName
+        })
+    }
+
+    var locationLookup = {};
+    if (invLocations) {
+        invLocations.forEach(invLocation => {
+            locationLookup[invLocation.id] = invLocation.locationName
+        })
+    }
     const [error, setError] = React.useState("")
     const [state, setState] = React.useState({
         open: false,
@@ -44,10 +67,10 @@ function CashOutflowTable(props) {
     const columns =[
         { title: 'ID', field: 'id' },
         { title: 'Description', field: 'description', },
-        { title: 'product', field: 'product' },
-        { title: 'Supplier', field: 'supplier' },
+        { title: 'product', field: 'product' , lookup: productLookup },
+        { title: 'Supplier', field: 'supplier', lookup: supplierLookup },
         { title: 'requester', field: 'requester' },
-        { title: 'location', field: 'location' },
+        { title: 'location', field: 'location' , lookup: locationLookup},
         { title: 'state', field: 'state' , lookup: stateLookup },
         { title: 'quantityOfItems', field: 'quantityOfItems' },
         { title: 'dateResolved', field: 'dateResolved' }
@@ -106,8 +129,16 @@ function CashOutflowTable(props) {
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve, reject) => {
                             setTimeout(() => {
+                                let err = validatePr(newData);
+                                if (err){
+                                    setError(err);
+                                    setState({ ...state, open: true });
+                                    resolve();
+                                }
+                                else{
                                 updatePurchaseReq(dispatch, newData)
                                 resolve();
+                                }
                             }, 1000)
                     }),
             }}

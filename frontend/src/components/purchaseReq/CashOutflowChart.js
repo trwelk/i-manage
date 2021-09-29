@@ -34,7 +34,7 @@ function CashOutflowChart(props) {
 
     purchaseReqs?.forEach( purchaseReq => {
         if(new Date().getUTCFullYear() === new Date(purchaseReq.dateResolved).getUTCFullYear()
-         && purchaseReq.state == AppConstants.STATE_CLEARED ){
+         && purchaseReq.state == AppConstants.STATE_APPROVED ){
             var month = new Date(purchaseReq.dateResolved).getMonth();
             chartData[month] = chartData[month] + purchaseReq.totalAmount;
         }

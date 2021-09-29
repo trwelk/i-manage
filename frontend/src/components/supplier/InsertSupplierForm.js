@@ -81,7 +81,6 @@ export default function InsertSupplierForm(props) {
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
-        console.log(state)
     }
 
     return (
