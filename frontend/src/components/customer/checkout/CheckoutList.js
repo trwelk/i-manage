@@ -25,40 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CartList() {
+function CartList(props) {
     const classes = useStyles();
-    const cart = {
-      'userId': '123',
-      'products': [{
-          'img': Image1,
-          'desc': 'Uniqeon',
-          'price': 300
-        },
-        {
-          'img': Image2,
-          'desc': 'Hibiscus Pop',
-          'price': 450
-        },
-        {
-          'img': Image3,
-          'desc': 'Candy Floss',
-          'price': 350
-        },
-        {
-          'img': Image4,
-          'desc': 'Mandarin Sting',
-          'price': 500
-        }
-      ],
-      'qty': [2,2,1,3],
-      'total': 3350,
-      'itemCount': 4
-    }
+    const {cart} = props;
   
     return (
       <div>
-        {cart.products.map((cartItem) => {
-          return <CheckoutItem itemDetails={cartItem} qty={cart.qty[cart.products.indexOf(cartItem)]} className={classes.root}/>;
+        {cart.items.map((cartItem) => {
+          return <CheckoutItem itemDetails={cartItem} qty={cartItem.qty} className={classes.root}/>;
         })}
       </div>
     );

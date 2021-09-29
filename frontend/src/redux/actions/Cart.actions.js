@@ -11,10 +11,8 @@ export const fetchCartSuccess = (data) =>  {
 
 
 export const fetchCart = (dispatch, userId) => {
-    console.log("fetching cart");
         axios.get(AppConstants.REST_URL_HOST + AppConstants.CART_URL  + '/' + userId)
             .then(response => {
-                console.log(response);
                 dispatch(fetchCartSuccess(response.data))
             })
             .catch(error => {
@@ -38,7 +36,6 @@ export const addToCart = (dispatch, cart) => {
         .then(response => {
             dispatch(fetchCartSuccess(response.data))
             if(response.data == ""){
-                console.log("Need to create a cart");
                 createCart(cart,dispatch);
             }
             else{
@@ -70,7 +67,6 @@ return {
 
 //CREATE
 export const createCart = (data,dispatch) => {
-    console.log(data);
     const cart = data;
     axios.post(AppConstants.REST_URL_HOST + AppConstants.CART_URL, cart )
         .then(response => {
