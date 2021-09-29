@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { validateProductObj, deleteSupplier, createSupplier, updateSupplier, fetchSuppliers } from '../../redux/actions/Supplier.actions'
+import { validateSupplierObj, deleteSupplier, createSupplier, updateSupplier, fetchSuppliers } from '../../redux/actions/Supplier.actions'
 import InsertSupplierForm from './InsertSupplierForm';
 
 // import AdminNavbar from '../views/AdminNavBar';
@@ -34,12 +34,9 @@ function SupplierTable(props) {
     });
     const { vertical, horizontal, open } = state;
     const { useState } = React;
-    const typeLookup = {
-        ELECTRONIC: 'ELECTRONIC',
-        APPARREL: 'APPARREL',
-        CONSUMABLE: 'CONSUMABLE',
-        HEADWEAR: 'HEADWEAR'
-    }
+
+    const stateLookup = {REQUESTED:"REQUESTED",APPROVED:"APPROVED",DECLINED:"DECLINED"}
+
 
     var supplierLookup = {};
     if (suppliers) {
@@ -50,15 +47,15 @@ function SupplierTable(props) {
     //*********************************************Setting columns************************************************************* */
 
     const columns = [
-        { title: 'ID', field: 'id' },
+        { title: 'ID', field: 'id', updatable: false },
         { title: 'Name', field: 'supplierName', },
-        { title: 'contractDate', field: 'contractDate' },
-        { title: 'contractExpDate', field: 'contractExpDate' },
         { title: 'contactNumber', field: 'contactNumber' },
         { title: 'contactEmail', field: 'contactEmail' },
         { title: 'methodOfContact', field: 'methodOfContact' },
-        { title: 'state', field: 'state' },
+        { title: 'state', field: 'state' , lookup: stateLookup},
         { title: 'rating', field: 'rating' },
+        { title: 'contractDate', field: 'contractDate' },
+        { title: 'contractExpDate', field: 'contractExpDate' },
 
     ]
 
@@ -116,8 +113,17 @@ function SupplierTable(props) {
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve, reject) => {
                         setTimeout(() => {
-                            updateSupplier(dispatch, newData)
-                            resolve();
+                            let err = validateSupplierObj(newData);
+                            if (err){
+                                setError(err);
+                                setState({ ...state, open: true });
+                                resolve();
+                            }
+                            else{
+                                updateSupplier(dispatch, newData)
+                                resolve();
+                            }
+
                         }, 1000)
                     }),
             }}
