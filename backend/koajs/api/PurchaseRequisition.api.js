@@ -24,6 +24,7 @@ const fManEmail = "weerasooriya.trewon@gmail.com"
             state: "REQUESTED",
             quantityOfItems:obj.quantityOfItems,
             dateResolved:new Date(),
+            totalAmount: obj.quantityOfItems * product[0].sellingPrice
          });
 
         newPurchaseRequisitionSchema.save()
@@ -110,6 +111,7 @@ async function updatePurchaseRequisition( purchaseRequisition ) {
   
     console.log("OLD RECORD",oldRecord)
     console.log("NEW RECORD",purchaseRequisition)
+    purchaseRequisition.dateResolved = new Date();
 
     let updatedPurchaseRequisition = await purchaseRequisitionSchema.findOneAndReplace(filter, purchaseRequisition, {
         new: true
@@ -122,6 +124,7 @@ async function updatePurchaseRequisition( purchaseRequisition ) {
                 quantity:purchaseRequisition.quantityOfItems,
                 location:purchaseRequisition.location,
                 product:purchaseRequisition.product,
+                state: "REQUESTED"
             }
         ).catch(error => {
             console.log("ERROR" , error)

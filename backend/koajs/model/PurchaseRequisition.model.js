@@ -44,7 +44,8 @@ var purchaseRequisitionSchema = mongoose.Schema({
     quantityOfItems: {
         type: Number,
         required: true
-    }
+    },
+    totalAmount:{ type : Number , required: true}
 });
 
 module.exports = mongoose.model('purchaseRequisition', purchaseRequisitionSchema);
