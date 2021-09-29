@@ -1,10 +1,6 @@
 import React from 'react'; 
 import { makeStyles } from '@material-ui/core/styles';
 import CheckoutItem from './CheckoutItem';
-import Image1 from "../../../assets/Items/1.PNG";
-import Image2 from "../../../assets/Items/2.PNG";
-import Image3 from "../../../assets/Items/3.PNG";
-import Image4 from "../../../assets/Items/4.PNG";
 
 const useStyles = makeStyles((theme) => ({
   root: {
