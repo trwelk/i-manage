@@ -36,7 +36,7 @@ function PurchaseReqsClearedPerMonthChart(props) {
       console.log(new Date(purchaseReq.dateResolved).getUTCFullYear(),new Date().getUTCFullYear())
 
         if(new Date().getUTCFullYear() === new Date(purchaseReq.dateResolved).getUTCFullYear()
-         && purchaseReq.state == AppConstants.STATE_CLEARED ){
+         && purchaseReq.state == AppConstants.STATE_APPROVED ){
             var month = new Date(purchaseReq.dateResolved).getMonth();
             chartData[month]++;
         }
