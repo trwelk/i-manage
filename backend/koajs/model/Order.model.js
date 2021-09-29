@@ -17,12 +17,14 @@ var orderSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    products: {
-        type: [String],
-        required: true
-    },
-    qty: {
-        type: [String],
+    items: {
+        type: [
+            {
+                productId: String,
+                qty: Number,
+                price: Number
+            }
+        ],
         required: true
     },
     total: {

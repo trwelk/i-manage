@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MaterialTable, { MTableToolbar } from 'material-table'
 import { useDispatch, useSelector } from 'react-redux'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import { AppConstants } from '../../constants/AppConstants';
 import { validateProductObj ,deleteProduct ,createProduct,updateProduct ,fetchProducts} from '../../redux/actions/Product.action'
 import { fetchSuppliers } from '../../redux/actions/Supplier.actions'
 import { IconButton } from '@material-ui/core';
@@ -22,8 +21,7 @@ function ProductTable(props) {
         fetchProducts(dispatch);
         fetchSuppliers(dispatch);
     }, [])
-    //*********************************************CONSTANTS************************************************************* */
-    const location = props.location     
+    //*********************************************CONSTANTS************************************************************* */    
     const globalState = useSelector((state) => state);
     const dispatch = useDispatch();
     const products = globalState.productReducer.products ? globalState.productReducer.products : null
@@ -36,12 +34,11 @@ function ProductTable(props) {
         horizontal: 'right',
     });
     const { vertical, horizontal, open } = state;
-    const { useState } = React;
     const typeLookup = {
-        ELECTRONIC: 'ELECTRONIC',
-        APPARREL:'APPARREL',
-        CONSUMABLE: 'CONSUMABLE',
-        HEADWEAR:'HEADWEAR'
+        HEADBAND: 'Headband',
+        TURBAN:'Turban',
+        SCRUNCHIE: 'Scrunchie',
+        BANDANA:'Bandana'
     }
 
     var supplierLookup = {};
@@ -55,8 +52,7 @@ function ProductTable(props) {
     const columns =[
         { title: 'ID', field: 'id' },
         { title: 'Name', field: 'productName', },
-        { title: 'Brand', field: 'brand' },
-        { title: 'Model', field: 'model' },
+        { title: 'Description', field: 'description' },
         { title: 'Type', field: 'type' , lookup:typeLookup},
         { title: 'Supplier', field: 'supplier',  lookup: supplierLookup },
         { title: 'Selling Price', field: 'sellingPrice' },
@@ -68,14 +64,9 @@ function ProductTable(props) {
 
 //*********************************************Event Handlers************************************************************* */
 
-    const handleClick = (newState) => () => {
-        setState({ open: true, ...newState });
-    };
-
     const handleClose = () => {
         setState({ ...state, open: false });
     };
-
 
 
     //--------------------------------------------------------UI-ELEMENTS-------------------------------------------------------------     
@@ -90,7 +81,7 @@ function ProductTable(props) {
         </Snackbar>)
 
     const table = products ? (
-        <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black" }}
+        <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black", backgroundColor: 'rgba(255,255,255,0.7)' }}
             title={"Products"}
             columns={columns}
             data={products}
@@ -103,6 +94,7 @@ function ProductTable(props) {
                   <div> 
 
                     <a 
+                    rel = "noreferrer"
                     href={rowData.paperLink} 
                     target="_blank"download>
                                               <IconButton>

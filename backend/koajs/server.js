@@ -18,6 +18,8 @@ const supplierRoutes = require('./routes/Supplier.routes')
 const purchaseRequisition = require('./routes/PurchaseRequisition.routes')
 const cartRoutes = require('./routes/Cart.routes')
 const orderRoutes = require('./routes/Order.routes')
+const customerRoutes = require('./routes/Customer.routes')
+
 
 
 const app = new Koa();
@@ -34,10 +36,13 @@ app.use(cors(corsOptions));
  .use(supplierRoutes.allowedMethods());
  app.use(purchaseRequisition.routes())
  .use(purchaseRequisition.allowedMethods());
+ app.use(customerRoutes.routes())
+ .use(customerRoutes.allowedMethods());
  app.use(cartRoutes.routes())
  .use(cartRoutes.allowedMethods()); 
  app.use(orderRoutes.routes())
  .use(orderRoutes.allowedMethods()); 
+
 
 
 app.listen(9090);

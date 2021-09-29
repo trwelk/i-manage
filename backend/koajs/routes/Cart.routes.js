@@ -7,9 +7,9 @@ const router = new Router({
 
 
 //call this to get all the cart
-router.get('/', async ctx => {
-    let userid = ctx.request.body;
-    let cart = await cartApi.getUserCart(userid)
+router.get('/:id', async ctx => {
+    let userId = ctx.params.id;
+    let cart = await cartApi.getUserCart(userId)
         .catch(error => {
             ctx.throw(400,'error',error);
         });

@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
-    background: '#aaa',
+    background: theme.palette.primary.medium,
     marginBottom: 10
   },
   bullet: {
@@ -25,44 +25,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CartList() {
+function CartList(props) {
     const classes = useStyles();
-    const cart = {
-      'userId': '123',
-      'products': [{
-          'img': 'https://www.claires.com/dw/image/v2/BBTK_PRD/on/demandware.static/-/Sites-master-catalog/default/dwac910086/images/hi-res/20559_1.jpg?sw=2000&sh=2000&sm=fit',
-          'desc': 'Item',
-          'price': 1000
-        },
-        {
-          'img': '../../../assets/ProductImages/img2.jpg',
-          'desc': 'Item 2',
-          'price': 1000
-        },
-        {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
-        },
-        {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
-        },
-        {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
-        },
-        {
-          'img': '../../../assets/ProductImages/img3.jpg',
-          'desc': 'Item 3',
-          'price': 1000
+    const {cartUpdate, cart} = props;
+
+    const itemUpdate = (itemInfo) => {
+      for(var i = 0; i < cart.items.length; i++) {
+        if(cart.items[i].productId === itemInfo.id) {
+          if(itemInfo.qty>0)
+            cart.items[i].qty = itemInfo.qty;
+          else
+            cart.items.splice(i, 1)
         }
-      ],
-      'qty': [2,5,4,6,7,2],
-      'total': 11000,
-      'itemCount': 3
+      }
+      cartUpdate(cart);
     }
   
     return (
@@ -93,8 +69,15 @@ function CartList() {
           </Grid>
         </CardContent>
       </Card>
-        {cart.products.map((cartItem) => {
-          return <CartItem itemDetails={cartItem} qty={cart.qty[cart.products.indexOf(cartItem)]} className={classes.root}/>;
+        {cart.items.map((cartItem) => {
+          if(cartItem.qty > 0){
+            return <CartItem 
+                    key = {cartItem.productId}
+                    cartItem={cartItem} 
+                    itemUpdate={itemUpdate}
+                    className={classes.root}/>;
+          }
+          else return null
         })}
       </div>
     );

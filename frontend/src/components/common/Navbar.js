@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,6 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import logo from '../../assets/Logo.png';
 import Button from '@material-ui/core/Button';
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
     '&:visited': {
-      color: '#fff'
+      color: theme.palette.primary.contrastText
     }
   },
   userMenu: {
@@ -100,10 +101,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
-  let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  var globalState = useSelector((state) => state);
+  const { cart, isLoading } = globalState.cartReducer ? globalState.cartReducer : null
+  const [count, setCount] = useState(0);
 
   const isMenuOpen = Boolean(anchorEl);
+
+  const calcCount = (items) => {
+    var count = 0;
+    for(var i = 0; i < items.length; i++) {
+      if(items[i].qty > 0)
+        count = count + 1
+    }
+    return count;
+  }
+
+  if(cart != null && count == 0){
+    setCount(calcCount(cart.items));
+  }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -130,13 +146,8 @@ export default function Navbar() {
         </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
-        <Link to="/shop" className={classes.link}>
+        <Link to="/shop/login" className={classes.link}>
           Login
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
-        <Link to="/shop" className={classes.link}>
-          Profile
         </Link>
       </MenuItem>
     </Menu>
@@ -150,15 +161,15 @@ export default function Navbar() {
             <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Home
             </Button></Link>
-            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
+            <Link to="/shop/viewProducts" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Products
             </Button></Link>
-            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
+            {/* <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               News
-            </Button></Link>
-            <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
+            </Button></Link> */}
+            {/* <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Shop
-            </Button></Link>
+            </Button></Link> */}
             <Link to="/shop/contactUs" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Contact Us
             </Button></Link>
@@ -178,15 +189,10 @@ export default function Navbar() {
           </div> */}
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="4 items in cart" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={count} color="secondary">
               <Link to="/shop/cart" className={classes.link}>
                 <ShoppingCartIcon className={classes.navbutton}/>
               </Link>
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon className={classes.navbutton}/>
               </Badge>
             </IconButton>
             <IconButton
