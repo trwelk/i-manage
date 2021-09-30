@@ -39,7 +39,7 @@ function CartItem(props) {
   const handleQuantityAdd = () => {
     setState(state+1);
     itemUpdate({
-      "id": cartItem.desc,
+      "id": cartItem.productId,
       "qty": state+1
     });
   }
@@ -47,14 +47,14 @@ function CartItem(props) {
   const handleQuantitySubtract = () => {
     setState(state-1);
     itemUpdate({
-      "id": cartItem.desc,
+      "id": cartItem.productId,
       "qty": state-1
     });
   }
 
   const handleDelete = () => {
     itemUpdate({
-      "id": cartItem.desc,
+      "id": cartItem.productId,
       "qty": 0
     });
   }
@@ -69,7 +69,7 @@ function CartItem(props) {
             </Grid>
             <Grid item xs={2}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    {cartItem.desc}
+                    {cartItem.productId}
                 </Typography>
             </Grid>
             <Grid item xs={2}>

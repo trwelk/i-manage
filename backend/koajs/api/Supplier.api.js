@@ -51,8 +51,8 @@ async function getSuppliers() {
 
 /*Fetches all the supplierLocations for a given category and returns a json array of supplierLocations.model type objects  : else returns the error 
   Catch this error from where it's called and  throw an error*/
-async function getSuppliersByCategory(category) {
-    const query = { categories: category }
+async function getSupplierByKey(id) {
+    const query = { id: id }
     return new Promise((resolve, reject) => {
         supplierSchema.find(query,function(err, response){
             if(err)
@@ -86,4 +86,4 @@ async function updateSupplier( supplier ) {
     });
     return updatedSupplier;
 }
-module.exports = {updateSupplier, addSupplier, getSuppliersByCategory, getSuppliers ,deleteSupplier };
+module.exports = {updateSupplier, addSupplier, getSupplierByKey, getSuppliers ,deleteSupplier };

@@ -41,13 +41,14 @@ return {
 //CREATE
 export const createPurchaseReq = (data,dispatch) => {
     const purchaseReq = data;
+    console.log(data)
     axios.post(AppConstants.REST_URL_HOST + AppConstants.PURCHASE_REQUEST_URL, purchaseReq )
         .then(response => {
             const id = response;
-            console.log(id)
                     dispatch(createPurchaseReqSuccess(response.data))
+        }).catch(err => {
+            console.log(err.response)
         })
-
 }
 
 export const createPurchaseReqSuccess = (data) => {
@@ -74,4 +75,33 @@ export const deletePurchaseReqSuccess = (data) =>  {
         type: ActionTypes.DELETE_PURCHASE_REQ_SUCCESS,
         payload: data
     }
+}
+
+export const validatePr = (data) => {
+    if (data.id == null || data.id == "") {
+        return "Field id Cannot be empty"
+    }
+    else if (data.description == null || data.description == "") {
+        return "Field description Cannot be empty"
+    }
+    else if (data.product == null || data.product == "") {
+        return "Field product Cannot be empty"
+    }
+    else if (data.supplier == null || data.supplier == "") {
+        return "Field supplier Cannot be empty"
+    }
+    else if (data.location == null || data.location == "") {
+        return "Field location Cannot be empty"
+    }
+    else if (data.requestedDate == null || data.requestedDate == "") {
+        return "Field requestedDate Cannot be empty"
+    }
+    else if (data.wantedDeliveryDate == null || data.wantedDeliveryDate == "") {
+        return "Field  wantedDeliveryDate Cannot be empty"
+    }
+    else if (data.quantityOfItems == null || data.quantityOfItems == "") {
+        return "Field quantityOfItems Cannot be empty"
+    }
+    else
+        return null;
 }

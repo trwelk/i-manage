@@ -41,7 +41,7 @@ function CheckoutItem(props) {
             <Grid container item xs={9}>
             <Typography variant="h5" component="h2">
                     <Grid container item xs={12} className={classes.title}>
-                        {itemDetails.desc}
+                        {itemDetails.productId}
                     </Grid>
                     <Grid container xs={12} className={classes.details}>
                         Quantity: {qty} Total: {qty * itemDetails.price}

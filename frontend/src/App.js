@@ -15,6 +15,9 @@ import CustomerSignUp from './pages/CustomerSignUp';
 import OrderManagement from './pages/OrderManagement';
 import OrderForm from './components/order/OrderForm';
 import CashFlowInsights from './pages/CashFlowInsights';
+import CashOutflowManagement from './pages/CashOutflowManagement';
+
+
 import Checkout from './pages/Checkout';
 import ProductView from './pages/ProductView';
 import Login from './pages/Login';
@@ -57,6 +60,7 @@ function App() {
               <Route exact path="/admin/orders" component={OrderManagement} />
               <Route exact path="/admin/orders/new" component={OrderForm} />
               <Route exact path="/admin/cashflow/insights" component={CashFlowInsights} />
+              <Route exact path="/admin/cashflow" component={CashOutflowManagement} />
               <Route exact path="/shop" component={LandingPage} />
               <Route exact path="/shop/cart" component={Cart} />
               <Route exact path="/shop/checkout" component={Checkout} />

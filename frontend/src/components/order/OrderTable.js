@@ -38,7 +38,7 @@ function OrderTable(props) {
     const globalState = useSelector((state) => state);
     const dispatch = useDispatch();
     const orders = globalState.orderReducer.orders ? globalState.orderReducer.orders : null
-    const [error, setError] = React.useState("");
+    const error = "";
     let history = useHistory();
     const [state, setState] = React.useState({
         open: false,
@@ -46,12 +46,11 @@ function OrderTable(props) {
         horizontal: 'right',
     });
     const { vertical, horizontal, open } = state;
-    const { useState } = React;
     const classes = useStyles();
 
 //*********************************************Setting columns************************************************************* */
 
-    const [columns, setColumns] = useState([
+    const columns = [
         { title: 'User Id', field: 'userId', editable: 'never'},
         { title: 'Source', field: 'source', editable: 'never' },
         { title: 'Date', field: 'date', editable: 'never' },
@@ -61,16 +60,9 @@ function OrderTable(props) {
             field: 'status',
             lookup: {'New': 'New', 'Completed': 'Completed', 'Processing': 'Processing', 'Delivered': 'Delivered'}
         }
-    ]);
+    ];
 
-
-
-
-//*********************************************Event Handlers************************************************************* */
-
-    const handleClick = (newState) => () => {
-        setState({ open: true, ...newState });
-    };
+//*********************************************Event Handlers************************************************************* */ 
 
     const handleOrderAdd = () => {
         history.push('/admin/orders/new');
@@ -79,8 +71,6 @@ function OrderTable(props) {
     const handleClose = () => {
         setState({ ...state, open: false });
     };
-
-
 
     //--------------------------------------------------------UI-ELEMENTS-------------------------------------------------------------     
     const feedBackToast =  (<Snackbar 
@@ -99,22 +89,6 @@ function OrderTable(props) {
             columns={columns}
             data={orders}
             editable={{
-                // onRowAdd: newData =>
-                //     new Promise((resolve, reject) => {
-                //             setTimeout(() => {
-                //                 let err = validateOrderObj(newData)
-                //                  if(err == null){
-                //                     createOrder(newData,dispatch)
-                //                     resolve();
-                //                 }
-                //                 else{
-                //                     setError(err)
-                //                     setState({...state,open:true})
-                //                     reject();
-                //                 }
-                //             }, 1000)
-
-                //     }),
                 onRowDelete: oldData =>
                     new Promise((resolve, reject) => {
                         setTimeout(() => {
@@ -132,6 +106,7 @@ function OrderTable(props) {
             }}
             options={{
                 pageSize: 10,
+                exportButton: true,
                 headerStyle: {
                     backgroundColor: 'rgb(35 47 62) ',
                     color: '#FFF',
@@ -175,11 +150,11 @@ function OrderTable(props) {
                             {rowData.items.map((row) => (
                                 <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
-                                    Product
+                                    {row.productId}
                                 </TableCell>
                                 <TableCell align="right">{row.qty}</TableCell>
                                 <TableCell align="right">{row.price}</TableCell>
-                                <TableCell align="right">{row.total}</TableCell>
+                                <TableCell align="right">{row.price * row.qty}</TableCell>
                                 </TableRow>
                             ))}
                             </TableBody>

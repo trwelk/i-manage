@@ -37,8 +37,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function InsertSupplierForm() {
-    const [open, setOpen] = React.useState(false);
+export default function InsertSupplierForm(props) {
+    const {open , setOpen}= props;
+
     const [state, setState] = React.useState({
         id: "", supplierName: "", note: "", contractDate: null, contractExpDate: null,
         contactNumber: "", contactEmail: "", currencyCode: "", rating: "", methodOfContact: ""
@@ -80,23 +81,12 @@ export default function InsertSupplierForm() {
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
-        console.log(state)
     }
 
     return (
         <div>
-            <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                className={classes.buttonIcon}
-                startIcon={<ShoppingCartIcon />}
-                onClick={handleClickOpen}
-            >
-                Add workshop
-            </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
-                <DialogTitle id="form-dialog-title">Workshops</DialogTitle>
+                <DialogTitle id="form-dialog-title">Suppliers</DialogTitle>
                 <div style={{ marginLeft: "20px", color: "red" }}>{error ? error : ""}</div>
                 <DialogContent className={classes.dialog}>
                     <form className={classes.root}  autoComplete="off">

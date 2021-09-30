@@ -22,8 +22,7 @@ var orderSchema = mongoose.Schema({
             {
                 productId: String,
                 qty: Number,
-                price: Number,
-                total: Number
+                price: Number
             }
         ],
         required: true

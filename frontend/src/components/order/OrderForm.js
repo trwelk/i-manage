@@ -123,7 +123,7 @@ export default function OrderForm() {
     const getProdDetails = (prodId) => {
         for(var i = 0; i < products.length; i++)
         {
-            if(products[i].id == prodId)
+            if(products[i].id === prodId)
             {
                 return products[i]
             }

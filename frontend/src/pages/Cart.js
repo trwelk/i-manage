@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "../components/common/Navbar";
 import CartList from "../components/customer/cart/CartList";
 import CartTotal from "../components/customer/cart/CartTotal";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
-import Image1 from "../assets/Items/2.PNG";
-import Image2 from "../assets/Items/2.PNG";
-import Image3 from "../assets/Items/3.PNG";
-import Image4 from "../assets/Items/4.PNG";
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCart, updateCart } from '../redux/actions/Cart.actions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,36 +28,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-var cart = {
-  'userId': '123',
-  'items': [{
-      'img': Image1,
-      'desc': 'Uniqeon',
-      'price': 300,
-      'qty': 1
-    },
-    {
-      'img': Image2,
-      'desc': 'Hibiscus Pop',
-      'price': 450,
-      'qty': 2
-    },
-    {
-      'img': Image3,
-      'desc': 'Candy Floss',
-      'price': 350,
-      'qty': 3
-    },
-    {
-      'img': Image4,
-      'desc': 'Mandarin Sting',
-      'price': 500,
-      'qty': 2
-    }
-  ]
-}
-
 function Cart() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchCart(dispatch, 'user123');
+  },[]);
+  var globalState = useSelector((state) => state);
+  const { cart, isLoading } = globalState.cartReducer ? globalState.cartReducer : null
   const classes = useStyles();
   const [data, setData] = useState(cart);
 
@@ -80,36 +55,64 @@ function Cart() {
     return count;
   }
 
-  const [total,setTotal] = useState(
-    {
-      "count": cart.items.length,
-      "total": calcTotal(cart.items)
-    }
-  );
-
   const cartUpdate = (childData) => {
     setData(childData);
     setTotal({
       "count": calcCount(childData.items),
       "total": calcTotal(childData.items)
     })
+    updateCart(dispatch,childData)
   }
 
-  return (
-    <div className={classes.root}>
-      <Navbar/>
-      <Typography className={classes.title}>Your cart: {calcCount(data.items)} items</Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={8} className={classes.cartItems}>
-            <CartList cartUpdate={cartUpdate} cart={data}/>
-        </Grid>
-        <Grid item xs={3} className={classes.cartItems}>
-            <CartTotal total={total}/>
-        </Grid>
-      </Grid>
+  const [total,setTotal] = useState();
 
-    </div>
-  );
+  if(isLoading){
+    fetchCart(dispatch, 'user123');
+    return (
+      <div className={classes.root}>
+        <Navbar/>
+        <Typography variant="h5" component="h2">
+                    Loading Cart ...
+        </Typography>
+      </div>
+    );
+  }
+  else if(cart == null){
+    return (
+      <div className={classes.root}>
+        <Navbar/>
+        <Typography variant="h5" component="h2">
+                    Cart is Empty
+        </Typography>
+      </div>
+    );
+  }
+  else{
+    if(total == null){
+      setTotal({
+        "count": cart.items.length,
+        "total": calcTotal(cart.items)
+      });
+    }
+    if(data == null){
+      setData(cart);
+    }
+    return (
+      <div className={classes.root}>
+        <Navbar/>
+        <Typography className={classes.title}>Your cart: {calcCount(cart.items)} items</Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={8} className={classes.cartItems}>
+              <CartList cartUpdate={cartUpdate} cart={data}/>
+          </Grid>
+          <Grid item xs={3} className={classes.cartItems}>
+              <CartTotal total={total}/>
+          </Grid>
+        </Grid>
+  
+      </div>
+    );
+  }
 }
 
 export default Cart;

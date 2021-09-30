@@ -71,7 +71,6 @@ async function getProductsByCategory(category) {
             if(err)
                 reject(err)
             else{
-                console.log(response)
                 resolve(response)
             }
          });

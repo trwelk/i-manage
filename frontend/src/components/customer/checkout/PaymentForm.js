@@ -10,6 +10,8 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/picker
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { createOrder } from '../../../redux/actions/Order.actions';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -51,28 +53,89 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PaymentForm() {
+export default function PaymentForm(props) {
+  const {total, cart} = props;
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date()
+  const dispatch = useDispatch();
+  const [card, setCard] = React.useState(
+    {
+      "cardNo": false,
+      "expiryDate": new Date(),
+      "cvv": null
+    }
   );
   let history = useHistory();
-  const [open,setOpen] = React.useState(false);
+  const [snackbarMessage,setSnackbarMessage] = React.useState(
+    {
+      "open": false,
+      "message": " ",
+      "severity": " "
+    }
+  );
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setCard({...card, expiryDate: date});
   };
 
+  const handleChange = (e) => {
+    setCard({ ...card, [e.target.name]: e.target.value })
+  } 
+
   const handlePayment = () => {
-    setOpen(true);
+    if(card.cardNo < 1000000000000000 || card.cardNo > 9999999999999999){
+      setSnackbarMessage({
+        "open": true,
+        "message": "Card number is invalid",
+        "severity": "error"
+      });
+    }
+    else if(card.expiryDate < new Date()){
+      setSnackbarMessage({
+        "open": true,
+        "message": "Card is expired or expiry date is invalid",
+        "severity": "error"
+      });
+    }
+    else if(card.cvv < 100 || card.cvv > 999){
+      setSnackbarMessage({
+        "open": true,
+        "message": "Security Code is invalid",
+        "severity": "error"
+      });
+    }
+    else {
+      setSnackbarMessage({
+        "open": true,
+        "message": "Contacting Payment Server",
+        "severity": "info"
+      });
+      setTimeout(() => {
+        setSnackbarMessage({
+          "open": true,
+          "message": "Payment Sucessfull",
+          "severity": "success"
+        });
+        const order = {
+          "userId": cart.userId,
+          "source": "Website",
+          "date": new Date(),
+          "items": cart.items,
+          "total": total,
+          "status": "New"
+        }
+        createOrder(order, dispatch);
+      },4000);
+    }     
   }
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
-    history.push('/shop');
+    setSnackbarMessage({...snackbarMessage, open: false});
+    if(snackbarMessage.severity === "success"){
+      history.push("/shop");
+    }
   };
 
   return (
@@ -85,18 +148,17 @@ export default function PaymentForm() {
           </Typography>
           <form className={classes.form} noValidate>
                 <TextField
-                  autoComplete="fname"
-                  name="firstName"
+                  name="cardNo"
                   variant="outlined"
                   required
                   fullWidth
                   InputProps={{
                     className: classes.text
                   }}
-                InputLabelProps={{
+                  InputLabelProps={{
                     className: classes.text
-                }}
-                  id="firstName"
+                  }}
+                  onChange={handleChange}
                   label="Card No"
                   autoFocus
                 />
@@ -117,7 +179,7 @@ export default function PaymentForm() {
                     InputLabelProps={{
                         className: classes.text
                     }}
-                    value={selectedDate}
+                    value={card.expiryDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
                       "aria-label": "change date",
@@ -126,8 +188,7 @@ export default function PaymentForm() {
                 </MuiPickersUtilsProvider>
                 <TextField
                   className = {classes.text}
-                  autoComplete="fname"
-                  name="firstName"
+                  name="cvv"
                   variant="outlined"
                   required
                   fullWidth
@@ -136,12 +197,12 @@ export default function PaymentForm() {
                   }}
                   InputLabelProps={{
                     className: classes.text
-                }}
-                  id="firstName"
+                  }}
+                  onChange={handleChange}
                   label="Security Code"
                   autoFocus
                 />
-                <Typography className={classes.total}>Total amount: Rs.3500</Typography>
+                <Typography className={classes.total}>Total amount: Rs.{total+150}</Typography>
             <Button
               fullWidth
               variant="contained"
@@ -151,9 +212,9 @@ export default function PaymentForm() {
             >
               Confirm Payment
             </Button>
-            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-              <Alert onClose={handleClose} severity="success">
-                Order Placed Successfully!
+            <Snackbar open={snackbarMessage.open} autoHideDuration={2000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity={snackbarMessage.severity}>
+                {snackbarMessage.message}
               </Alert>
             </Snackbar>
           </form>
