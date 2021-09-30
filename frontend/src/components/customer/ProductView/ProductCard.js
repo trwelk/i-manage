@@ -63,6 +63,7 @@ export default function ProductCard(props) {
             {
               id: values.id,
               productName: values.productName,
+              image: values.image,
               qty: 1,
               price: values.sellingPrice
             }
