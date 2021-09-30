@@ -150,7 +150,7 @@ function OrderTable(props) {
                             {rowData.items.map((row) => (
                                 <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
-                                    {row.productId}
+                                    {row.productName}
                                 </TableCell>
                                 <TableCell align="right">{row.qty}</TableCell>
                                 <TableCell align="right">{row.price}</TableCell>

@@ -20,7 +20,8 @@ var orderSchema = mongoose.Schema({
     items: {
         type: [
             {
-                productId: String,
+                id: String,
+                productName: String,
                 qty: Number,
                 price: Number
             }

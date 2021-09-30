@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../components/customer/ProductView/ProductCard';
 import Navbar from '../components/common/Navbar';
 import { Grid } from '@material-ui/core';
@@ -10,66 +11,73 @@ import Image5 from '../assets/Items/5.PNG'
 import Image6 from '../assets/Items/6.PNG'
 import Image7 from '../assets/Items/7.PNG'
 import Image8 from '../assets/Items/8.PNG'
+import { fetchProducts } from '../redux/actions/Product.action';
 
 
-const products = [
-  {
-    "title" : "Uniqeon",
-    "image":Image1,
-    "description": "Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-    "price": 300
-  },
-  {
-    "title" : "Hibiscus Pop",
-    "image":Image2,
-    "description": " Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-    "price": 450
-  },
-  {
-    "title" : "Candy Floss",
-    "image":Image3,
-    "description": "Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-    "price": 350
-  },
-  {
-    "title" : "Mandarin Sting",
-    "image":Image4,
-    "description": "Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-    "price": 500
-  },
-  {
-    "title" : "Sunshine Smile",
-    "image":Image5,
-    "description": "Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-    "price": 480
-  },
-  {
-    "title" : "Eco Minty",
-    "image":Image6,
-    "description": "Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-    "price": 500
-  },{
-    "title" : "Blue Forest",
-    "image":Image7,
-    "description": "Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-    "price": 480
-  },
-  {
-    "title" : "Grape Goodness",
-    "image":Image8,
-    "description": "Overview of Item",
-    "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement."
-  },
-]
+// const products = [
+//   {
+//     "title" : "Uniqeon",
+//     "image":Image1,
+//     "description": "Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
+//     "price": 300
+//   },
+//   {
+//     "title" : "Hibiscus Pop",
+//     "image":Image2,
+//     "description": " Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
+//     "price": 450
+//   },
+//   {
+//     "title" : "Candy Floss",
+//     "image":Image3,
+//     "description": "Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
+//     "price": 350
+//   },
+//   {
+//     "title" : "Mandarin Sting",
+//     "image":Image4,
+//     "description": "Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
+//     "price": 500
+//   },
+//   {
+//     "title" : "Sunshine Smile",
+//     "image":Image5,
+//     "description": "Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
+//     "price": 480
+//   },
+//   {
+//     "title" : "Eco Minty",
+//     "image":Image6,
+//     "description": "Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
+//     "price": 500
+//   },{
+//     "title" : "Blue Forest",
+//     "image":Image7,
+//     "description": "Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
+//     "price": 480
+//   },
+//   {
+//     "title" : "Grape Goodness",
+//     "image":Image8,
+//     "description": "Overview of Item",
+//     "mainDescription": "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement."
+//   },
+// ]
 
 export default function ProductView(){
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchProducts(dispatch);
+  }, []);
+  var globalState = useSelector((state) => state);
+  const { products } = globalState.productReducer ? globalState.productReducer : null
 
   return (
     <div style={{ flexGrow: 1}}>

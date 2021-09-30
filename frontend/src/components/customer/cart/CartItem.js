@@ -39,7 +39,7 @@ function CartItem(props) {
   const handleQuantityAdd = () => {
     setState(state+1);
     itemUpdate({
-      "id": cartItem.productId,
+      "id": cartItem.id,
       "qty": state+1
     });
   }
@@ -47,14 +47,14 @@ function CartItem(props) {
   const handleQuantitySubtract = () => {
     setState(state-1);
     itemUpdate({
-      "id": cartItem.productId,
+      "id": cartItem.id,
       "qty": state-1
     });
   }
 
   const handleDelete = () => {
     itemUpdate({
-      "id": cartItem.productId,
+      "id": cartItem.id,
       "qty": 0
     });
   }
@@ -65,11 +65,11 @@ function CartItem(props) {
         <CardContent>
           <Grid container spacing={0}>
             <Grid item xs={2}>
-              <img src={cartItem.img} alt="ProdImage" className={classes.image} />
+              <img src={cartItem.image} alt="ProdImage" className={classes.image} />
             </Grid>
             <Grid item xs={2}>
             <Typography variant="h5" component="h2" className={classes.text}>
-                    {cartItem.productId}
+                    {cartItem.productName}
                 </Typography>
             </Grid>
             <Grid item xs={2}>
