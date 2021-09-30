@@ -42,7 +42,7 @@ export const addToCart = (dispatch, cart) => {
                 var items = response.data[0].items;
                 var updated = false;
                 for(var i = 0; i < items.length; i++){
-                    if(items[i].productId == cart.items[0].productId){
+                    if(items[i].id == cart.items[0].id){
                         response.data[0].items[i].qty += 1;
                         updated = true;
                     }

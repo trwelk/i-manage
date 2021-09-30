@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import Navbar from "../components/common/Navbar";
 import LandingCarousel from "../components/customer/landingpage/LandingCarousel";
 import { makeStyles } from '@material-ui/core/styles';
 import ProductCard from "../components/customer/ProductView/ProductCard";
 import { Grid } from "@material-ui/core";
-import Image1 from "../assets/Items/1.PNG";
-import Image2 from "../assets/Items/2.PNG";
-import Image3 from "../assets/Items/3.PNG";
-import Image4 from "../assets/Items/4.PNG";
 import Typography from '@material-ui/core/Typography';
+import { fetchProducts } from '../redux/actions/Product.action';
 
 const useStyles = makeStyles((theme) => ({
     card : {
@@ -26,36 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
 function LandingPage() {
   const classes = useStyles();
-  const products = [
-    {
-      title: "Uniqeon",
-      image: Image1,
-      description: "Overview of Item",
-      mainDescription: "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-      price: 300,
-    },
-    {
-      title: "Hibiscus Pop",
-      image: Image2,
-      description: " Overview of Item",
-      mainDescription: "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-      price: 450,
-    },
-    {
-      title: "Candy Floss",
-      image: Image3,
-      description: "Overview of Item",
-      mainDescription: "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-      price: 350,
-    },
-    {
-      title: "Mandarin Sting",
-      image: Image4,
-      description: "Overview of Item",
-      mainDescription: "Description 100% Brand New and high quality.Features:Material:Cotton Color:dark green,black,pink,white,blue,dark purple,navy blue,lake blue,rose red,light blue,purple Size:One Size adjustable 1 inch =25.4mm or 1mm = 0.0393 inch Package Includes: 1 pc caps Notice:1. Please allow 2-3% error due to manual measurement.",
-      price: 500,
-    },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchProducts(dispatch);
+  }, []);
+  var globalState = useSelector((state) => state);
+  const { products } = globalState.productReducer ? globalState.productReducer : null
 
   return (
     <div style={{ flexGrow: 1 }}>

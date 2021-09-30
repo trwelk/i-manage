@@ -36,12 +36,12 @@ function CheckoutItem(props) {
         <CardContent>
           <Grid container spacing={3}>
             <Grid container item xs={3}>
-              <img src={itemDetails.img} alt="ProdImage" className={classes.image} />
+              <img src={itemDetails.image} alt="ProdImage" className={classes.image} />
             </Grid>
             <Grid container item xs={9}>
             <Typography variant="h5" component="h2">
                     <Grid container item xs={12} className={classes.title}>
-                        {itemDetails.productId}
+                        {itemDetails.productName}
                     </Grid>
                     <Grid container xs={12} className={classes.details}>
                         Quantity: {qty} Total: {qty * itemDetails.price}
