@@ -8,9 +8,8 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { validateProductObj ,deleteProduct ,createProduct,updateProduct ,fetchProducts} from '../../redux/actions/Product.action'
 import { fetchSuppliers } from '../../redux/actions/Supplier.actions'
 import { IconButton } from '@material-ui/core';
-// import AdminNavbar from '../views/AdminNavBar';
-
-
+import { storageRef } from '../../base';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -25,8 +24,8 @@ function ProductTable(props) {
     const globalState = useSelector((state) => state);
     const dispatch = useDispatch();
     const products = globalState.productReducer.products ? globalState.productReducer.products : null
-
     const suppliers = globalState.productReducer.products ? globalState.supplierReducer.suppliers : null
+
     const [error, setError] = React.useState("")
     const [state, setState] = React.useState({
         open: false,
@@ -56,7 +55,8 @@ function ProductTable(props) {
         { title: 'Type', field: 'type' , lookup:typeLookup},
         { title: 'Supplier', field: 'supplier',  lookup: supplierLookup },
         { title: 'Selling Price', field: 'sellingPrice' },
-        { title: 'Buying Price', field: 'buyingPrice' }
+        { title: 'Buying Price', field: 'buyingPrice' },
+        { title: 'Image', field: 'image', render: (rowData) => <ProductImage rowData={rowData} /> },
     ]
 
 
@@ -67,6 +67,27 @@ function ProductTable(props) {
     const handleClose = () => {
         setState({ ...state, open: false });
     };
+
+    const handleLinkUpdate = (url, rowData) => {
+        rowData.rowData.image = url;
+        console.log(rowData.rowData);
+        updateProduct(dispatch, rowData.rowData);
+    }
+
+    const handleUpload = (e,rowData) => {
+        const file = e.target.files[0];
+        const fileRef = ref(storageRef, file.name);
+        uploadBytes(fileRef, file).then((snapshot) => {
+            console.log('File uploaded');
+            getDownloadURL(ref(storageRef, file.name))
+            .then((url) => {
+                handleLinkUpdate(url,rowData);
+            })
+            .catch((error) => {
+                // Handle any errors
+            });
+        });
+    }
 
 
     //--------------------------------------------------------UI-ELEMENTS-------------------------------------------------------------     
@@ -79,6 +100,19 @@ function ProductTable(props) {
         >
           <Alert severity="error">{error}</Alert>
         </Snackbar>)
+
+    const ProductImage = (rowData) => {
+        return (
+        <div>
+            <input 
+                id="prodImage"
+                label="Product Image"
+                type="file"
+                onChange={(e) => handleUpload(e,rowData)}
+                accept=".jpg, .jpeg, .png"
+            />
+        </div>
+    )};        
 
     const table = products ? (
         <MaterialTable style={{ padding: "0px", boxShadow: "0 0 2px 2px black", backgroundColor: 'rgba(255,255,255,0.7)' }}
