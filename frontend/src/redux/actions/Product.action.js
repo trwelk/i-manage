@@ -85,12 +85,6 @@ export const validateProductObj = (data) => {
     else if (data.productName == null || data.productName == "") {
         return "Field Name Cannot be empty"
     }
-    else if (data.brand == null || data.brand == "") {
-        return "Field brand Date Cannot be empty"
-    }
-    else if (data.model == null || data.model == "") {
-        return "Field model Cannot be empty"
-    }
     else if (data.type == null || data.type == "") {
         return "Field type Cannot be empty"
     }

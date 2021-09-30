@@ -11,12 +11,12 @@ const productSchema = require('../model/Product.model')
             id: obj.id,
             productName: obj.productName,
             brand: obj.brand,
-            model: obj.model,
+            description: obj.description,
+            image: obj.image,
             type: obj.type,
             supplier: obj.supplier,
             buyingPrice: obj.buyingPrice,
             sellingPrice: obj.sellingPrice,
-
         });
 
         newProductSchema.save()
