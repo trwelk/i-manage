@@ -96,7 +96,7 @@ export default function CustomerSignUp() {
  }
 
   const [state,setState] =  React.useState({
-    firstName: "", lastName: "", dateOfBirth: new Date(), contactNumber: "", address: "", emailAddress: "", password: ""
+    firstName: "", lastName: "", dateOfBirth: new Date(), contactNumber: "", address: "", emailAddress: "", password: "",type: "customer"
   });
 
   const handleOnChange = (e) => {
