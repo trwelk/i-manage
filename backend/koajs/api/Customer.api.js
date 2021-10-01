@@ -16,7 +16,7 @@ const addCustomer = async obj => {
           emailAddress: obj.emailAddress,
           password: obj.password,
       });
-      let check = await User.findOne({ emailAddress: userName})
+      let check = User.findOne({ emailAddress: userName})
       if(check){
         newCustomerSchema.catch(error => {
           reject(error)
@@ -84,7 +84,7 @@ async function updateUser(user) {
   return updatedUser;
 }
 async function getUser(email) {
-  let user = await User.findOne({emailAddress: email}, function(err,response) {
+  let user = User.findOne({emailAddress: email}, function(err,response) {
       if(err)
           console.log(err);
       else
