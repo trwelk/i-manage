@@ -155,6 +155,11 @@ export default function Navbar() {
           My orders
         </Link>
       </MenuItem>
+      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+        <Link to="/shop/profile" className={classes.link}>
+          My profile
+        </Link>
+      </MenuItem>
     </Menu>
   );
 

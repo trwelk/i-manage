@@ -22,6 +22,9 @@ import {
 } from "@material-ui/pickers";
 import { useHistory } from "react-router-dom";
 import { colors } from "@material-ui/core";
+import { useDispatch } from 'react-redux';
+import Footer from "../components/common/Footer";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -34,14 +37,17 @@ function Copyright() {
     </Typography>
   );
 }
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: colors.black
+    color: colors.black,
+    margin: "100px auto",
+    padding: "20px",
+    background: theme.palette.primary.main,
+    borderRadius: "15px",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -309,10 +315,8 @@ export default function ProfilePage() {
             </Grid>
           </form>
         </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
       </Container>
+      <Footer />
     </div>
   );
 }

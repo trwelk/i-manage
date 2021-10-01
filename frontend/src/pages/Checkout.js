@@ -7,11 +7,12 @@ import Grid from "@material-ui/core/Grid";
 import PaymentForm from "../components/customer/checkout/PaymentForm";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart } from '../redux/actions/Cart.actions';
+import Footer from "../components/common/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height: '100vh'
+    height: '90vh'
   },
   checkoutList: {
     maxHeight: 400,
@@ -61,6 +62,7 @@ function Checkout() {
         <Typography variant="h5" component="h2">
                     Loading Cart ...
         </Typography>
+        <Footer />
       </div>
     );
   }
@@ -71,6 +73,7 @@ function Checkout() {
         <Typography variant="h5" component="h2">
                     Cart is Empty
         </Typography>
+        <Footer />
       </div>
     );
   }
@@ -79,17 +82,19 @@ function Checkout() {
       setTotal(calcTotal(cart.items));
     }
     return (
-      <div className={classes.root}>
-        <Navbar/>
-        <Grid container spacing={2}>
-          <Grid item xs={4} className={classes.checkoutList}>
-              <CheckoutList cart={cart}/>
+      <div style={{flex:1}}>
+        <div className={classes.root}>
+          <Navbar/>
+          <Grid container spacing={2}>
+            <Grid item xs={4} className={classes.checkoutList}>
+                <CheckoutList cart={cart}/>
+            </Grid>
+            <Grid item xs={4} className={classes.paymentForm}>
+                <PaymentForm total={total} cart = {cart}/>
+            </Grid>
           </Grid>
-          <Grid item xs={4} className={classes.paymentForm}>
-              <PaymentForm total={total} cart = {cart}/>
-          </Grid>
-        </Grid>
-  
+        </div>
+        <Footer />
       </div>
     );
   }

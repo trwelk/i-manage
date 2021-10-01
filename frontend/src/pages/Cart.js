@@ -8,11 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart, updateCart } from '../redux/actions/Cart.actions'
+import Footer from "../components/common/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height: '100vh'
+    height: '90vh'
   },
   cartItems: {
     height: '70vh',
@@ -73,16 +74,20 @@ function Cart() {
       <div className={classes.root}>
         <Navbar/>
         <div><CircularProgress style={{ marginTop: "200px" }} /></div>
+        <Footer/>
       </div>
     );
   }
   else if(cart == null){
     return (
-      <div className={classes.root}>
-        <Navbar/>
-        <Typography variant="h5" component="h2">
-                    Cart is Empty
-        </Typography>
+      <div style={{flex:1}}>
+        <div className={classes.root}>
+          <Navbar/>
+            <Typography variant="h5" component="h2">
+                        Cart is Empty
+            </Typography>
+        </div>
+        <Footer/>
       </div>
     );
   }
@@ -97,18 +102,20 @@ function Cart() {
       setData(cart);
     }
     return (
-      <div className={classes.root}>
-        <Navbar/>
-        <Typography className={classes.title}>Your cart: {calcCount(cart.items)} items</Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={8} className={classes.cartItems}>
-              <CartList cartUpdate={cartUpdate} cart={data}/>
+      <div style={{flex:1}}>
+        <div className={classes.root}>
+          <Navbar/>
+          <Typography className={classes.title}>Your cart: {calcCount(cart.items)} items</Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={8} className={classes.cartItems}>
+                <CartList cartUpdate={cartUpdate} cart={data}/>
+            </Grid>
+            <Grid item xs={3} className={classes.cartItems}>
+                <CartTotal total={total}/>
+            </Grid>
           </Grid>
-          <Grid item xs={3} className={classes.cartItems}>
-              <CartTotal total={total}/>
-          </Grid>
-        </Grid>
-  
+        </div>
+        <Footer />
       </div>
     );
   }
