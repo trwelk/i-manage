@@ -19,7 +19,7 @@ export const AuthReducer = (state = initialState, { type, payload }) => {
             const { token, auth } = payload.data;
             var currentUser = jwt_decode(token);
             window.sessionStorage.setItem("jwtToken", token);
-            return { loggedUser: currentUser, logged: true };   
+            return { loggedUser: currentUser, logged: auth };   
         case ActionTypes.SUPERUSER_LOGOUT:
             window.sessionStorage.removeItem("jwtToken");
             return { loggedUser: null, logged: false, fail: false};

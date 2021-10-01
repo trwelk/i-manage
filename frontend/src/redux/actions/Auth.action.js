@@ -3,7 +3,7 @@ import {ActionTypes} from  '../constants/ActionTypes'
 import {AppConstants} from '../constants/AppConstants'
 
 export const superUserLogin = (dispatch, superuser) => {
-    axios.post(AppConstants.REST_URL_HOST + "/login", superuser)
+    axios.post(AppConstants.REST_URL_HOST + "/customer/login", superuser)
         .then(response => {
             if(response.data.auth)
                 dispatch(superUserLoginSuccess(response))
