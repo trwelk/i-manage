@@ -22,7 +22,6 @@ export const fetchOrders = (dispatch) => {
 
 //UPDATE
 export const updateOrder = (dispatch, order) => {
-    console.log(order);
     axios.put(AppConstants.REST_URL_HOST + AppConstants.ORDER_URL, order)
         .then(response => {
             console.log(response)
