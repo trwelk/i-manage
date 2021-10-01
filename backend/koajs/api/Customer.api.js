@@ -1,12 +1,13 @@
 const uuid = require('uuid');
-const customerSchema = require('../model/Customer.model')
+const User = require('../model/Customer.model')
 
 /*Inserts a new Customer entity into the database and returns the object if successfull : else returns the error 
   Catch this error from where it's called and throw an error*/
 
 const addCustomer = async obj => {
+  
   return new Promise((resolve, reject) => {
-      var newCustomerSchema = new customerSchema({
+      var newCustomerSchema = new User({
           id: uuid.v4(),
           firstName: obj.firstName,
           lastName: obj.lastName,
@@ -15,27 +16,32 @@ const addCustomer = async obj => {
           address: obj.address,
           emailAddress: obj.emailAddress,
           password: obj.password,
+          type : obj.type,
       });
-      let check = User.findOne({ emailAddress: userName})
-      if(check){
-        newCustomerSchema.catch(error => {
-          reject(error)
+      let check;
+      User.findOne({ emailAddress: obj.emailAddress},function(err, response) {
+        check = response;
+        if(check != null){
+          reject("User Already Exists")
+        }
+        else{
+          newCustomerSchema.save()
+          .then(response => {
+              resolve(response)
+          })
+          .catch(error => {
+              reject(error)
+          })
+        }
       })
-      }
-      else{
-        newCustomerSchema.save()
-        .then(response => {
-            resolve(response)
-        })
-        .catch(error => {
-            reject(error)
-        })
-      }
-      
   })
+
 }
 async function userLogin(userName,userPassword) {
-  let user = await User.findOne({ emailAddress: userName, password: userPassword }, function(err, response){
+  let user = await User.findOne({ emailAddress: userName, password: userPassword }, function
+    
+    (err, response){
+      
       if(err){
           console.log("Invalid User Details");
           return false;
