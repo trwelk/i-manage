@@ -88,6 +88,29 @@ export const createCartSuccess = (data) => {
     }
 }
 
+//CREATE
+export const deleteCart = (data,dispatch) => {
+    const cart = data;
+    axios.delete(AppConstants.REST_URL_HOST + AppConstants.CART_URL + "/" + cart.userId )
+        .then(response => {
+            const id = response;
+            dispatch(deleteCartSuccess(response.data))
+            console.log(id);
+        })
+        .catch(error => {
+            console.log(error)
+
+        })
+
+}
+
+export const deleteCartSuccess = (data) => {
+    return {
+        type: ActionTypes.CART_DELETE_SUCCESS,
+        payload: data
+    }
+}
+
 
 // export const validateOrderObj = (data) => {
 //     if (data.userId == null || data.userId === "") {

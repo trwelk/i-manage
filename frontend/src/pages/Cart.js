@@ -5,7 +5,8 @@ import CartList from "../components/customer/cart/CartList";
 import CartTotal from "../components/customer/cart/CartTotal";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
-import { useDispatch, useSelector } from 'react-redux'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart, updateCart } from '../redux/actions/Cart.actions'
 
 const useStyles = makeStyles((theme) => ({
@@ -71,9 +72,7 @@ function Cart() {
     return (
       <div className={classes.root}>
         <Navbar/>
-        <Typography variant="h5" component="h2">
-                    Loading Cart ...
-        </Typography>
+        <div><CircularProgress style={{ marginTop: "200px" }} /></div>
       </div>
     );
   }
