@@ -32,6 +32,7 @@ export const updateCustomerSuccess = (data) => {
         payload: data
     }
 }
+
 export const createCustomerSuccess = (data) => {
     return {
         type: ActionTypes.CUSTOMER_SIGNUP_SUCCESS,
@@ -40,23 +41,23 @@ export const createCustomerSuccess = (data) => {
 }
 
 //DELETE
-// export const deleteCustomer = (dispatch, customerId) => {
-//     axios.delete(AppConstants.REST_URL_HOST + AppConstants.SUPPLIER_URL + '/' + customerId)
-//         .then(response => {
-//             console.log(response)
-//             dispatch(deleteCustomerSuccess(customerId))
-//         })
-//         .catch(error => {
-//             console.log(error)
-//         })
-// }
+export const deleteCustomer = (dispatch, customerId) => {
+    axios.delete(AppConstants.REST_URL_HOST + "/customer/delete/" + customerId)
+        .then(response => {
+            console.log(response)
+            dispatch(deleteCustomerSuccess(customerId))
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 
-// export const deleteCustomerSuccess = (data) => {
-//     return {
-//         type: ActionTypes.DELETE_SUPPLIER_SUCCESS,
-//         payload: data
-//     }
-// }
+export const deleteCustomerSuccess = (data) => {
+    return {
+        type: ActionTypes.CUSTOMER_DELETE_SUCCESS,
+        payload: data
+    }
+}
 
 
 export const validateCustomerObj = (data) => {

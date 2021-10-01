@@ -14,7 +14,7 @@ import Container from "@material-ui/core/Container";
 import Navbar from "../components/common/Navbar";
 import DateFnsUtils from "@date-io/date-fns";
 import MuiPhoneNumber from "material-ui-phone-number";
-import { validateCustomerObj, updateCustomer } from "../redux/actions/Customer.actions";
+import { validateCustomerObj, updateCustomer,deleteCustomer } from "../redux/actions/Customer.actions";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -99,6 +99,11 @@ export default function ProfilePage() {
     }
     console.log(state);
  }
+ function handleDelete() {
+  deleteCustomer(dispatch,user.id);
+  history.push('/shop');
+  console.log(state);
+}
 
   function handlePhoneChange(value) {
     setState(prevState => ({ ...prevState,contactNumber: value}));
@@ -305,7 +310,7 @@ export default function ProfilePage() {
               fullWidth
               variant="contained"
               color="secondary"
-              onClick = {handleSubmit}
+              onClick = {handleDelete}
               className={classes.submit}
             >
               Delete Account
