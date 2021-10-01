@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff'
   },
   text: {
-    color: '#fff',
+    color: theme.palette.secondary.dark,
     textDecoration: 'none',
     '&:visited': {
 
