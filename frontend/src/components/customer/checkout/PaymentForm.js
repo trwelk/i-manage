@@ -12,6 +12,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { createOrder } from '../../../redux/actions/Order.actions';
+import { deleteCart } from '../../../redux/actions/Cart.actions';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -120,7 +121,7 @@ export default function PaymentForm(props) {
           "source": "Website",
           "date": new Date(),
           "items": cart.items,
-          "total": total,
+          "total": total+150,
           "status": "New"
         }
         createOrder(order, dispatch);
@@ -134,6 +135,7 @@ export default function PaymentForm(props) {
     }
     setSnackbarMessage({...snackbarMessage, open: false});
     if(snackbarMessage.severity === "success"){
+      deleteCart(cart,dispatch);
       history.push("/shop");
     }
   };

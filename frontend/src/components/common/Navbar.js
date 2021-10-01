@@ -150,6 +150,11 @@ export default function Navbar() {
           Login
         </Link>
       </MenuItem>
+      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+        <Link to="/shop/orderhistory" className={classes.link}>
+          My orders
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
