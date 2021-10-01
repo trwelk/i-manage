@@ -22,7 +22,6 @@ import {
 } from "@material-ui/pickers";
 import { useHistory } from "react-router-dom";
 import { colors } from "@material-ui/core";
-import { useDispatch } from 'react-redux';
 import Footer from "../components/common/Footer";
 
 function Copyright() {
