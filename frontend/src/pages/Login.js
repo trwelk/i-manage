@@ -5,9 +5,9 @@ import PersonIcon from "@material-ui/icons/Person";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Navbar from "../components/common/Navbar";
-// import { superUserLogin, superUserLogout, superUserLoginReset } from '../redux/actions/Auth.action';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useHistory } from "react-router-dom";
+import { superUserLogin, superUserLogout, superUserLoginReset } from '../redux/actions/Auth.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,48 +59,46 @@ function Alert(props) {
 
 function Login() {
   const classes = useStyles();
-  //const dispatch = useDispatch();
-  // const [state, setState] = React.useState({ username: "", password: ""});
-  // const [fail, setFail] = React.useState(false);
-  // const globalState = useSelector((state) => state);
-  // let history = useHistory();
+  const dispatch = useDispatch();
+  const [state, setState] = React.useState({ username: "", password: ""});
+  const [fail, setFail] = React.useState(false);
+  const globalState = useSelector((state) => state);
+  let history = useHistory();
 
-  // if(globalState.auth.logged){
-  //     let user = globalState.auth.loggedUser;
-  //     if(user.type == 'admin')
-  //         history.push('/editor/dashboard');
-  //     else if(user.type == 'editor')
-  //         history.push('/editor/NewsTable');
-  //     else if(user.type == 'reviewer')
-  //         history.push('/editor/research');
-  // } else if(globalState.auth.fail) {
-  //     setFail(true);
-  //     setState({ username: "", password: ""});
-  //     superUserLoginReset(dispatch);
-  // }
+  if(globalState.auth.logged){
+      let user = globalState.auth.loggedUser;
+      if(user.type == 'admin')
+          history.push('/admin');
+      else if(user.type == 'customer')
+          history.push('/shop');
+  } else if(globalState.auth.fail) {
+      setFail(true);
+      setState({ username: "", password: ""});
+      superUserLoginReset(dispatch);
+  }
 
   //Event Handler
-  // const handleLogin = () => {
-  //     let user = {};
-  //     user.username = state.username;
-  //     user.password = state.password;
-  //     superUserLogin(dispatch,user);
-  // }
+  const handleLogin = () => {
+      let user = {};
+      user.username = state.username;
+      user.password = state.password;
+      superUserLogin(dispatch,user);
+  }
 
-  // const handleLogout = () => {
-  //     superUserLogout(dispatch);
-  // }
+  const handleLogout = () => {
+      superUserLogout(dispatch);
+  }
 
-  // const handleChange = (e) => {
-  //     setState({ ...state, [e.target.name]: e.target.value })
-  // }
+  const handleChange = (e) => {
+      setState({ ...state, [e.target.name]: e.target.value })
+  }
 
-  // const handleClose = (event, reason) => {
-  //     if (reason === 'clickaway') {
-  //       return;
-  //     }
-  //     setFail(false);
-  //   };
+  const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setFail(false);
+    };
 
   return (
     <div style={{ flexGrow: 1 }}>
@@ -114,42 +112,9 @@ function Login() {
               </Avatar>
               <h2 className={classes.textStyle}>Customer Login</h2>
             </Grid>
-            <TextField
-              name="username"
-              label="Username"
-              placeholder="Enter Username"
-              fullWidth
-              required
-              className={classes.fieldStyle}
-              InputProps={{
-                className: classes.text,
-              }}
-              InputLabelProps={{
-                className: classes.text,
-              }}
-            />
-            <TextField
-              type="password"
-              name="password"
-              label="Password"
-              placeholder="Enter Password"
-              fullWidth
-              required
-              className={classes.fieldStyle}
-              InputProps={{
-                className: classes.text,
-              }}
-              InputLabelProps={{
-                className: classes.text,
-              }}
-            />
-            <Button
-              variant="contained"
-              className={classes.buttonStyle}
-              fullWidth
-            >
-              Login
-            </Button>
+            <TextField name="username" label="Username" placeholder="Enter Username" onChange={handleChange} fullWidth required className={classes.fieldStyle}/>
+                    <TextField type="password" name="password" label="Password" placeholder="Enter Password" onChange={handleChange} fullWidth required className={classes.fieldStyle}/>
+                    <Button onClick={handleLogin} variant="contained" className={classes.buttonStyle} fullWidth>Login</Button>
             {/* <Button onClick={handleLogout} variant="contained" className={classes.buttonStyle} fullWidth>Logout</Button> */}
           </Paper>
         </Grid>
