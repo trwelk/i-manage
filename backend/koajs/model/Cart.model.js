@@ -8,7 +8,9 @@ var cartSchema = mongoose.Schema({
     items: {
         type: [
             {
-                productId: String,
+                id: String,
+                productName: String,
+                image: String,
                 qty: Number,
                 price: Number
             }

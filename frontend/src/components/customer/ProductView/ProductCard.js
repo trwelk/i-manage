@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux'
 import clsx from 'clsx';
@@ -48,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductCard(props) {
   const dispatch = useDispatch();
-  useEffect(() => {
-    fetchCart(dispatch, 'user123');
-  }, []);
   const classes = useStyles();
   const {values} = props;
   const [expanded, setExpanded] = React.useState(false);
@@ -64,9 +61,11 @@ export default function ProductCard(props) {
           userId: "user123",
           items: [
             {
-              productId: values.title,
+              id: values.id,
+              productName: values.productName,
+              image: values.image,
               qty: 1,
-              price: values.price
+              price: values.sellingPrice
             }
           ]
         }
@@ -77,19 +76,16 @@ export default function ProductCard(props) {
     <Card className={classes.root}>
       <CardHeader
         className={classes.cardText}
-        title={values.title}
+        title={values.productName}
       />
       <CardMedia
         className={classes.media}
         image={values.image}
-        title={values.title}
+        title={values.productName}
       />
       <CardContent>
         <Typography variant="body2" component="p" className={classes.cardText}>
-          {values.description}
-        </Typography>
-        <Typography variant="body2" component="p" className={classes.cardText}>
-          Price : {values.price}
+          Price : {values.sellingPrice}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -120,7 +116,7 @@ export default function ProductCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph className={classes.cardText}>
-          {values.mainDescription}
+          {values.description}
           </Typography>
         </CardContent>
       </Collapse>
