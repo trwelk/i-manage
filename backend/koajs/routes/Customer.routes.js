@@ -25,13 +25,11 @@ router.get('/:username', async ctx => {
   ctx.response.status = 201;
   ctx.body = user;
  });
- 
- 
-
- router.delete('/:id', async ctx => {
+ router.delete('/delete/:id', async ctx => {
   let userid = ctx.params.id
   ctx.body = await customerApi.deleteUser(userid);
 })
+
 router.post('/login',async ctx => {
   let user = ctx.request.body;
   user = await customerApi.userLogin(user.emailAddress, user.password);
