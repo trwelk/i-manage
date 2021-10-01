@@ -8,6 +8,7 @@ import Navbar from "../components/common/Navbar";
 import { superUserLogin, superUserLogout, superUserLoginReset } from '../redux/actions/Auth.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import Footer from "../components/common/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -126,6 +127,7 @@ function Login() {
           </Alert>
         </Snackbar>
       </div>
+      <Footer />
     </div>
   );
 }

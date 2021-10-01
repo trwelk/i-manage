@@ -7,6 +7,7 @@ import ProductCard from "../components/customer/ProductView/ProductCard";
 import { Grid } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import { fetchProducts } from '../redux/actions/Product.action';
+import Footer from "../components/common/Footer";
 
 const useStyles = makeStyles((theme) => ({
     card : {
@@ -49,6 +50,7 @@ function LandingPage() {
           })}
         </Grid>
       </div>
+      <Footer />
     </div>
   );
 }
