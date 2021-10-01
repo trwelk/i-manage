@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: '#fff'
+    color: theme.palette.secondary.main
   },
   avatar: {
     margin: theme.spacing(1),
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff'
   },
   text: {
-    color: theme.palette.secondary.dark,
+    color: theme.palette.secondary.main,
     textDecoration: 'none',
     '&:visited': {
 
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function CustomerSignUp() {
+export default function ProfilePage() {
   const classes = useStyles();
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
@@ -96,7 +96,7 @@ export default function CustomerSignUp() {
  }
 
   const [state,setState] =  React.useState({
-    firstName: "", lastName: "", dateOfBirth: new Date(), contactNumber: "", address: "", emailAddress: "", password: "",type: "customer"
+    firstName: "", lastName: "", dateOfBirth: new Date(), contactNumber: "", address: "", emailAddress: "", password: ""
   });
 
   const handleOnChange = (e) => {
@@ -113,12 +113,15 @@ export default function CustomerSignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Profile Page
           </Typography>
           <div style={{ marginLeft: "20px", color: "red" }}>{error ? error : ""}</div>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
+              <Typography component="h1" variant="h6">
+            First Name
+          </Typography>
                 <TextField
                   autoComplete="fname"
                   name="firstName"
@@ -138,6 +141,9 @@ export default function CustomerSignUp() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+              <Typography component="h1" variant="h6">
+            Last Name
+          </Typography>
                 <TextField
                   variant="outlined"
                   required
@@ -156,6 +162,9 @@ export default function CustomerSignUp() {
                 />
               </Grid>
               <Grid item xs={12} spacing={2}>
+              <Typography component="h1" variant="h6">
+            Date Of Birth
+          </Typography>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     disableToolbar
@@ -183,6 +192,9 @@ export default function CustomerSignUp() {
                 </MuiPickersUtilsProvider>
               </Grid>
               <Grid item xs={12}>
+              <Typography component="h1" variant="h6">
+            Contact Number
+          </Typography>
                 <MuiPhoneNumber
                   variant="outlined"
                   defaultCountry={"lk"}
@@ -198,6 +210,9 @@ export default function CustomerSignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
+              <Typography component="h1" variant="h6">
+              Home Address
+          </Typography>
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -215,6 +230,9 @@ export default function CustomerSignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
+              <Typography component="h1" variant="h6">
+              Email Address
+          </Typography>
                 <TextField
                   variant="outlined"
                   required
@@ -233,6 +251,9 @@ export default function CustomerSignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
+              <Typography component="h1" variant="h6">
+            Password
+          </Typography>
                 <TextField
                   variant="outlined"
                   required
@@ -252,15 +273,32 @@ export default function CustomerSignUp() {
                 />
               </Grid>
             </Grid>
-            <Button
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+              <Button
               fullWidth
               variant="contained"
               color="secondary"
               onClick = {handleSubmit}
               className={classes.submit}
             >
-              Sign Up
+              Update
             </Button>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <Button
+              fullWidth
+              variant="contained"
+              color="secondary"
+              onClick = {handleSubmit}
+              className={classes.submit}
+            >
+              Delete Account
+            </Button>
+              </Grid>
+            </Grid>
+            
+            
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/shop" variant="body2" className= {classes.text}>

@@ -7,7 +7,7 @@ import { PurchaseReqReducer } from './PurchaseReqReducer'
 import { OrderReducer } from './OrderReducer'
 import { CustomerReducer } from './CustomerReducer'
 import { CartReducer } from './CartReducer'
-
+import { AuthReducer } from './AuthReducer'
 
  const reducer = combineReducers({
    
@@ -18,7 +18,8 @@ import { CartReducer } from './CartReducer'
     purchaseReq:PurchaseReqReducer,
     orderReducer: OrderReducer,
     customerReducer:CustomerReducer,
-    cartReducer: CartReducer
+    cartReducer: CartReducer,
+    auth: AuthReducer,
 })
 
 export default reducer
