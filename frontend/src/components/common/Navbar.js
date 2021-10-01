@@ -208,13 +208,14 @@ export default function Navbar() {
             />
           </div> */}
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="4 items in cart" color="inherit">
+          {globalState.auth.logged == true &&<IconButton aria-label="4 items in cart" color="inherit">
               <Badge badgeContent={count} color="secondary">
               <Link to="/shop/cart" className={classes.link}>
                 <ShoppingCartIcon className={classes.navbutton}/>
               </Link>
               </Badge>
-            </IconButton>
+            </IconButton>}
+          
             <IconButton
               edge="end"
               aria-label="account of current user"
