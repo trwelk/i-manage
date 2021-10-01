@@ -20,6 +20,7 @@ router.get('/:username', async ctx => {
  });
  router.put('/update', async ctx => {
   let user = ctx.request.body;
+  console.log(user);
   user = await customerApi.updateUser(user);
   ctx.response.status = 201;
   ctx.body = user;

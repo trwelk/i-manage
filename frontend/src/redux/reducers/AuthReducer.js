@@ -26,7 +26,9 @@ export const AuthReducer = (state = initialState, { type, payload }) => {
         case ActionTypes.SUPERUSER_LOGIN_FAIL:
             return { loggedUser: null, logged: false, fail: true};
         case ActionTypes.SUPERUSER_LOGIN_RESET:
-            return { loggedUser: null, logged: false, fail: false};   
+            return { loggedUser: null, logged: false, fail: false};  
+        case ActionTypes.CUSTOMER_UPDATE_SUCCESS:
+            return {...state, loggedUser:payload}
         default:
             return state;
     }

@@ -14,7 +14,24 @@ export const createCustomer = (data, dispatch) => {
         })
 
 }
+//Update
+export const updateCustomer = (data, dispatch) => {
+    const customer = data;
+    console.log(data);
+    axios.put(AppConstants.REST_URL_HOST + AppConstants.CUSTOMER_UPDATE_URL , customer)
+        .then(response => {
+            const id = response;
+            console.log(id)
+            dispatch(updateCustomerSuccess(response.data))
+        })
 
+}
+export const updateCustomerSuccess = (data) => {
+    return {
+        type: ActionTypes.CUSTOMER_UPDATE_SUCCESS,
+        payload: data
+    }
+}
 export const createCustomerSuccess = (data) => {
     return {
         type: ActionTypes.CUSTOMER_SIGNUP_SUCCESS,

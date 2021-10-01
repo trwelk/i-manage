@@ -7,29 +7,43 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { useDispatch, useSelector } from 'react-redux';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Navbar from "../components/common/Navbar";
 import DateFnsUtils from "@date-io/date-fns";
 import MuiPhoneNumber from "material-ui-phone-number";
-import { validateCustomerObj, createCustomer } from "../redux/actions/Customer.actions";
+import { validateCustomerObj, updateCustomer } from "../redux/actions/Customer.actions";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import { useHistory } from "react-router-dom";
+import { colors } from "@material-ui/core";
 import { useDispatch } from 'react-redux';
 import Footer from "../components/common/Footer";
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      
+        shan.eryn_
+{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: '#fff',
+    color: colors.black,
     margin: "100px auto",
     padding: "20px",
     background: theme.palette.primary.main,
@@ -48,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff'
   },
   text: {
-    color: theme.palette.secondary.main,
+    color: colors.black,
     textDecoration: 'none',
     '&:visited': {
 
@@ -67,18 +81,22 @@ export default function ProfilePage() {
   const [error,setError] = React.useState("");
   const history = useHistory();
   const dispatch = useDispatch();
+  const globalState = useSelector((state) => state);
+  let user = globalState.auth.loggedUser;
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setState(prevState => ({ ...prevState,dateOfBirth: selectedDate}));
     console.log(state)
   };
+  if(!globalState.auth.logged){
+    history.push('/shop/login');
+  }
   function handleSubmit() {
     let err = validateCustomerObj(state);
     if(err!=null){
       setError(err);
     }else{
-      createCustomer(state,dispatch);
-      history.push('/shop');
+      updateCustomer(state,dispatch);
     }
     console.log(state);
  }
@@ -89,7 +107,7 @@ export default function ProfilePage() {
  }
 
   const [state,setState] =  React.useState({
-    firstName: "", lastName: "", dateOfBirth: new Date(), contactNumber: "", address: "", emailAddress: "", password: ""
+    firstName: user.firstName, lastName: user.lastName, dateOfBirth: user.dateOfBirth, contactNumber: user.contactNumber, address: user.address, emailAddress: user.emailAddress, password: user.password, id : user.id
   });
 
   const handleOnChange = (e) => {
@@ -123,7 +141,7 @@ export default function ProfilePage() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  defaultValue = {user.firstName}
                   autoFocus
                   InputProps={{
                     className: classes.text
@@ -143,7 +161,7 @@ export default function ProfilePage() {
                   onChange={handleOnChange}
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  defaultValue = {user.lastName}
                   name="lastName"
                   autoComplete="lname"
                   InputProps={{
@@ -167,10 +185,11 @@ export default function ProfilePage() {
                     format="MM/dd/yyyy"
                     inputVariant="outlined"
                     margin="normal"
+                    defaultValue = {user.dateOfBirth}
                     id="date-picker-inline"
-                    label="Date of Birth"
+                    label={user.dateOfBirth}
                     name = "dateOfBirth"
-                    value={selectedDate}
+                    value={user.dateOfBirth}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
                       "aria-label": "change date",
@@ -189,10 +208,13 @@ export default function ProfilePage() {
             Contact Number
           </Typography>
                 <MuiPhoneNumber
+                  label={user.contactNumber}
                   variant="outlined"
                   defaultCountry={"lk"}
                   onChange={handlePhoneChange}
                   name = "contactNumber"
+                  defaultValue = {user.contactNumber}
+                  value = {user.contactNumber}
                   fullWidth
                   InputProps={{
                     className: classes.text
@@ -211,8 +233,8 @@ export default function ProfilePage() {
                   fullWidth
                   onChange={handleOnChange}
                   id="address"
-                  label="Home Address"
                   name="address"
+                  defaultValue ={user.address}
                   autoComplete="address"
                   InputProps={{
                     className: classes.text
@@ -232,7 +254,7 @@ export default function ProfilePage() {
                   fullWidth
                   onChange={handleOnChange}
                   id="email"
-                  label="Email Address"
+                  defaultValue = {user.emailAddress}
                   name="emailAddress"
                   autoComplete="email"
                   InputProps={{
@@ -255,6 +277,7 @@ export default function ProfilePage() {
                   name="password"
                   label="Password"
                   type="password"
+                  defaultValue = {user.password}
                   id="password"
                   autoComplete="current-password"
                   InputProps={{
@@ -288,15 +311,6 @@ export default function ProfilePage() {
             >
               Delete Account
             </Button>
-              </Grid>
-            </Grid>
-            
-            
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="/shop" variant="body2" className= {classes.text}>
-                  Already have an account? Sign in
-                </Link>
               </Grid>
             </Grid>
           </form>
