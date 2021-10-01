@@ -19,6 +19,7 @@ const purchaseRequisition = require('./routes/PurchaseRequisition.routes')
 const cartRoutes = require('./routes/Cart.routes')
 const orderRoutes = require('./routes/Order.routes')
 const customerRoutes = require('./routes/Customer.routes')
+const contactRoutes = require('./routes/ContactUs.routes')
 
 
 
@@ -42,6 +43,8 @@ app.use(cors(corsOptions));
  .use(cartRoutes.allowedMethods()); 
  app.use(orderRoutes.routes())
  .use(orderRoutes.allowedMethods()); 
+ app.use(contactRoutes.routes())
+ .use(contactRoutes.allowedMethods()); 
 
 
 

@@ -68,6 +68,7 @@ function Login() {
 
   if(globalState.auth.logged){
       let user = globalState.auth.loggedUser;
+      history.push('/shop');
       if(user.type == 'admin')
           history.push('/admin');
       else if(user.type == 'customer')
