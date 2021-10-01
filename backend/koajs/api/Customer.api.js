@@ -64,6 +64,7 @@ async function userLogin(userName,userPassword) {
           "contactNumber": user.contactNumber,
           "address": user.address,
           "emailAddress": user.emailAddress,
+          "password" : user.password,
           "logged": true
        }
    }
@@ -82,7 +83,7 @@ async function deleteUser(userId) {
 }
 async function updateUser(user) {
   var filter = {emailAddress: user.emailAddress, password: user.password};
-  var oldUser = await this.getUser(user.username);
+  var oldUser = await this.getUser(user.emailAddress);
   user.id = oldUser.id;
   let updatedUser = await User.findOneAndReplace(filter,user, {
       new: true
