@@ -15,7 +15,9 @@ import logo from '../../assets/Logo.png';
 import Button from '@material-ui/core/Button';
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux'
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import { superUserLogout} from '../../redux/actions/Auth.action';
+import { useDispatch} from 'react-redux';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -101,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   var globalState = useSelector((state) => state);
   const { cart, isLoading } = globalState.cartReducer ? globalState.cartReducer : null
@@ -125,6 +128,10 @@ export default function Navbar() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    superUserLogout(dispatch);
+}
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -140,26 +147,28 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+      {globalState.auth.logged == false && <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
         <Link to="/shop/signUp" className={classes.link}>
           Sign Up
         </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+      </MenuItem>}
+      {globalState.auth.logged == false && <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
         <Link to="/shop/login" className={classes.link}>
           Login
         </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+      </MenuItem>}
+      {globalState.auth.logged == true && <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
         <Link to="/shop/orderhistory" className={classes.link}>
           My orders
         </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
+      </MenuItem>}
+      {globalState.auth.logged == true && <MenuItem onClick={handleMenuClose} className = {classes.userMenu}>
         <Link to="/shop/profile" className={classes.link}>
           My profile
         </Link>
-      </MenuItem>
+      </MenuItem>}
+
+      
     </Menu>
   );
 
@@ -213,8 +222,21 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
+              
               <AccountCircle className={classes.navbutton}/>
             </IconButton>
+            <IconButton
+              edge="end"
+              aria-label={LogoutIcon}
+              aria-controls={LogoutIcon}
+              aria-haspopup="false"
+              onClick={handleLogout}
+              color="inherit"
+            >
+              
+              <LogoutIcon className={classes.navbutton}/>
+            </IconButton>
+            
           </div>
         </Toolbar>
       </AppBar>
