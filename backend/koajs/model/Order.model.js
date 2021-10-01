@@ -22,6 +22,7 @@ var orderSchema = mongoose.Schema({
             {
                 id: String,
                 productName: String,
+                image: String,
                 qty: Number,
                 price: Number
             }

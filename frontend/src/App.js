@@ -5,6 +5,7 @@ import ProductManagement from './pages/ProductManagement';
 import LocationManagement from './pages/LocationManagement';
 import SupplierInsights from './pages/SupplierInsights';
 import Cart from './pages/Cart';
+import OrderHistory from './pages/OrderHistory';
 import SupplierManagement from './pages/SupplierManagement';
 import LandingPage from './pages/LandingPage';
 import { createTheme } from '@material-ui/core/styles';
@@ -63,6 +64,7 @@ function App() {
               <Route exact path="/admin/cashflow" component={CashOutflowManagement} />
               <Route exact path="/shop" component={LandingPage} />
               <Route exact path="/shop/cart" component={Cart} />
+              <Route exact path="/shop/orderhistory" component={OrderHistory} />
               <Route exact path="/shop/checkout" component={Checkout} />
               <Route exact path="/shop/contactUs" component = {ContactUs}/>
               <Route exact path="/shop/signUp" component = {CustomerSignUp}/>

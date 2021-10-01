@@ -11,6 +11,8 @@ export const CartReducer = (state = initialState, { type, payload }) => {
             return { ...state, cart: payload[0], isLoading: true }
         case ActionTypes.FETCH_CART_SUCCESS:
             return { ...state, cart: payload[0], isLoading: false }
+        case ActionTypes.CART_DELETE_SUCCESS:
+            return { ...state, cart: null, isLoading: false }
         default:
             return state;
     }
