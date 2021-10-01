@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -80,7 +81,7 @@ function Login() {
   //Event Handler
   const handleLogin = () => {
       let user = {};
-      user.username = state.username;
+      user.emailAddress = state.username;
       user.password = state.password;
       superUserLogin(dispatch,user);
   }
@@ -113,7 +114,7 @@ function Login() {
               <h2 className={classes.textStyle}>Customer Login</h2>
             </Grid>
             <TextField name="username" label="Username" placeholder="Enter Username" onChange={handleChange} fullWidth required className={classes.fieldStyle}/>
-                    <TextField type="password" name="password" label="Password" placeholder="Enter Password" onChange={handleChange} fullWidth required className={classes.fieldStyle}/>
+                    <TextField type="password" name="password" label="Password" placeholder="Enter Password" onChange={handleChange} fullWidth required className={classes.fieldStyle} />
                     <Button onClick={handleLogin} variant="contained" className={classes.buttonStyle} fullWidth>Login</Button>
             {/* <Button onClick={handleLogout} variant="contained" className={classes.buttonStyle} fullWidth>Logout</Button> */}
           </Paper>

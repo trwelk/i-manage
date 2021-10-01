@@ -45,6 +45,7 @@ router.post('/login',async ctx => {
             address: user.address,
             emailAddress: user.emailAddress,
             password: user.password,
+            type : user.type,
           }, "jwtSecret")
 
           ctx.body = {token:token, auth: true};
