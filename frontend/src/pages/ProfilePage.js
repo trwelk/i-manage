@@ -20,19 +20,8 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux'
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      
-        shan.eryn_
-{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useDispatch } from 'react-redux';
+import Footer from "../components/common/Footer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,7 +29,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: theme.palette.secondary.main
+    color: '#fff',
+    margin: "100px auto",
+    padding: "20px",
+    background: theme.palette.primary.main,
+    borderRadius: "15px",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -308,10 +301,8 @@ export default function ProfilePage() {
             </Grid>
           </form>
         </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
       </Container>
+      <Footer />
     </div>
   );
 }

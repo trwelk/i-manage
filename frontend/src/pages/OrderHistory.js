@@ -5,12 +5,13 @@ import OrderList from "../components/customer/orderHistory/OrderList";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchOrders } from '../redux/actions/Order.actions'
+import { fetchOrders } from '../redux/actions/Order.actions';
+import Footer from "../components/common/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height: '100vh'
+    height: '90vh'
   },
   cartItems: {
     height: '70vh',
@@ -37,6 +38,7 @@ function OrderHistory() {
     const classes = useStyles();
 
     return (
+      <div style={{flex:1}}>
         <div className={classes.root}>
         <Navbar/>
         <Typography className={classes.title}>Your order History</Typography>
@@ -45,8 +47,9 @@ function OrderHistory() {
                 <OrderList orders={orders}/>
             </Grid>
         </Grid>
-
         </div>
+        <Footer />
+      </div>
     );
 }
 
