@@ -108,7 +108,7 @@ export default function Navbar() {
   var globalState = useSelector((state) => state);
   const { cart, isLoading } = globalState.cartReducer ? globalState.cartReducer : null
   const [count, setCount] = useState(0);
-
+  const history = useHistory();
   const isMenuOpen = Boolean(anchorEl);
 
   const calcCount = (items) => {
@@ -130,6 +130,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     superUserLogout(dispatch);
+    history.push('/shop');
 }
 
   const handleMenuClose = () => {
@@ -225,7 +226,7 @@ export default function Navbar() {
               
               <AccountCircle className={classes.navbutton}/>
             </IconButton>
-            <IconButton
+            {globalState.auth.logged == true && <IconButton
               edge="end"
               aria-label={LogoutIcon}
               aria-controls={LogoutIcon}
@@ -235,7 +236,8 @@ export default function Navbar() {
             >
               
               <LogoutIcon className={classes.navbutton}/>
-            </IconButton>
+            </IconButton>}
+            
             
           </div>
         </Toolbar>
