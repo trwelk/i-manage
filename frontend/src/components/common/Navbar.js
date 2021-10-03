@@ -190,9 +190,6 @@ export default function Navbar() {
             {/* <Link to="/shop" className={classes.link}><Button color="secondary" className={classes.navbutton}>
               Shop
             </Button></Link> */}
-            <Link to="/shop/contactUs" className={classes.link}><Button color="secondary" className={classes.navbutton}>
-              Contact Us
-            </Button></Link>
           {/* Uncomment if search is required in navbar */}
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
