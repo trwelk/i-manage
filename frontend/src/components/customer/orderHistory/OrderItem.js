@@ -78,7 +78,7 @@ function OrderItem(props) {
                       {orderDetails.items.length} item(s), Total Rs: {orderDetails.total}
                   </Grid>
                   <Grid container xs={12} className={classes.details}>
-                      {orderDate.getUTCDate()}/{orderDate.getUTCMonth()}/{orderDate.getUTCFullYear()}
+                      {orderDate.getUTCDate()}/{orderDate.getUTCMonth() + 1}/{orderDate.getUTCFullYear()}
                   </Grid>
               </Typography>
             </Grid>

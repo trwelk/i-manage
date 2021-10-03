@@ -42,11 +42,15 @@ function LandingPage() {
       <div>
         <Grid className = {classes.card} alignContent="stretch" container spacing={2} justifyContent='center'>
           {products.map((product) => {
-            return (
-              <Grid item xs={3} alignContent="stretch">
-                <ProductCard values={product} />
-              </Grid>
-            );
+            if(products.findIndex(obj => obj.id==product.id) < 4){
+              return (
+                <Grid item xs={3} alignContent="stretch">
+                  <ProductCard values={product} />
+                </Grid>
+              );
+            }
+            else
+              return (<div />);
           })}
         </Grid>
       </div>
