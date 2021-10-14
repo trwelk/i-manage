@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# 2021S2_REG_WE_22
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Online Store/Inventory Management System
 
-## Available Scripts
+## Group Details
+Member Details:
+|ID Number|Name  | UserName |
+|--|--|--|
+|IT19163864  |Moses R. C.  |ryanmlk|
+|IT19187006  |Weerasooriya S. T. P.  |trwelk|
+|IT18219562  |Liyanage P. L. K. C.  |kalanal|
+|IT19206660  |Kavisinghe U. K.  |udithkav|
 
-In the project directory, you can run:
+## Project Details
 
-### `npm start`
+This system is designed for a business who is looking to sell products online. The system is designed with both a shop front for customer to browse through items and place orders as well as an admin portal where business related activities can be performed such as inventory mangagement, order management, employee management, etc..
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The frontend of this application has been developed using ReactJs along with Redux. This frontend communicates with a backend api service that has been implemented using node and koaJs. For storage of data MongoDb is used along with Firebase storage for any images and other documents that need be stored
 
-### `npm test`
+## How to get started with the app
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### Prerequisites
+1. Node
+2. Cloned Project from the Git Repository
+3. An up to date web browser
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##### Procedure to run the app
+1. Install Node on your system
+2. Clone the project from the Git Repository
+3. __Setting up the api service__
+    * Navigate to the root of the cloned project
+    * Navigate to the folder backend/koajs and open a terminal
+    * Run the following commands
+        * npm install
+        * npm start
+    * The api service should now be up and running
+4. __Setting up the frontend__
+    * Navigate to the root of the cloned project
+    * Navigate to the folder frontend and open a terminal
+    * Run the following commands
+        * npm install
+        * npm start
+    * The frontend application should now be up and running
+5. Open a browser of your choosing and navigate to https://localhost:3000 to view the webapp
+    
